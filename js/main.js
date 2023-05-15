@@ -61,6 +61,7 @@
     /*------------------
         Accordin Active
     --------------------*/
+
     $('.collapse').on('shown.bs.collapse', function () {
         $(this).prev().addClass('active');
     });
