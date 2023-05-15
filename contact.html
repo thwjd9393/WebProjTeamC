@@ -42,9 +42,9 @@
             width: auto;
             height: 800px;
             max-width: 1200px;
-            
+
         }
-        
+
 
 
         .locationSearch {
@@ -83,7 +83,7 @@
 
         }
 
-        
+
         #place {
             border-radius: 35px;
             height: 70px;
@@ -99,13 +99,37 @@
             bottom: 3px;
             cursor: pointer;
             z-index: 100;
-            
+
         }
 
-        
-    
 
-        
+        @media (max-width: 768px) {
+            #map {
+                height: 650px;
+            }
+
+            #title {
+                top: 10px;
+                width: 60px;
+                height: 60px;
+            }
+
+            #logo {
+                width: 45;
+
+            }
+
+            .locationSearch {
+                height: 70px;
+
+            }
+
+            #place {
+                width: 380px;
+            }
+
+
+        }
     </style>
 
     <script>
@@ -230,12 +254,12 @@
 
     <div id="map">
         <div href="" id="title"><img id="logo" src="./img/logo.png" width="70"></img> </div>
-        
+
         <div class="locationSearch">
 
             <input type="text" name="" id="place" onkeydown="handleSearch(event)">
             <img src="./img/search.png" alt="돋보기" id="searchImg" onclick="sumit()">
-       
+
         </div>
     </div>
 
