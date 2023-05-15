@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Male-Fashion | Template</title>
 
+
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
         rel="stylesheet">
@@ -22,6 +23,124 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
+
+
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        #map {
+            display: flex;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 30px;
+            z-index: 0;
+            position: relative;
+            border: 1px solid black;
+            width: auto;
+            height: 800px;
+            max-width: 1200px;
+            margin-bottom: 60px;
+
+        }
+
+
+
+        .locationSearch {
+            display: flex;
+            height: 70px;
+            align-items: center;
+            margin: 5px;
+
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+
+        }
+
+
+
+        #title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 70px;
+            background-color: white;
+            border: 1px solid black;
+            border-radius: 50%;
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            margin-top: 9px;
+            z-index: 100;
+        }
+
+
+        #logo {
+            width: 50px;
+            z-index: 100;
+
+        }
+
+
+        #place {
+            border-radius: 35px;
+            height: 70px;
+            width: 500px;
+            z-index: 100;
+            margin-top: 25px;
+            border: 1px solid #949494;
+        }
+
+        #searchImg {
+            height: 70px;
+            position: absolute;
+            right: 13px;
+            bottom: 3px;
+            cursor: pointer;
+            z-index: 100;
+            padding-top: 25px;
+        }
+
+
+        @media (max-width: 768px) {
+            #map {
+                height: 650px;
+            }
+
+            #title {
+                top: 10px;
+                width: 60px;
+                height: 60px;
+            }
+
+            #logo {
+                width: 45;
+
+            }
+
+            .locationSearch {
+                height: 70px;
+
+            }
+
+            #place {
+                width: 380px;
+            }
+
+        }
+    </style>
+
+    <script>
+        function sumit() {
+
+        }
+    </script>
+
+
 </head>
 
 <body>
@@ -126,61 +245,49 @@
             </div>
             <div class="canvas__open"><i class="fa fa-bars"></i></div>
         </div>
+
+
+
+
     </header>
     <!-- Header Section End -->
 
     <!-- Map Begin -->
-    <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d111551.9926412813!2d-90.27317134641879!3d38.606612219170856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited%20States!5e0!3m2!1sen!2sbd!4v1597926938024!5m2!1sen!2sbd" height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+    <div id="map">
+        <div href="" id="title"><img id="logo" src="./img/logo.png" width="70"></img> </div>
+
+        <div class="locationSearch">
+
+            <input type="text" name="" id="place" onkeydown="handleSearch(event)">
+            <img src="./img/search.png" alt="돋보기" id="searchImg" onclick="sumit()">
+
+        </div>
     </div>
+
+    <!-- 카카오지도 라이브러리 적용 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c87bba090a945773d9d69e7a4539f69b">
+    </script>
+
+    <!-- 실제 지도관련 작업 스크립트 -->
+    <script>
+        var container = document.getElementById('map');
+        var options = { //지도를 생성할 때 필요한 기본 옵션
+            center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+            level: 3 //지도의 레벨(확대, 축소 정도)
+        };
+
+        var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+        // 마커 표시..
+        var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+        var marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+        marker.setMap(map);
+    </script>
     <!-- Map End -->
 
-    <!-- Contact Section Begin -->
-    <section class="contact spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="contact__text">
-                        <div class="section-title">
-                            <span>Information</span>
-                            <h2>Contact Us</h2>
-                            <p>As you might expect of a company that began as a high-end interiors contractor, we pay
-                                strict attention.</p>
-                        </div>
-                        <ul>
-                            <li>
-                                <h4>America</h4>
-                                <p>195 E Parker Square Dr, Parker, CO 801 <br />+43 982-314-0958</p>
-                            </li>
-                            <li>
-                                <h4>France</h4>
-                                <p>109 Avenue Léon, 63 Clermont-Ferrand <br />+12 345-423-9893</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="contact__form">
-                        <form action="#">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <input type="text" placeholder="Name">
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" placeholder="Email">
-                                </div>
-                                <div class="col-lg-12">
-                                    <textarea placeholder="Message"></textarea>
-                                    <button type="submit" class="site-btn">Send Message</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Contact Section End -->
+   
 
     <!-- Footer Section Begin -->
     <footer class="footer">
