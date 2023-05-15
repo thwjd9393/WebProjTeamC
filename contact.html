@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Male-Fashion | Template</title>
-    
+
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -30,125 +30,86 @@
         body {
             overflow-x: hidden;
         }
-    
+
         #map {
             display: flex;
             margin-left: auto;
             margin-right: auto;
             margin-top: 30px;
             z-index: 0;
+            position: relative;
+            border: 1px solid black;
+            width: auto;
+            height: 800px;
+            max-width: 1200px;
+            
         }
-    
-        #place {
-            display: inline-block;
-            width: 800px;
+        
+
+
+        .locationSearch {
+            display: flex;
             height: 70px;
-            border-radius: 35px;
+            align-items: center;
+            margin: 5px;
+
             margin-left: auto;
             margin-right: auto;
-            margin-top: 30px;
-            left: 0;
-            right: 0;
-            font-size: 35px;
-            z-index: 2;
-            position: absolute;
+            position: relative;
+
         }
-    
+
+
+
         #title {
-            display: inline-block;
-            margin-top: 55px;
-            margin-left: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 70px;
+            background-color: white;
+            border: 1px solid black;
+            border-radius: 50%;
             position: absolute;
-            z-index: 2;
+            left: 5px;
+            top: 5px;
+            z-index: 100;
         }
-    
-        @media (max-width: 768px) {
-            #title {
-                display: inline-flexbox;
-                justify-content: center;
-                height: 100%;
-                margin: 9%;
-                overflow: hidden;
-                align-content: center;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                position: absolute;
-            }
+
+
+        #logo {
+            width: 50px;
+            z-index: 100;
+
         }
-    
-        @media (max-width: 768px) {
-            #place {
-                display: inline-block;
-                width: auto;
-                max-width: 50%;
-                height: 70px;
-                border-radius: 35px;
-                margin-left: auto;
-                margin-right: auto;
-                position: absolute;
-                font-size: 35px;
-                z-index: 2;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-            #searchImg{
-                display: inline-block;
-                width: auto;
-                height: auto;
-                margin-left: auto;
-                margin-right: auto;
-                position: absolute;
-                z-index: 2;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-               
-            }
-            }
+
+        
+        #place {
+            border-radius: 35px;
+            height: 70px;
+            width: 500px;
+            z-index: 100;
+        }
+
+        #searchImg {
+            width: 70px;
+            height: 70px;
+            position: absolute;
+            right: 13px;
+            bottom: 3px;
+            cursor: pointer;
+            z-index: 100;
+            
+        }
+
         
     
-        #search_wrap {
-            position: relative;
-            display: inline-block;
-        }
-    
-        #place {
-            width: 40%;
-            height: 70px;
-            border-radius: 35px;
-            padding-right: 60px;
-            font-size: 35px;
-        }
-    
-        #searchImg {
-            display: inline;
-            position: absolute;
-            right: 31%;
-            width: 50px;
-            top: 195px;
-            cursor: pointer;
-            z-index: 2;
-        }
-    
-        @media (max-width: 768px) {
-            #place {
-                font-size: 28px;
-            }
-    
-            #searchImg {
-                position: absolute;
-                width: 40px;
-                top: 10px;
-                padding-right: 2px;
-                
-                
-            }
-        }
+
+        
     </style>
 
     <script>
-        function sumit(){
+        function sumit() {
 
         }
     </script>
@@ -259,37 +220,32 @@
             <div class="canvas__open"><i class="fa fa-bars"></i></div>
         </div>
 
-       
+
 
 
     </header>
     <!-- Header Section End -->
 
     <!-- Map Begin -->
-    
-    <div id="map" style="width: 1200px; height: 800px; border: 1px solid black;">
-        <div>
 
-            <div>
-                <a href="" id="title" ><img id="h2" src="./img/logo.png" width="70"></img> </a>
-                
-                <div id="search_warap">
-                    <input type="text" name="" id="place" onkeydown="handleSearch(event)">
-                    <img src="./img/search.png" alt="돋보기" id="searchImg"  onclick="sumit()">
-                </div>
-                
-            </div>
-            
+    <div id="map">
+        <div href="" id="title"><img id="logo" src="./img/logo.png" width="70"></img> </div>
+        
+        <div class="locationSearch">
 
+            <input type="text" name="" id="place" onkeydown="handleSearch(event)">
+            <img src="./img/search.png" alt="돋보기" id="searchImg" onclick="sumit()">
+       
         </div>
     </div>
 
     <!-- 카카오지도 라이브러리 적용 -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c87bba090a945773d9d69e7a4539f69b"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c87bba090a945773d9d69e7a4539f69b">
+    </script>
 
     <!-- 실제 지도관련 작업 스크립트 -->
     <script>
-        var container = document.getElementById('map'); 
+        var container = document.getElementById('map');
         var options = { //지도를 생성할 때 필요한 기본 옵션
             center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
             level: 3 //지도의 레벨(확대, 축소 정도)
