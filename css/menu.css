@@ -1,0 +1,54 @@
+/* 메뉴 네비게이션 */
+ul#menu_ul {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+ul#menu_ul li{
+    display: inline;
+    padding: 10px 10px;
+    letter-spacing: 1px;
+}
+
+ul#menu_ul li a{
+    color: #0d0d0d;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.active {
+    color: burlywood;
+}
+
+/* 메뉴 아이템 */
+div#product_item {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+div#product_img_warp {
+    height: 230px;
+    width: 210px;
+    margin: 0 auto;
+    background-color: #efefef;
+    border-radius: 5px;
+    text-align: center;
+}
+
+div#product_img_warp > img {
+    max-height: 100%;
+    min-height: 100%;
+    max-width: 100%;
+}
+
+.product_item:hover img {
+    scale: 1.1;
+}
+
+.product_item_text h5 {
+	color: #0d0d0d;
+	font-weight: 700;
+    margin-top: 1em;
+}
+
