@@ -7,7 +7,7 @@ ul#menu_ul {
 
 ul#menu_ul li{
     display: inline;
-    padding: 10px 10px;
+    padding: 10px 10px 5px 10px;
     letter-spacing: 1px;
 }
 
@@ -17,9 +17,10 @@ ul#menu_ul li a{
     font-weight: 700;
 }
 
-.active {
-    color: burlywood;
+li.active {
+    border-bottom: 3px solid #ff5a5a;
 }
+
 
 /* 메뉴 아이템 */
 div#product_item {
@@ -52,3 +53,16 @@ div#product_img_warp > img {
     margin-top: 1em;
 }
 
+/* Wide Mobile = 480px */
+@media (max-width: 767px) {
+    ul#menu_ul li{
+        display: inline;
+        letter-spacing: 1px;
+        padding: 0;
+        font-size: 13px;
+    }
+
+    .shop__sidebar__search {
+        margin: 0 40px 45px;
+    }
+}
