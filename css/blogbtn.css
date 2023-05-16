@@ -1,0 +1,21 @@
+#writePost {
+    background-color: black;
+    float: right;
+    color: white;
+   margin-bottom: 26px;
+  }
+  #readmorehold{
+    text-align: center;
+  }
+
+  #readmore{
+    background-color: black;
+    border-radius: 35px;
+    color: white;
+    
+  }
+  @media (max-width: 300px) {
+    #writePost {
+      float: right;
+    }
+  }
