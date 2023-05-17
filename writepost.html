@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- head meta영역 -->
+    <meta charset="utf-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- head meta영역 -->
+
+    <title>게시글 작성</title>
+
+    <!-- 스타일 시트 연결 영역 -->
+    <link rel="stylesheet" href="./css/writepost.css">
+    <!-- 스타일 시트 연결  영역-->
+</head>
+
+<body>
+
+    <h2>게시글 작성</h2>
+
+    <form action="./php/write.php" method="POST" enctype="multipart/form-data">
+        <!-- 게시글 제목란(start) -->
+        <div class="title">
+            <input class="form-control form-control-lg" type="text" name="title" placeholder="제목" aria-label=".form-control-lg example">
+        </div>
+        <!-- 게시글 제목란 (end) -->
+
+        <!-- 게시글 본문 작성란(start) -->
+        <div class="text">
+            <textarea name="contents" id="textra" cols="60" rows="50"></textarea>
+        </div>
+        <!-- 게시글 본문 작성란(end) -->
+
+        <div class="account">
+            <!-- 이미지 첨부(start) -->
+            <div class="mb-3">
+                <label for="formFile" class="form-label">이미지 첨부</label>
+                <input class="form-control" type="file" name="image" id="formFile">
+            </div>
+            <!-- 이미지 첨부(end) -->
+
+            <!-- 익명 닉네임 비밀번호 기입(start) -->
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <input type="text" name="name" maxlength="13" placeholder="닉네임">
+                    <input type="password" name="password" id="inputPassword6" class="form-control" placeholder="비밀번호">
+                </div>
+                <div class="col-auto">
+                    <span id="passwordHelpInline" class="form-text">
+                        <p>비밀번호 4자리 입력</p>
+                    </span>
+                </div>
+            </div>
+            <!-- 익명 닉네임 비밀번호 기입(end) -->
+
+            <!-- 게시글 등록 버튼(start) -->
+            <div class="col-auto">
+                <button type="submit" class="btn" name="submit"><span>게시글 등록</span></button>
+            </div>
+            <!-- 게시글 등록 버튼(end) -->
+        </div>
+    </form>
+
+</body>
+
+</html>

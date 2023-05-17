@@ -6,6 +6,7 @@
     <meta name="description" content="Male_Fashion Template">
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=200,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Male-Fashion | Template</title>
 
@@ -23,116 +24,10 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="./css/locationkao.css" type="text/css">
 
 
-
-    <style>
-        body {
-            overflow-x: hidden;
-        }
-
-        #map {
-            display: flex;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 30px;
-            z-index: 0;
-            position: relative;
-            border: 1px solid black;
-            width: auto;
-            height: 800px;
-            max-width: 1200px;
-            margin-bottom: 60px;
-
-        }
-
-
-
-        .locationSearch {
-            display: flex;
-            height: 70px;
-            align-items: center;
-            margin: 5px;
-
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-
-        }
-
-
-
-        #title {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 70px;
-            height: 70px;
-            background-color: white;
-            border: 1px solid black;
-            border-radius: 50%;
-            position: absolute;
-            left: 5px;
-            top: 5px;
-            margin-top: 9px;
-            z-index: 100;
-        }
-
-
-        #logo {
-            width: 50px;
-            z-index: 100;
-
-        }
-
-
-        #place {
-            border-radius: 35px;
-            height: 70px;
-            width: 500px;
-            z-index: 100;
-            margin-top: 25px;
-            border: 1px solid #949494;
-        }
-
-        #searchImg {
-            height: 70px;
-            position: absolute;
-            right: 13px;
-            bottom: 3px;
-            cursor: pointer;
-            z-index: 100;
-            padding-top: 25px;
-        }
-
-
-        @media (max-width: 768px) {
-            #map {
-                height: 650px;
-            }
-
-            #title {
-                top: 10px;
-                width: 60px;
-                height: 60px;
-            }
-
-            #logo {
-                width: 45;
-
-            }
-
-            .locationSearch {
-                height: 70px;
-
-            }
-
-            #place {
-                width: 380px;
-            }
-
-        }
-    </style>
+    
 
     <script>
         function sumit() {
@@ -255,8 +150,6 @@
     <!-- Map Begin -->
 
     <div id="map">
-        <div href="" id="title"><img id="logo" src="./img/logo.png" width="70"></img> </div>
-
         <div class="locationSearch">
 
             <input type="text" name="" id="place" onkeydown="handleSearch(event)">

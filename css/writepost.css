@@ -1,0 +1,60 @@
+.title {
+    display: flex;
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+
+}
+
+.title :first-child {
+    border-radius: 38px;
+    width: 350px;
+    height: 25px;
+    padding-left: 10px;
+}
+
+.text {
+    display: flex;
+    margin-top: 55px;
+
+}
+
+.text :first-child {
+    width: 550px;
+    height: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 5px;
+    padding-top: 3px;
+
+
+}
+
+.account {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.col-auto {
+    font-size: 11px;
+    padding-left: 5px;
+    margin-top: 15px;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.btn {
+    background-color: #ffffff;
+}
+
+.btn:hover {
+    background-color: #f0f0f0;
+}
+
+.btn:active {
+    background-color: #000000;
+}
