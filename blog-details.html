@@ -33,9 +33,13 @@
     </script>
 
     <!-- JS 영역 (end)  -->
+
+  
+
 </head>
 
 <body>
+      <header include-html="./common/header.html"></header>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -126,27 +130,85 @@
                                 “marine collagen” which along with Vyo-Serum helps revitalize the skin.</p>
                         </div>
 
-                        <!-- 좋아요 영역(start) -->
-                      
-                        <div>
-                            <div class="like_holder">
-                                <img src="./img/like.png" alt="like" onclick="check_ctn()">
-                                <h4 id="likeCount">0</h4> 
-                                <p class="repost" onclick="fun_repost()" id="exampleModal">수정</p>
 
-                                
 
-                                <p class="endline">&nbsp; &nbsp;|</p>
-                                <p class="delete" onclick="fun_delete()">삭제</p>
-                               
+                        <!-- 모달 -->
+                        <div class="modal fade" id="exampleModal" tabindex="1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <p class="modal-title" id="exampleModalLabel">비밀번호를 입력해주세요</p>
+                                        <button type="button" class="btn-close" data-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="password" class="col-form-label">Password:</label>
+                                                <input type="password" class="form-control" id="password">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                                        <button type="button" class="btn btn-primary" id="confirmBtn">확인</button>
+                                    </div>
+                                </div>
                             </div>
-                            
+                        </div>
+                        <!-- 모달 -->
+
+
+                        <div class="modal fade" id="exampleModa2" tabindex="1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <p class="modal-title" id="exampleModalLabel">비밀번호를 입력해주세요</p>
+                                        <button type="button" class="btn-close" data-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="password" class="col-form-label">Password:</label>
+                                                <input type="password" class="form-control" id="password">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                                        <button type="button" class="btn btn-primary" id="confirmBtn">확인</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 좋아요 영역(start) -->
+
+                        <div>
+
+
+                            <div class="like_holder">
+
+                                <img src="./img/like.png" alt="like" onclick="check_ctn()">
+                                <h4 id="likeCount">0</h4>
+
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModal" data-whatever="@mdo">수정</button>
+                                <script src="./js/blog-details.js"></script>
+
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModa2" data-whatever="@mdo">삭제</button>
+
+                            </div>
+
                         </div>
 
-                        
+
 
                         <!-- 좋아요 영역(end) -->
-                        
+
                         <div class="blog__details__option">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -190,7 +252,7 @@
                                     <div class="col-lg-6 col-md-6">
                                         <input type="text" placeholder="닉네임">
                                     </div>
-                                    
+
                                     <div class="col-lg-6 col-md-6">
                                         <input type="password" placeholder="비밀번호">
                                     </div>
@@ -211,40 +273,10 @@
     </section>
     <!-- Blog Details Section End -->
 
-    <!-- 모달 버튼 -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
 
-
-    <!-- 모달 -->
-    <div class="modal fade" id="exampleModal" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="mb-3">
-                  <label for="recipient-name" class="col-form-label">Recipient:</label>
-                  <input type="text" class="form-control" id="recipient-name">
-                </div>
-                <div class="mb-3">
-                  <label for="message-text" class="col-form-label">Message:</label>
-                  <textarea class="form-control" id="message-text"></textarea>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Send message</button>
-            </div>
-          </div>
-        </div>
-    </div>
 
     <!-- Footer Section Begin -->
-    
+
     <!-- Footer Section End -->
 
 
@@ -259,6 +291,12 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <header include-html="./common/footer.html"></header>
 </body>
+<script>
+    
+    // 헤더 푸터
+    includeHTML();
 
+</script>
 </html>
