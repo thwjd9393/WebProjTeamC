@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zxx">
 
 <head>
     <!-- head meta영역 -->
@@ -12,58 +12,142 @@
 
     <title>게시글 작성</title>
 
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
     <!-- 스타일 시트 연결 영역 -->
-    <link rel="stylesheet" href="./css/writepost.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="./css/writepost.css" type="text/css">
+
     <!-- 스타일 시트 연결  영역-->
+    <!--헤더 푸터-->
+    <script src="./js/includeHTML.js"></script>
 </head>
 
 <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 
-    <h2>게시글 작성</h2>
+    <!-- Header Section Begin -->
+    <header include-html="./header.html"></header>
+    <!-- Header Section End -->
 
-    <form action="./php/write.php" method="POST" enctype="multipart/form-data">
-        <!-- 게시글 제목란(start) -->
-        <div class="title">
-            <input class="form-control form-control-lg" type="text" name="title" placeholder="제목" aria-label=".form-control-lg example">
-        </div>
-        <!-- 게시글 제목란 (end) -->
 
-        <!-- 게시글 본문 작성란(start) -->
-        <div class="text">
-            <textarea name="contents" id="textra" cols="60" rows="50"></textarea>
-        </div>
-        <!-- 게시글 본문 작성란(end) -->
 
-        <div class="account">
-            <!-- 이미지 첨부(start) -->
-            <div class="mb-3">
-                <label for="formFile" class="form-label">이미지 첨부</label>
-                <input class="form-control" type="file" name="image" id="formFile">
-            </div>
-            <!-- 이미지 첨부(end) -->
 
-            <!-- 익명 닉네임 비밀번호 기입(start) -->
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <input type="text" name="name" maxlength="13" placeholder="닉네임">
-                    <input type="password" name="password" id="inputPassword6" class="form-control" placeholder="비밀번호">
-                </div>
-                <div class="col-auto">
-                    <span id="passwordHelpInline" class="form-text">
-                        <p>비밀번호 4자리 입력</p>
-                    </span>
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-blog set-bg" data-setbg="img/breadcrumb-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Edit Post</h2>
                 </div>
             </div>
-            <!-- 익명 닉네임 비밀번호 기입(end) -->
-
-            <!-- 게시글 등록 버튼(start) -->
-            <div class="col-auto">
-                <button type="submit" class="btn" name="submit"><span>게시글 등록</span></button>
-            </div>
-            <!-- 게시글 등록 버튼(end) -->
         </div>
-    </form>
+    </section>
+    <!-- Breadcrumb Section End -->
 
+
+
+    <!--write a post  -->
+    <section class="blog spad">
+        <div class="container content_warp">
+
+
+
+            <form action="./php/write.php" method="POST" enctype="multipart/form-data">
+                <!-- 게시글 제목란(start) -->
+                <div>
+                    <input class="form-control form-control-lg title" type="text" name="title" placeholder="제목"
+                        aria-label=".form-control-lg example">
+                </div>
+                <!-- 게시글 제목란 (end) -->
+
+                <!-- 익명 닉네임 비밀번호 기입(start) -->
+                <div class="row account__warp">
+                    <div class="col-lg-6 col-md-6 col-sm-6 account__name">
+                        <input type="text" name="name" maxlength="13" placeholder="닉네임" class="form-control"
+                            id="nameinp">
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 account__passwd">
+                        <input type="password" name="password" id="inputPassword" class="form-control"
+                            placeholder="비밀번호">
+                    </div>
+
+                </div>
+                <!-- 익명 닉네임 비밀번호 기입(end) -->
+
+                <!-- 게시글 본문 작성란(start) -->
+                <div class="text">
+                    <textarea name="contents" id="textra" cols="60" rows="50"></textarea>
+                </div>
+                <!-- 게시글 본문 작성란(end) -->
+
+                <div class="account">
+                    <!-- 이미지 첨부(start) -->
+                    <div class="mb-3">
+                        <input class="form-control" type="file" name="image" id="formFile">
+                    </div>
+
+                    <!-- 이미지 첨부(end) -->
+                    <!-- 게시글 등록 버튼(start) -->
+                    <div class="row btn_sum">
+                        <div class="col-auto">
+                            <button type="submit" class="btn" name="submit"><span>게시글 등록</span></button>
+                        </div>
+                    </div>
+                    <!-- 게시글 등록 버튼(end) -->
+                </div>
+            </form>
+
+        </div>
+        <div>
+        </div>
+    </section>
+    <!-- Post End -->
+
+    <!-- <footer include-html="./common_footer.html"></footer> -->
+    <footer include-html="./footer.html"></footer>
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
+
+<script>
+    // 헤더 푸터
+    includeHTML();
+</script>
 
 </html>

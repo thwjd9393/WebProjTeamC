@@ -22,12 +22,17 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/blog-deaails.css" type="text/css">
 
     <!-- 헤더 푸터 -->
-    <script>
 
-        
+    <!-- JS 영역 (start) -->
+
+    <script src="./js/blog-details.js">
+
     </script>
+
+    <!-- JS 영역 (end)  -->
 </head>
 
 <body>
@@ -135,12 +140,26 @@
                                 the pores clog, nevertheless also let’s sweeps out the wrinkles and all signs of aging
                                 from the sensitive near the eyes.</p>
                         </div>
+
+                        <!-- 좋아요 영역(start) -->
+                        <div>
+                            <div class="like_holder">
+                                <img src="./img/like.png" alt="like" onclick="check_ctn()">
+                                <h4 id="likeCount">0</h4> 
+                                <p class="repost" onclick="fun_repost()">수정</p>
+                                <p class="endline">&nbsp; &nbsp;|</p>
+                                <p class="delete" onclick="fun_delete()">삭제</p>
+                                
+                            </div>
+                        </div>
+                        <!-- 좋아요 영역(end) -->
+                        
                         <div class="blog__details__option">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="blog__details__author">
                                         <div class="blog__details__author__pic">
-                                            <img src="img/blog/details/blog-author.jpg" alt="">
+
                                         </div>
                                         <div class="blog__details__author__text">
                                             <h5>Aiden Blair</h5>
@@ -149,9 +168,6 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="blog__details__tags">
-                                        <a href="#">#Fashion</a>
-                                        <a href="#">#Trending</a>
-                                        <a href="#">#2020</a>
                                     </div>
                                 </div>
                             </div>
@@ -172,26 +188,29 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- comment 영역(start) -->
                         <div class="blog__details__comment">
-                            <h4>Leave A Comment</h4>
+                            <h4>댓글</h4>
                             <form action="#">
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4">
-                                        <input type="text" placeholder="Name">
+                                    <div class="col-lg-6 col-md-6">
+                                        <input type="text" placeholder="닉네임">
                                     </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <input type="text" placeholder="Email">
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <input type="text" placeholder="Phone">
+                                    
+                                    <div class="col-lg-6 col-md-6">
+                                        <input type="password" placeholder="비밀번호">
                                     </div>
                                     <div class="col-lg-12 text-center">
                                         <textarea placeholder="Comment"></textarea>
-                                        <button type="submit" class="site-btn">Post Comment</button>
+                                        <button type="submit" class="btn">댓글 작성</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
+                        <!-- comment 영역(end) -->
+
+
                     </div>
                 </div>
             </div>
