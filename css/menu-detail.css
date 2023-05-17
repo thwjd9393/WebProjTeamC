@@ -1,0 +1,104 @@
+
+/* 메뉴 타이틀 */
+.menu__title__warp {
+    border-bottom: 3px solid #556a9b;
+    padding: 0 0 10px 0;
+}
+
+.blog__hero__text h3 {
+	color: #111111;
+	font-weight: 700;
+}
+
+
+/* 보더 */
+.mune__border {
+    border-top: 1px solid #e5e5e5;
+    padding: 15px 0;
+}
+
+
+/* 컨텐츠 */
+.menu__detail__img {
+    max-width: 450px;
+    max-height: 450px;
+}
+
+.menu__detail__img > img {
+    width: 70%;
+}
+
+.menu__detail__contents__warp{
+    background: #f3f2ee;
+    margin-bottom: 60px;
+}
+
+.menu__detail__contents{
+    padding: 50px 0;
+}
+
+.menu__detail__table {
+    margin-top: 30px;
+}
+
+.menu__detail__table > p {
+    margin: 30px 0 5px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #5c5c5c;
+}
+
+.menu__detail__table thead {
+    background-color: #556a9b;
+    color: #fff;
+}
+
+.table td, .table th {
+    padding: 0.5rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 13px;
+}
+
+/* 코멘트 */
+
+.comment__warp{
+    margin-bottom: 50px;
+}
+
+.comment_content_warp{
+    margin-bottom: 15px;
+}
+
+.blog__details__comment h4 {
+    margin: 10px 0 25px;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: left;
+}
+
+.comment_item_warp{
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#nicname, #date {
+    margin: 0;
+    color: #6e6e6e;
+}
+
+#nicname {
+    margin-right: 10px;
+    font-weight: 600;
+}
+
+/* Wide Mobile = 480px */
+@media (max-width: 767px) {
+    .blog-hero {
+        background: rgb(243, 242, 238);
+        padding-top: 40px;
+        padding-bottom: 190px;
+    }
+}

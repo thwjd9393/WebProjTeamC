@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/menu-detail.css" type="text/css">
 
     <!-- 헤더 푸터 -->
     <script src="./js/includeHTML.js"></script>
@@ -35,118 +36,110 @@
     </div>
 
     <!-- Header Section Begin -->
-    <header include-html="./header.html"></header>
+    <header include-html="./common/header.html" style="position: sticky; top: 0; z-index: 100;"></header>
     <!-- Header Section End -->
 
-    <!-- Blog Details Hero Begin -->
+    <!-- Details Hero Begin -->
     <section class="blog-hero spad">
         <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-9 text-center">
-                    <div class="blog__hero__text">
-                        <h3>블루밍 콜드브루 티라미수 젤라또 프라페노</h3>
-                    </div>
-                </div>
+            <div class="col-lg-12 menu__title__warp">
+                <h3>블루밍 콜드브루 티라미수 젤라또 프라페노</h3>
             </div>
         </div>
     </section>
-    <!-- Blog Details Hero End -->
+    <!-- Details Hero End -->
 
-    <!-- Blog Details Section Begin -->
-    <section class="blog-details spad">
+    <!-- Details Section Begin -->
+    <section class="blog-details spad menu__detail__contents__warp">
         <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-12">
-                    <div class="blog__details__pic">
-                        <img src="img/blog/details/blog-details.jpg" alt="">
+
+            <!-- 상세 정보 -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="menu__detail__img text-center">
+                        <img src="img/product/menu01.png" alt="블루밍 콜드브루 티라미수 젤라또 프라페노">
                     </div>
                 </div>
+
+                <div class="col-lg-6">
+                    <div class="menu__detail__contents">
+                        
+                        <!-- 메뉴 설명 -->
+                        <div class="menu__detail__text">
+                            신선한 생딸기를 듬뿍 넣어 갈아 만든 딸기 주스
+                        </div>
+                        
+                        <!-- 영양표시 -->
+                        <div class="menu__detail__table">
+                            <p>열량 및 영양성분</p>
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col" class="text-center">R</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td scope="row">1회제공량 1잔 (ml)</th>
+                                    <td class="text-center">Mark</td>
+                                  </tr>
+                                  <tr>
+                                    <td scope="row">2</th>
+                                    <td class="text-center">Jacob</td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <!-- Details Section End -->
+
+
+    <!-- Comments Section Begin -->
+    <section class="comment__warp">
+        <div class="container">
+
+            <!-- 코멘트 -->
+            <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-lg-8">
                     <div class="blog__details__content">
-                        <div class="blog__details__share">
-                            <span>share</span>
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="youtube"><i class="fa fa-youtube-play"></i></a></li>
-                                <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="blog__details__text">
-                            <p>Hydroderm is the highly desired anti-aging cream on the block. This serum restricts the
-                                occurrence of early aging sings on the skin and keeps the skin younger, tighter and
-                                healthier. It reduces the wrinkles and loosening of skin. This cream nourishes the skin
-                                and brings back the glow that had lost in the run of hectic years.</p>
-                            <p>The most essential ingredient that makes hydroderm so effective is Vyo-Serum, which is a
-                                product of natural selected proteins. This concentrate works actively in bringing about
-                                the natural youthful glow of the skin. It tightens the skin along with its moisturizing
-                                effect on the skin. The other important ingredient, making hydroderm so effective is
-                                “marine collagen” which along with Vyo-Serum helps revitalize the skin.</p>
-                        </div>
-                        <div class="blog__details__quote">
-                            <i class="fa fa-quote-left"></i>
-                            <p>“When designing an advertisement for a particular product many things should be
-                                researched like where it should be displayed.”</p>
-                            <h6>_ John Smith _</h6>
-                        </div>
-                        <div class="blog__details__text">
-                            <p>Vyo-Serum along with tightening the skin also reduces the fine lines indicating aging of
-                                skin. Problems like dark circles, puffiness, and crow’s feet can be control from the
-                                strong effects of this serum.</p>
-                            <p>Hydroderm is a multi-functional product that helps in reducing the cellulite and giving
-                                the body a toned shape, also helps in cleansing the skin from the root and not letting
-                                the pores clog, nevertheless also let’s sweeps out the wrinkles and all signs of aging
-                                from the sensitive near the eyes.</p>
-                        </div>
-                        <div class="blog__details__option">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="blog__details__author">
-                                        <div class="blog__details__author__pic">
-                                            <img src="img/blog/details/blog-author.jpg" alt="">
-                                        </div>
-                                        <div class="blog__details__author__text">
-                                            <h5>Aiden Blair</h5>
-                                        </div>
-                                    </div>
+                        
+                        <div class="blog__details__comment mune__border comment_content_warp">
+                            <h4>Comments</h4>
+
+                            <!-- 코멘트 -->
+                            <div class="comment_item_warp">
+                                <p class="comment">
+                                   Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                   Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                </p>
+                                <div class="d-flex justify-content-between">
+                                      <p id="nicname">우리집으로가자</p>
+                                      <p id="date">2023-05-17 12:23:05 </p>
+                                   <!-- <div class="reply-btn">
+                                      <a href="#" class="btn-reply text-uppercase">reply</a>
+                                   </div> -->
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="blog__details__tags">
-                                        <a href="#">#Fashion</a>
-                                        <a href="#">#Trending</a>
-                                        <a href="#">#2020</a>
-                                    </div>
-                                </div>
-                            </div>
+                             </div>
+
                         </div>
-                        <div class="blog__details__btns">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <a href="" class="blog__details__btns__item">
-                                        <p><span class="arrow_left"></span> Previous Pod</p>
-                                        <h5>It S Classified How To Utilize Free Classified Ad Sites</h5>
-                                    </a>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <a href="" class="blog__details__btns__item blog__details__btns__item--next">
-                                        <p>Next Pod <span class="arrow_right"></span></p>
-                                        <h5>Tips For Choosing The Perfect Gloss For Your Lips</h5>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="blog__details__comment">
+                        
+                        <div class="blog__details__comment mune__border">
                             <h4>Leave A Comment</h4>
                             <form action="#">
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4">
-                                        <input type="text" placeholder="Name">
+                                    <div class="col-lg-6 col-md-6">
+                                        <input type="text" placeholder="Name" maxlength="15">
                                     </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <input type="text" placeholder="Email">
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <input type="text" placeholder="Phone">
+                                    
+                                    <div class="col-lg-6 col-md-6">
+                                        <input type="password" placeholder="Password">
                                     </div>
                                     <div class="col-lg-12 text-center">
                                         <textarea placeholder="Comment"></textarea>
@@ -158,24 +151,14 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
-    <!-- Blog Details Section End -->
+    <!-- Comments Details Section End -->
 
     <!-- Footer Section Begin -->
-    <footer include-html="./footer.html"></footer>
+    <footer include-html="./common/footer.html"></footer>
     <!-- Footer Section End -->
-
-    <!-- Search Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
-    </div>
-    <!-- Search End -->
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
