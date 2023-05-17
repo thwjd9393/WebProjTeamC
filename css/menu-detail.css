@@ -95,6 +95,16 @@
     font-weight: 600;
 }
 
+.moreBtn {
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+#modalDelBtn{
+    cursor: pointer;
+    padding: 0 10px;
+}
+
 /* Wide Mobile = 480px */
 @media (max-width: 767px) {
     .blog-hero {

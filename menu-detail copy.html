@@ -26,10 +26,49 @@
 
     <!-- 헤더 푸터 -->
     <script src="./js/includeHTML.js"></script>
+
+    <script>
+
+        //리뷰 로드
+        function loaded(){
+
+            var url="http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReview.php?mnuNo=1";
+
+            fetch(url)
+            .then(response => response.json())
+            .then(data => 
+
+                console.log(data);
+                // const container = document.querySelector("#comtemt_item_warp");
+                // container.innerHTML = data.map
+
+                
+                // document.getElementById('comtemt_item_warp').innerHTML= result;
+            )
+            .catch(error => console.log(error));
+
+        }
+
+    </script>
+
+<!-- <div id="comtemt_item_warp">
+
+    <div class="comment_item_warp">
+        <p class="comment">
+           Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+           Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+        </p>
+        <div class="d-flex justify-content-between">
+              <p id="nicname">우리집으로가자</p>
+              <p id="date">2023-05-17 12:23:05 </p>
+        </div>
+     </div>
+
+</div> -->
     
 </head>
 
-<body>
+<body onload="loaded()">
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -117,48 +156,11 @@
                             </div>
 
                             <!-- 코멘트 -->
-                            <div class="comment_item_warp">
-                                <p class="comment">
-                                   Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                   Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                </p>
-                                <div class="d-flex justify-content-between">
-                                      <p id="nicname">우리집으로가자</p>
-                                      <p id="date">2023-05-17 12:23:05 </p>
-                                   <!-- <div class="reply-btn">
-                                      <a href="#" class="btn-reply text-uppercase">reply</a>
-                                   </div> -->
-                                </div>
-                             </div>
+                            <div id="comtemt_item_warp">
 
-                             <div class="comment_item_warp">
-                                <p class="comment">
-                                   Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                   Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                </p>
-                                <div class="d-flex justify-content-between">
-                                      <p id="nicname">우리집으로가자</p>
-                                      <p id="date">2023-05-17 12:23:05 </p>
-                                   <!-- <div class="reply-btn">
-                                      <a href="#" class="btn-reply text-uppercase">reply</a>
-                                   </div> -->
-                                </div>
-                             </div>
+                                
 
-                             <div class="comment_item_warp">
-                                <p class="comment">
-                                   Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                   Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                </p>
-                                <div class="d-flex justify-content-between">
-                                      <p id="nicname">우리집으로가자</p>
-                                      <p id="date">2023-05-17 12:23:05 </p>
-                                   <!-- <div class="reply-btn">
-                                      <a href="#" class="btn-reply text-uppercase">reply</a>
-                                   </div> -->
-                                </div>
-                             </div>
-
+                            </div>
                         </div>
     
                         <div class="blog__details__comment mune__border">
@@ -221,10 +223,12 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    
 
     <script>
         // 헤더 푸터
         includeHTML();
+
     </script>
 
 
