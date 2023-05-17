@@ -12,6 +12,7 @@ function check_ctn() {
     }
 }
 
+
 function fun_repost() {
     var password = prompt('게시글을 수정 하려면 비밀번호를 입력해주세요.')
     if (password) {
