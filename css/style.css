@@ -316,7 +316,10 @@ ol {
 -----------------------*/
 
 .header {
-	background: #ffffff;
+    background: #ffffff;
+    /* position: fixed;
+    z-index: 100;
+    width: -webkit-fill-available; */
 }
 
 .header__top {
