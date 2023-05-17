@@ -3,15 +3,24 @@
     float: right;
     color: white;
    margin-bottom: 26px;
+   border-radius: 15px;
+   font-size: 14px;
   }
+  #writePost:hover {
+    background-color: #f0f0f0;
+    color: black;
+    border: 1px solid black;
+}
   #readmorehold{
     text-align: center;
+
   }
 
   #readmore{
     background-color: black;
     border-radius: 35px;
     color: white;
+    font-size: 14px;
     
   }
   @media (max-width: 300px) {

@@ -12,17 +12,22 @@ $title = $_POST['title'];
 $contents = $_POST['contents'];
 $name = $_POST['name'];
 $password = $_POST['password'];
-$date = date("Y-m-d"); // 현재 날짜 가져오기
+$date = date("YmdHis"); // 현재 날짜시간 가져오기
 
 // 사진 파일 업로드
 $file = $_FILES['image'];
 $filename = $file['name'];
 $tmpName = $file['tmp_name'];
-$dstName = "./uploads/" . date('YmdHis') . $filename;
-$moveResult = move_uploaded_file($tmpName, $dstName);
+$dstName = "./uploadimg/" . date('YmdHis') . $filename;
+$allowedExtensions = ['jpg', 'png']; // 허용할 확장자 목록
 
-if ($moveResult) {
+$extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION)); // 파일의 확장자 추출 후 소문자로 변환
+
+if (!in_array($extension, $allowedExtensions)) {
+    echo "jpg 또는 png 파일만 업로드할 수 있습니다.";
+} elseif (move_uploaded_file($tmpName, $dstName)) {
     echo "사진 업로드 성공";
+    // 데이터 삽입 로직을 추가해야 함
 } else {
     echo "사진 업로드 실패";
 }
