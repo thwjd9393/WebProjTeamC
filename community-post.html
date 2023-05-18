@@ -113,7 +113,9 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="blog__details__content">
-                       
+                        
+                        <div id="cmtyNo" style="display: none;"></div>
+
                         <div class="blog__details__text">
                             <p>Hydroderm is the highly desired anti-aging cream on the block. This serum restricts the
                                 occurrence of early aging sings on the skin and keeps the skin younger, tighter and
@@ -261,15 +263,63 @@
                         <!-- 페이지네이션 -->
 
                         <!-- comment 영역(start) -->
+                        
+                        <script>
+                            function loadReviewList() {
+
+                                //글번호 찾아오기
+                                const cmtyNo = document.getElementById('cmtyNo').innerHTML;
+
+                                console.log('cmtyNo');
+
+                                //연동할 주소
+                                var url =
+                                    `http://vasco1379.dothome.co.kr/WebProjTeamC/php/communityComment.php?mnuNo=${cmtyNo}`;
+
+                                // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+                                fetch(url)
+                                    .then(response => response.json())
+                                    .then(data =>
+
+                                        //포문이 then문 안에서는 동작하지 않음
+                                        // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
+                                        displayReviewList(data)
+                                        // console.log(data)
+                                    ).catch(error => console.log(error))
+                            }
+
+                            function displayReviewList(data) {
+                                const container = document.querySelector("#comtemt_item_warp")
+
+                                data.forEach(e => {
+
+                                container.innerHTML += `<div class="comment_item">
+                                        <div id="reviewNo" style="display: none;">${e.reviewNo}</div>
+                                        <p class="comment">${e.reviewContent}</p>
+                                        <div class="d-flex justify-content-between">
+                                            <p id="nicname">${e.reviewNic}</p>
+                                            <p id="date">${e.reviewDate}</p>
+                                        </div>
+                                    </div>`;
+
+                                });
+                            }
+
+
+                            // 페이지 로드 시 loadMemberList 함수 호출
+                            window.onload = loadReviewList;
+                        </script>
+
+                        
                         <div class="blog__details__comment">
                             <h4>댓글</h4>
                             <form action="#">
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6">
+                                    <div class="col-lg-6 col-md-6 col-sm-2">
                                         <input type="text" placeholder="닉네임">
                                     </div>
 
-                                    <div class="col-lg-6 col-md-6">
+                                    <div class="col-lg-6 col-md-6 col-sm-2">
                                         <input type="password" placeholder="비밀번호">
                                     </div>
                                     <div class="col-lg-12 text-center">

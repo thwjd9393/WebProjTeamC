@@ -17,8 +17,10 @@ $password = $_POST['cmtyPasswd'];
 // 사진 파일 업로드
 $file = $_FILES['cmtyImg'];
 $filename = $file['name'];
-$tmpName = $file['tmp_name'];
-$dstName = "./uploadimg/" . date('YmdHis') . $filename;
+$tmpName = $file['tmp_name']; //임시 저장소 위치
+
+
+$dstName = "./uploadimg/" . date('YmdHis') . $filename; //영구 저장소 위치
 $allowedExtensions = ['jpg', 'png']; // 허용할 확장자 목록
 
 $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION)); // 파일의 확장자 추출 후 소문자로 변환

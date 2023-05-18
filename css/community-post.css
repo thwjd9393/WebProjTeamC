@@ -48,6 +48,7 @@
 }
 
 .blog__details__comment h4 {
+    
     margin: 10px 0 25px;
     font-size: 18px;
     line-height: 22px;
@@ -69,6 +70,7 @@
 
 /* 댓글작성영역 */
 .submitcomment {
+    
     margin-top: 15px;
     background-color: black;
     color: white;
