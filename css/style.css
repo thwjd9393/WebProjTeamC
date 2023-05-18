@@ -3174,7 +3174,7 @@ ol {
 	text-align: center;
 }
 
-.blog__details__comment form input {
+.blog__details__comment input {
 	height: 50px;
 	width: 100%;
 	border: 1px solid #e1e1e1;
@@ -3187,31 +3187,31 @@ ol {
 	transition: all, 0.3s;
 }
 
-.blog__details__comment form input::-webkit-input-placeholder {
+.blog__details__comment input::-webkit-input-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form input::-moz-placeholder {
+.blog__details__comment input::-moz-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form input:-ms-input-placeholder {
+.blog__details__comment input:-ms-input-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form input::-ms-input-placeholder {
+.blog__details__comment input::-ms-input-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form input::placeholder {
+.blog__details__comment input::placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form input:focus {
+.blog__details__comment input:focus {
 	border-color: #000000;
 }
 
-.blog__details__comment form textarea {
+.blog__details__comment textarea {
 	height: 120px;
 	width: 100%;
 	border: 1px solid #e1e1e1;
@@ -3226,31 +3226,31 @@ ol {
 	transition: all, 0.3s;
 }
 
-.blog__details__comment form textarea::-webkit-input-placeholder {
+.blog__details__comment textarea::-webkit-input-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form textarea::-moz-placeholder {
+.blog__details__comment textarea::-moz-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form textarea:-ms-input-placeholder {
+.blog__details__comment textarea:-ms-input-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form textarea::-ms-input-placeholder {
+.blog__details__comment textarea::-ms-input-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form textarea::placeholder {
+.blog__details__comment textarea::placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form textarea:focus {
+.blog__details__comment textarea:focus {
 	border-color: #000000;
 }
 
-.blog__details__comment form button {
+.blog__details__comment button {
 	letter-spacing: 4px;
 	padding: 14px 35px;
 }

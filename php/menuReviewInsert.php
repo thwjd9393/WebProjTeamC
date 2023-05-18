@@ -13,11 +13,6 @@
     $tmpName = $file['tmp_name']; //임시 저장소 위치
     $filename = $file['name']; 
 
-    // echo "aaaa";
-    // echo "$reviewNic";
-    // echo "$reviewPasswd";
-    // echo "$reviewContent";
-
     if($tmpName != "" || $tmpName != null){
         $allowedExtensions = ['jpg', 'png']; // 허용할 확장자 목록
         $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION)); // 파일의 확장자 추출 후 소문자로 변환
