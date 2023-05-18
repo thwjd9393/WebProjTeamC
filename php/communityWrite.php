@@ -20,7 +20,7 @@ $filename = $file['name'];
 $tmpName = $file['tmp_name']; //임시 저장소 위치
 
 
-$dstName = "./uploadimg/" . date('YmdHis') . $filename; //영구 저장소 위치
+$dstName = "../uploadImg/community/" . date('YmdHis') . $filename; // 영구 저장소 위치
 $allowedExtensions = ['jpg', 'png']; // 허용할 확장자 목록
 
 $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION)); // 파일의 확장자 추출 후 소문자로 변환
@@ -39,7 +39,7 @@ $sql = "INSERT INTO cCommunity (cmtyTitle, cmtyContent, cmtyNic, cmtyPasswd, cmt
 
 // 데이터 삽입 실행
 if ($db->query($sql) === TRUE) {
-    echo "데이터가 성공적으로 삽입되었습니다.";
+    echo "<script>window.location.href = 'http://mrhisj23.dothome.co.kr/WebProjTeamC/community.html';</script>";
 } else {
     echo "데이터 삽입 중 오류가 발생하였습니다: " . $db->error;
 }
