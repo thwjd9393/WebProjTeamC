@@ -23,107 +23,10 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/menu-detail.css" type="text/css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    
 
     <!-- 헤더 푸터 -->
     <script src="./js/includeHTML.js"></script>
-
-    <script>
-
-        //매뉴 상세 로드
-        
-
-
-        //리뷰 로드
-        function loadReviewList(){
-
-            //연동할 주소
-            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewSeleteAll.php?mnuNo=&{}`;
-
-            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
-            fetch(url)
-            .then(response => response.json())
-            .then(data => 
-
-                //포문이 then문 안에서는 동작하지 않음
-                // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
-                displayReviewList(data)
-                // console.log(data)
-            ).catch(error => console.log(error))
-        }
-
-        function displayReviewList(data) {
-            const container = document.querySelector("#comtemt_item_warp")
-
-            data.forEach(e=> {
-                
-                // 1. appendChild 사용
-                // const nameDiv = document.createElement('div');
-                // nameDiv.className = 'reviewNic';
-                // nameDiv.textContent = e.reviewNic;
-
-                // const aa = document.createElement('a');
-                // aa.className = '4444';
-                // aa.textContent = e.mnuNo;
-
-                // nameDiv.appendChild(aa);
-
-                // const noDiv = document.createElement('div');
-                // noDiv.classList.add('reviewPasswd');
-                // noDiv.textContent = e.reviewPasswd;
-
-                // container.appendChild(nameDiv);
-                // container.appendChild(noDiv);
-
-                // 2. innerHtml 사용
-                // container.innerHTML = `<div class="comment_item">`;
-                // container.innerHTML+= `<p class="comment">${e.reviewContent}</p>`;
-                // container.innerHTML+= `<div class="d-flex justify-content-between">`;
-                // container.innerHTML+= `<p id="nicname">${e.reviewNic}</p>`;
-                // container.innerHTML+= `<p id="date">${e.reviewPasswd}</p>`;
-                // container.innerHTML+= `</div>`;
-                // container.innerHTML+= `</div>`;
-
-                container.innerHTML += `<div class="comment_item">
-                        <div id="reviewNo" style="display: none;">${e.reviewNo}</div>
-                        <p class="comment">${e.reviewContent}</p>
-                        <div class="d-flex justify-content-between">
-                            <p id="nicname">${e.reviewNic}</p>
-                            <p id="date">${e.reviewDate}</p>
-                        </div>
-                    </div>`;
-
-        // <div id="comtemt_item">
-
-        // <div class="comment_item">
-        //     <p class="comment">
-                                            
-        //     </p>
-        //     <div class="d-flex justify-content-between">
-        //         <p id="nicname">우리집으로가자</p>
-        //         <p id="date">2023-05-17 12:23:05 </p>
-        //     </div>
-        // </div>
-
-        // </div> -->
-
-                    
-
-            });
-        }
-
-
-        // 페이지 로드 시 loadMemberList 함수 호출
-        window.onload = loadReviewList;
-
-
-    </script>
-
-    <!-- 리뷰 쓰기 -->
-    function reViewBtn(){
-        alert('dkss')
-    }
-
     
 </head>
 
@@ -209,31 +112,54 @@
                     <div class="blog__details__content">
                         
                         <div class="blog__details__comment comment_content_warp">
-                            <div class="d-flex">
+                            <div class="d-flex justify-content-between">
                                 <h4>Comments</h4>
-                                <p id="reviewCnt"><i class="bi bi-chat"></i> 5</p>
-                                <!-- <p class="moreBtn" data-toggle="modal" data-target="#comentsMore"> 더보기 <i class="fa fa-chevron-right"></i></p> -->
+                                <p class="moreBtn" data-toggle="modal" data-target="#comentsMore"> 더보기 <i class="fa fa-chevron-right"></i></p>
                             </div>
 
                             <!-- 코멘트 -->
-                            <div id="comtemt_item_warp">
-
-                                
-
-                            </div>
-                        </div>
-
-                        <!-- 페이지네이션 -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="product__pagination">
-                                    <a class="active" href="#">1</a>
-                                    <a href="#">2</a>
-                                    <a href="#">3</a>
-                                    <span>...</span>
-                                    <a href="#">21</a>
+                            <div class="comment_item">
+                                <p class="comment">
+                                   Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                   Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                </p>
+                                <div class="d-flex justify-content-between">
+                                      <p id="nicname">우리집으로가자</p>
+                                      <p id="date">2023-05-17 12:23:05 </p>
+                                   <!-- <div class="reply-btn">
+                                      <a href="#" class="btn-reply text-uppercase">reply</a>
+                                   </div> -->
                                 </div>
-                            </div>
+                             </div>
+
+                             <div class="comment_item">
+                                <p class="comment">
+                                   Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                   Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                </p>
+                                <div class="d-flex justify-content-between">
+                                      <p id="nicname">우리집으로가자</p>
+                                      <p id="date">2023-05-17 12:23:05 </p>
+                                   <!-- <div class="reply-btn">
+                                      <a href="#" class="btn-reply text-uppercase">reply</a>
+                                   </div> -->
+                                </div>
+                             </div>
+
+                             <div class="comment_item">
+                                <p class="comment">
+                                   Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                   Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                </p>
+                                <div class="d-flex justify-content-between">
+                                      <p id="nicname">우리집으로가자</p>
+                                      <p id="date">2023-05-17 12:23:05 </p>
+                                   <!-- <div class="reply-btn">
+                                      <a href="#" class="btn-reply text-uppercase">reply</a>
+                                   </div> -->
+                                </div>
+                             </div>
+
                         </div>
     
                         <div class="blog__details__comment mune__border">
@@ -254,7 +180,6 @@
                                 </div>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -275,7 +200,7 @@
                 
             </div>
             <div class="modal-footer">
-              <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary">Understood</button>
             </div>
           </div>
@@ -297,12 +222,10 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-    
 
     <script>
         // 헤더 푸터
         includeHTML();
-
     </script>
 
 

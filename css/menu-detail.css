@@ -62,7 +62,6 @@
 }
 
 /* 코멘트 */
-
 .comment__warp{
     margin-bottom: 50px;
 }
@@ -71,14 +70,22 @@
     margin-bottom: 15px;
 }
 
-.blog__details__comment h4 {
-    margin: 10px 0 25px;
+.blog__details__comment h4{
+    margin: 10px 10px 25px 0;
     font-size: 18px;
     line-height: 22px;
     text-align: left;
 }
 
-.comment_item_warp{
+.comment_content_warp p {
+    margin: 10px 0 25px;
+    font-size: 15px;
+    line-height: 22px;
+    text-align: left;
+    
+}
+
+.comment_item{
     padding: 20px;
     border: 1px solid #eee;
     border-radius: 5px;
@@ -93,6 +100,16 @@
 #nicname {
     margin-right: 10px;
     font-weight: 600;
+}
+
+.moreBtn {
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+#modalDelBtn{
+    cursor: pointer;
+    padding: 0 10px;
 }
 
 /* Wide Mobile = 480px */
