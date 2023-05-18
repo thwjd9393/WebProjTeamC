@@ -30,15 +30,28 @@
 
     <script>
 
-        //매뉴 상세 로드
-        
+        //메뉴 상세 로드
 
+
+    </script>
+
+
+    <script>
+
+        //선택한 파일 보이기
+        function fileupload(e){
+            document.getElementById('file').innerHTML=e.value;   
+        } 
 
         //리뷰 로드
         function loadReviewList(){
 
+            const mnuNo = document.getElementById('mnuNo').innerHTML
+
+            console.log(mnuNo);
+
             //연동할 주소
-            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewSeleteAll.php?mnuNo=&{}`;
+            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewSeleteAll.php?mnuNo=${mnuNo}`;
 
             // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
             fetch(url)
@@ -54,6 +67,11 @@
 
         function displayReviewList(data) {
             const container = document.querySelector("#comtemt_item_warp")
+            const reviewCnt = document.getElementById('reviewCnt')
+
+            //코멘트 갯수
+            reviewCnt.innerHTML = `<i class="bi bi-chat"></i> ${data.length}`;
+            // console.log(data.length);
 
             data.forEach(e=> {
                 
@@ -93,6 +111,7 @@
                         </div>
                     </div>`;
 
+                
         // <div id="comtemt_item">
 
         // <div class="comment_item">
@@ -119,10 +138,55 @@
 
     </script>
 
-    <!-- 리뷰 쓰기 -->
-    function reViewBtn(){
-        alert('dkss')
-    }
+    <script>
+
+        //리뷰 쓰기
+        function reViewBtn(){
+
+            //보낼 데이터 준비
+            const reviewNic = document.getElementById('reviewNic').value;
+            const reviewPasswd = document.getElementById('reviewPasswd').value;
+            const reviewContent = document.getElementById('reviewContent').value;
+            const reviewImg = document.getElementById('reviewImg').value;
+            const mnuNo = document.getElementById('mnuNo').innerHTML;
+
+            // var data="title=HELO&msg=sdsfd";
+            const data = `reviewNic=${reviewNic}&reviewPasswd=${reviewPasswd}&reviewContent=${reviewContent}&reviewImg=${reviewImg}&mnuNo=${mnuNo}`;
+
+            //연동할 주소
+            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewInsert.php`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url,{
+                    method : 'POST',
+                    headers : {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
+                    body : data
+            }).then(response =>response.text())
+            .then(data => 
+                //리뷰 재로드
+                reViewReload()
+            ).catch(error => console.log(error))
+
+        }
+
+        //리뷰 등록 후...
+        function reViewReload(){
+
+            //텍스트 지우기
+            document.getElementById('reviewNic').value = "";
+            document.getElementById('reviewPasswd').value = "";
+            document.getElementById('reviewContent').value = "";
+            document.getElementById('reviewImg').value = "";
+
+            //기존 리스트 부시기
+            const container = document.querySelector("#comtemt_item_warp");
+            container.innerHTML = "";
+
+            //리뷰 재로드
+            loadReviewList()
+        }
+
+    </script>
 
     
 </head>
@@ -158,6 +222,8 @@
                         <img src="img/product/menu01.png" alt="블루밍 콜드브루 티라미수 젤라또 프라페노">
                     </div>
                 </div>
+
+                <div id="mnuNo" style="display: none;">1</div>
 
                 <div class="col-lg-6">
                     <div class="menu__detail__contents">
@@ -211,7 +277,7 @@
                         <div class="blog__details__comment comment_content_warp">
                             <div class="d-flex">
                                 <h4>Comments</h4>
-                                <p id="reviewCnt"><i class="bi bi-chat"></i> 5</p>
+                                <p id="reviewCnt"><i class="bi bi-chat"></i>0</p>
                                 <!-- <p class="moreBtn" data-toggle="modal" data-target="#comentsMore"> 더보기 <i class="fa fa-chevron-right"></i></p> -->
                             </div>
 
@@ -238,21 +304,30 @@
     
                         <div class="blog__details__comment mune__border">
                             <h4>Leave A Comment</h4>
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6">
-                                        <input type="text" placeholder="Name" maxlength="15">
-                                    </div>
-                                    
-                                    <div class="col-lg-6 col-md-6">
-                                        <input type="password" placeholder="Password">
-                                    </div>
-                                    <div class="col-lg-12 text-center">
-                                        <textarea placeholder="Comment"></textarea>
-                                        <button type="submit" class="site-btn">Post Comment</button>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <input id="reviewNic" type="text" placeholder="Name" maxlength="15">
+                                </div>
+                                   
+                                <div class="col-lg-6 col-md-6">
+                                    <input id="reviewPasswd" type="password" placeholder="Password">
+                                </div>
+
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="file_box">
+                                        <p id="file"></p>
+                                        <span class="btn_type_file">파일첨부</span>
+                                        <input id="reviewImg" type="file" onchange="fileupload(this)">
                                     </div>
                                 </div>
-                            </form>
+
+                                <div class="col-lg-12 text-center">
+                                    <textarea id="reviewContent" placeholder="Comment"></textarea>
+                                    <button type="button" class="site-btn" onclick="reViewBtn()">Post Comment</button>
+                                </div>
+                                
+
+                            </div>
                         </div>
 
                     </div>
