@@ -1,9 +1,11 @@
 .sub-title {
-    font-size: 2.25em;
+    font-size: 1.7em;
     line-height: 1.3;
     color: #000;
+    font-weight: bold;
     font-weight: 500;
 }
+
 .line-txt-area {
     border: 0.3125em solid #e5e5e5;
     padding: 1.5em;
@@ -17,32 +19,110 @@ element.style {
 }
 
 .line-txt-area .tit {
-    font-size: 1.5em;
+    font-size: 1.2em;
     line-height: 1.3;
     color: #000;
     font-weight: 500;
 }
 
+.aa{
+    color: #666;
+}
+.aa:hover{
+    color: #000;
+    text-decoration: underline;
+}
+
+/* Table */
+.mt_30 {
+    margin-top: 30px;
+}
+.table_board_for.type_a {
+    border-top: 2px solid #000;
+}
 
 .table_board_for {
     table-layout: fixed;
     width: 100%;
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #474b53;
     border-bottom: 1px solid #ddd;
     text-align: center;
     word-break: break-all;
 }
+*, :after, :before {
+    box-sizing: border-box;
+}
+.table_board_for.type_a tr th {
+    background-color: #f8f8f8;
+}
+.table_board_for thead th {
+    color: #444;
+    font-weight: bold;
+}
 
+.table_board_for th {
+    padding: 13px 2px;
+    position: relative;
+    color: #000;
+    font-weight: 700;
+}
+td, th {
+    border-collapse: collapse;
+}
 .table_board_for td {
     padding: 15px 5px;
     border-top: 1px solid #ddd;
     text-align: center;
-    vertical-align: top;
+    vertical-align: middle;
+    color: #666;
 }
-.aa{
-    color: #000;
-}
-.aa:hover{
-    color: #000;
+td, th {
+    border-collapse: collapse;
 }
 
+@media screen and (max-width: 1024px){
+.table_board_for tbody tr:first-child {
+    border-top: 0;
+}}
+@media screen and (max-width: 1024px){
+.table_board_for tbody tr {
+    border-top: 1px solid #ddd;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0;
+}}
+
+@media screen and (max-width: 1024px){
+.table_board_for col, .table_board_for colgroup, .table_board_for table, .table_board_for tbody, .table_board_for td, .table_board_for th, .table_board_for thead, .table_board_for tr {
+    display: block;
+}}
+
+@media screen and (max-width: 1024px){
+.table_board_for thead {
+    display: none;
+}}
+@media screen and (max-width: 1024px){
+.table_board_for tbody td:first-child {
+    display: none;
+}}
+@media screen and (max-width: 1024px){
+.table_board_for tbody td {
+    text-align: left;
+    border: none;
+    padding: 5px 10px;
+}}
+@media screen and (max-width: 1024px){
+.table_board_for.type_a tr td:nth-child(n+2) {
+    flex: 0 0 100%;
+    max-width: 100%;
+}}
+@media screen and (max-width: 1024px){
+.table_board_for.type_a tr td:nth-child(n+3):nth-child(-n+4) {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+}}
+
+.product__pagination{
+    margin-bottom: 25px;
+}

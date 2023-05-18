@@ -36,7 +36,7 @@
 
     
     <!-- Header Section Begin -->
-    <header include-html="./header.html"></header>
+    <header include-html="./common/header.html"></header>
     <!-- Header Section End -->
 
     <!-- Breadcrumb Section Begin -->
@@ -62,55 +62,68 @@
     <section class="shopping-cart spad">
         <div class="container">
                 <div class="col-lg-12">                                        
-                    <h3 class="sub-title motion_item" style="visibility: inherit; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">문의 내역</h3>                                               
+                    <h4 class="sub-title motion_item" style="visibility: inherit; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">문의 내역</h4>                                               
                 </div>
                 <div class="col-lg-12">
                     <div class="line-txt-area">
-                        <h4 class="tit motion_item" style="visibility: inherit; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+                        <h6 class="tit motion_item" style="visibility: inherit; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
                           고객 여러분의 칭찬과 격려에 감사드립니다.<br>
                           항상 발전하기 위해 노력하겠습니다.
-                        </h4>
+                        </h6>
                       </div>
                 </div>
-                <div class="col-lg-12">
+                <section class="community-section mt_30" style="margin-left: 15px; margin-right: 15px;">
                     <table class="table_board_for type_a">
                         <colgroup>
-                            <col width="8%">
-                            <col width="*%;">
-                            <col width="15%;">
-                            <col width="8%;">
-                         </colgroup>
+                             <col width="8%">
+                             <col width="*%;">
+                             <col width="15%;">
+                             <col width="8%;">
+                        </colgroup>
                          <thead>
-                            <tr>
-                                <th scope="col">No.</th>
-                                <th scope="col">제목</th>
-                                <th scope="col">작성일</th>
-                                <th scope="col">유형</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                           <tr class="">
+                             <tr>
+                                 <th scope="col">No.</th>
+                                 <th scope="col">제목</th>
+                                 <th scope="col">작성일</th>
+                                 <th scope="col">유형</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr class="">
                                  <td>2</td>
-                                 <td class="text_left"><a href="#" class="aa"> 커피랑 브레드가 너무 맛있어요~~</a></td>
+                                 <td class="text_left"><a href="./inquiry-details.html" class="aa">[Power Bloger] 빵도 맛있고 음료도 맛있고 알바생도 친절하고 가게 뷰도 좋아요 </a></td>
                                  <td>2022.05.11</td>
                                  <td>칭찬</td>
-                           </tr>
-                           <tr class="">
+                             </tr>
+                             <tr class="">
                                  <td>1</td>
-                                 <td class="text_left"><a href="#" class="aa">알바생이 싸가지가 너무 없어요 교육시켜주세요</a></td>
+                                 <td class="text_left"><a href="./inquiry-details.html" class="aa">[Power Bloger] 알바생이 불친절하고 매장이 불청결하고 커피도 맛이없어요  </a></td>
                                  <td>2021.12.20</td>
                                  <td>불만</td>
-                           </tr>
-                        </tbody>
-                      </table>
-                </div>
-                 
+                             </tr>
+                         </tbody>
+                    </table>
+                 </section>
+                
         </div>
     </section>
+
+    <!-- 페이지네이션 -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="product__pagination">
+                <a class="active" href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <span>...</span>
+                <a href="#">21</a>
+            </div>
+        </div>
+    </div>
     <!-- Shopping Cart Section End -->
 
     <!-- Footer Section Begin -->
-    <footer include-html="./footer.html"></footer>
+    <footer include-html="./common/footer.html"></footer>
     <!-- Footer Section End -->
 
     <!-- Search Begin -->

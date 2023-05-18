@@ -3,5 +3,5 @@ function fileupload(e){
 }
     
 function goInquiry(){
-    open('./inquiry-details.html')
+    open('./inquiry-list.html')
 }
