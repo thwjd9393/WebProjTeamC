@@ -11,7 +11,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
-    rel="stylesheet">
+        rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -25,7 +25,46 @@
     <link rel="stylesheet" href="css/inquiry-list.css" type="text/css">
     <!--헤더 푸터-->
     <script src="./js/includeHTML.js"></script>
-    
+
+    <script>
+        //리뷰 로드
+        function loadInquiryList(){
+
+            //연동할 주소
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/inquirySelectAll.php`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+                .then(response => response.json())
+                .then(data =>
+
+                    //포문이 then문 안에서는 동작하지 않음
+                    // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
+                    displayInquiryList(data)
+
+                ).catch(error => console.log(error))
+        }
+
+        function displayInquiryList(data) {
+            const container = document.querySelector("#table_body_wrap")
+
+            data.forEach(e => {
+
+
+                container.innerHTML += `<tr>
+                            <td>${e.qaNo}</td>
+                            <td class="text_left"><a href="./inquiry-details.html" class="aa">${e.qaTitle}</a></td>
+                            <td>${e.qaDate}</td>
+                            <td>${e.qaType}</td>
+                        </tr>`;
+
+            });
+        }
+
+
+        // 페이지 로드 시 loadMemberList 함수 호출
+        window.onload = loadInquiryList;
+    </script>
 </head>
 
 <body>
@@ -34,7 +73,7 @@
         <div class="loader"></div>
     </div>
 
-    
+
     <!-- Header Section Begin -->
     <header include-html="./common/header.html"></header>
     <!-- Header Section End -->
@@ -61,50 +100,41 @@
     <!-- Shopping Cart Section Begin -->
     <section class="shopping-cart spad">
         <div class="container">
-                <div class="col-lg-12">                                        
-                    <h4 class="sub-title motion_item" style="visibility: inherit; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">문의 내역</h4>                                               
+            <div class="col-lg-12">
+                <h4 class="sub-title motion_item"
+                    style="visibility: inherit; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">문의 내역</h4>
+            </div>
+            <div class="col-lg-12">
+                <div class="line-txt-area">
+                    <h6 class="tit motion_item"
+                        style="visibility: inherit; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+                        고객 여러분의 칭찬과 격려에 감사드립니다.<br>
+                        항상 발전하기 위해 노력하겠습니다.
+                    </h6>
                 </div>
-                <div class="col-lg-12">
-                    <div class="line-txt-area">
-                        <h6 class="tit motion_item" style="visibility: inherit; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
-                          고객 여러분의 칭찬과 격려에 감사드립니다.<br>
-                          항상 발전하기 위해 노력하겠습니다.
-                        </h6>
-                      </div>
-                </div>
-                <section class="community-section mt_30" style="margin-left: 15px; margin-right: 15px;">
-                    <table class="table_board_for type_a">
-                        <colgroup>
-                             <col width="8%">
-                             <col width="*%;">
-                             <col width="15%;">
-                             <col width="8%;">
-                        </colgroup>
-                         <thead>
-                             <tr>
-                                 <th scope="col">No.</th>
-                                 <th scope="col">제목</th>
-                                 <th scope="col">작성일</th>
-                                 <th scope="col">유형</th>
-                             </tr>
-                         </thead>
-                         <tbody>
-                             <tr class="">
-                                 <td>2</td>
-                                 <td class="text_left"><a href="./inquiry-details.html" class="aa">[Power Bloger] 빵도 맛있고 음료도 맛있고 알바생도 친절하고 가게 뷰도 좋아요 </a></td>
-                                 <td>2022.05.11</td>
-                                 <td>칭찬</td>
-                             </tr>
-                             <tr class="">
-                                 <td>1</td>
-                                 <td class="text_left"><a href="./inquiry-details.html" class="aa">[Power Bloger] 알바생이 불친절하고 매장이 불청결하고 커피도 맛이없어요  </a></td>
-                                 <td>2021.12.20</td>
-                                 <td>불만</td>
-                             </tr>
-                         </tbody>
-                    </table>
-                 </section>
-                
+            </div>
+            <section class="community-section mt_30" style="margin-left: 15px; margin-right: 15px;">
+                <table class="table_board_for type_a">
+                    <colgroup>
+                        <col width="8%">
+                        <col width="*%;">
+                        <col width="15%;">
+                        <col width="8%;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성일</th>
+                            <th scope="col">유형</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_body_wrap">
+                        
+                    </tbody>
+                </table>
+            </section>
+
         </div>
     </section>
 
