@@ -1,3 +1,4 @@
+/* 글작성 페이지 이동 버튼 */
 #writePost {
   background-color: black;
   float: right;
@@ -15,7 +16,9 @@
   color: black;
   border: 1px solid black;
 }
+/* 글작성 페이지 이동 버튼 */
 
+/* 게시글 리스트 더 보기 버튼 */
 #readmorehold {
   text-align: center;
 
@@ -35,7 +38,9 @@
   color: black;
   border: 1px solid black;
 }
+/* 게시글 리스트 더 보기 버튼 */
 
+/* 미디어 쿼리 모바일 환경 사이즈 조절 */
 @media(max-width: 1000px) {
   .writetop {
     align-items: center;
@@ -49,8 +54,6 @@
   .readmoretop {
     margin-right: 30%;
   }
-
-
 
 }
 

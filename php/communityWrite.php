@@ -26,7 +26,7 @@ $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION)); // 파일의 �
 if (!in_array($extension, $allowedExtensions)) {
     echo "jpg 또는 png 파일만 업로드할 수 있습니다.";
 } elseif (move_uploaded_file($tmpName, $dstName)) {
-    echo "사진 업로드 성공";
+    
     // 데이터 삽입 로직을 추가해야 함
 } else {
     echo "사진 업로드 실패";
@@ -37,7 +37,7 @@ $sql = "INSERT INTO community (no, title, contents, name, password, date, image,
 
 // 데이터 삽입 실행
 if ($db->query($sql) === TRUE) {
-    echo "데이터가 성공적으로 삽입되었습니다.";
+   
 } else {
     echo "데이터 삽입 중 오류가 발생하였습니다: " . $db->error;
 }

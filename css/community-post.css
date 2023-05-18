@@ -1,0 +1,59 @@
+/* 추천 영역 */
+.like_holder {
+    margin: 40px;
+    text-align: center;
+}
+
+.like_holder :first-child {
+    display: inline-block;
+    width: 80px;
+    cursor: pointer;
+}
+
+.like_holder:nth-child(2) {
+    display: inline-block;
+    
+}
+/* 추천 영역 */
+
+/* 수정 삭제 영역 */
+
+#delete,
+#repost{
+    background-color: black;
+    border: 1px solid black;
+}
+#delete:hover,
+#repost:hover{
+    background-color: white;
+    color: black;
+    
+}
+
+
+/* 수정 삭제 영역 */
+
+/* 댓글작성영역 */
+.submitcomment {
+    margin-top: 15px;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+}
+
+.submitcomment:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+/* 댓글작성영역 */
+
+
+/* 미디어 쿼리 */
+@media(max-width: 400px){
+    .btn-primary{
+        float: right;
+        margin-right: 8px;
+    }
+}
+/* 미디어 쿼리 */

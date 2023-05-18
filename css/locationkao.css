@@ -1,7 +1,7 @@
 body {
     overflow-x: hidden;
 }
-
+/* 맵 영역 */
 #map {
     display: flex;
     margin-left: auto;
@@ -9,16 +9,17 @@ body {
     margin-top: 30px;
     z-index: 0;
     position: relative;
-    border: 1px solid black;
+    border: 1px solid #b5b5b5;
     width: auto;
     height: 700px;
     max-width: 1200px;
     margin-bottom: 60px;
+    border-radius: 3px;
 
 }
+/* 맵 영역 */
 
-
-
+/* 검색창 영역 */
 .locationSearch {
     display: flex;
     height: 70px;
@@ -53,8 +54,9 @@ body {
     z-index: 100;
     padding-top: 25px;
 }
+/* 검색창 영역 */
 
-
+/* 미디어 쿼리 맵과 검색창영역 */
 @media (max-width: 780px) {
     #map {
         height: 650px;
@@ -78,4 +80,4 @@ body {
     }
 
 }
-
+/* 미디어 쿼리 맵과 검색창영역 */

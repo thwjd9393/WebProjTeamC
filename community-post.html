@@ -22,13 +22,17 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/blog-deaails.css" type="text/css">
+    <link rel="stylesheet" href="css/community-post.css" type="text/css">
 
     <!-- 헤더 푸터 -->
 
+    <!-- 부트스트립 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
+
     <!-- JS 영역 (start) -->
 
-    <script src="./js/blog-details.js">
+    <script src="./js/community-post.js">
 
     </script>
 
@@ -159,7 +163,6 @@
                         </div>
                         <!-- 모달 -->
 
-
                         <div class="modal fade" id="exampleModa2" tabindex="1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
@@ -184,6 +187,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <!-- 좋아요 영역(start) -->
 
                         <div>
@@ -194,52 +199,52 @@
                                 <img src="./img/like.png" alt="like" onclick="check_ctn()">
                                 <h4 id="likeCount">0</h4>
 
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModal" data-whatever="@mdo">수정</button>
-                                <script src="./js/blog-details.js"></script>
-
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModa2" data-whatever="@mdo">삭제</button>
-
                             </div>
 
                         </div>
 
-
+                       
 
                         <!-- 좋아요 영역(end) -->
 
                         <div class="blog__details__option">
-                            <div class="row">
+                            <div class="row btn_holder">
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="blog__details__author">
                                         <div class="blog__details__author__pic">
-
+                                          
                                         </div>
                                         <div class="blog__details__author__text">
-                                            <h5>Aiden Blair</h5>
+                                            
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="blog__details__tags">
+                                    <div class="blog__details__tags ">
+
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal" data-whatever="@mdo" id="repost">수정</button>
+                                    <script src="./js/blog-details.js"></script>
+    
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModa2" data-whatever="@mdo" id="delete">삭제</button>
+                                    
+    
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="blog__details__btns">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <a href="" class="blog__details__btns__item">
-                                        <p><span class="arrow_left"></span> Previous Pod</p>
-                                        <h5>It S Classified How To Utilize Free Classified Ad Sites</h5>
-                                    </a>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <a href="" class="blog__details__btns__item blog__details__btns__item--next">
-                                        <p>Next Pod <span class="arrow_right"></span></p>
-                                        <h5>Tips For Choosing The Perfect Gloss For Your Lips</h5>
-                                    </a>
+                      
+                        <!-- 페이지네이션 -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="product__pagination">
+                                    <a class="active" href="#">1</a>
+                                    <a href="#">2</a>
+                                    <a href="#">3</a>
+                                    <span>...</span>
+                                    <a href="#">21</a>
                                 </div>
                             </div>
                         </div>
@@ -258,7 +263,7 @@
                                     </div>
                                     <div class="col-lg-12 text-center">
                                         <textarea placeholder="Comment"></textarea>
-                                        <button type="submit" class="btn">댓글 작성</button>
+                                        <button type="submit" class="submitcomment">댓글 작성</button>
                                     </div>
                                 </div>
                             </form>
@@ -275,9 +280,9 @@
 
 
 
-    <!-- Footer Section Begin -->
-
-    <!-- Footer Section End -->
+  <!-- Footer Section Begin -->
+  <footer include-html="./common/footer.html"></footer>
+  <!-- Footer Section End -->
 
 
     <!-- Js Plugins -->
