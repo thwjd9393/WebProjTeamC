@@ -38,6 +38,7 @@
 
     <script>
 
+        //선택한 파일 보이기
         function fileupload(e){
             document.getElementById('file').innerHTML=e.value;   
         } 
@@ -139,9 +140,50 @@
 
     <script>
 
-        <!-- 리뷰 쓰기 -->
+        //리뷰 쓰기
         function reViewBtn(){
-            alert('dkss')
+
+            //보낼 데이터 준비
+            const reviewNic = document.getElementById('reviewNic').value;
+            const reviewPasswd = document.getElementById('reviewPasswd').value;
+            const reviewContent = document.getElementById('reviewContent').value;
+            const reviewImg = document.getElementById('reviewImg').value;
+            const mnuNo = document.getElementById('mnuNo').innerHTML;
+
+            // var data="title=HELO&msg=sdsfd";
+            const data = `reviewNic=${reviewNic}&reviewPasswd=${reviewPasswd}&reviewContent=${reviewContent}&reviewImg=${reviewImg}&mnuNo=${mnuNo}`;
+
+            //연동할 주소
+            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewInsert.php`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url,{
+                    method : 'POST',
+                    headers : {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
+                    body : data
+            }).then(response =>response.text())
+            .then(data => 
+                //리뷰 재로드
+                reViewReload()
+            ).catch(error => console.log(error))
+
+        }
+
+        //리뷰 등록 후...
+        function reViewReload(){
+
+            //텍스트 지우기
+            document.getElementById('reviewNic').value = "";
+            document.getElementById('reviewPasswd').value = "";
+            document.getElementById('reviewContent').value = "";
+            document.getElementById('reviewImg').value = "";
+
+            //기존 리스트 부시기
+            const container = document.querySelector("#comtemt_item_warp");
+            container.innerHTML = "";
+
+            //리뷰 재로드
+            loadReviewList()
         }
 
     </script>
@@ -275,7 +317,7 @@
                                     <div class="file_box">
                                         <p id="file"></p>
                                         <span class="btn_type_file">파일첨부</span>
-                                        <input type="file" onchange="fileupload(this)">
+                                        <input id="reviewImg" type="file" onchange="fileupload(this)">
                                     </div>
                                 </div>
 

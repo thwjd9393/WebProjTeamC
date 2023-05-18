@@ -23,7 +23,7 @@
         }
         
         //임시 저장소에 있는 이미지를 영구저장소 위치로 이동
-        $dstName = "./uploadImg/".date('YmdHis').$filename;
+        $dstName = "./uploadImg/menu_review/".date('YmdHis').$filename;
         $result = move_uploaded_file($tmpName, $dstName);
     }
 
@@ -47,7 +47,7 @@
     // if($result) echo "" . $db -> insert_id; 
     // else echo "게시글 업로드에 실패했습니다";
     if($result) echo "등록 성공"; 
-    else echo "등록 실패.$result";
+    else echo "등록 실패";
 
     //6.php 닫기
     mysqli_close($db);

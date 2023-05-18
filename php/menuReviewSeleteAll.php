@@ -9,7 +9,7 @@
     mysqli_query($db, "set names utf8"); //한글깨짐 방지
  
     //3.쿼리문
-    $sql = "SELECT * FROM cMenuReview WHERE mnuNo=$mnuNo";
+    $sql = "SELECT * FROM cMenuReview WHERE mnuNo=$mnuNo ORDER BY reviewNo DESC";
  
     //4. 내 디비에 쿼리문 요청 보내고 받아온 응답 값 result 변수에 담기 
     $result = mysqli_query($db,$sql);
