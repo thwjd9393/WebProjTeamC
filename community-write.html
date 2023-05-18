@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="./css/writepost.css" type="text/css">
+    <link rel="stylesheet" href="./css/community-write.css" type="text/css">
 
     <!-- 스타일 시트 연결  영역-->
     <!--헤더 푸터-->
@@ -66,10 +66,10 @@
 
 
 
-            <form action="./php/write.php" method="POST" enctype="multipart/form-data">
+            <form action="./php/communityWrite.php" method="POST" enctype="multipart/form-data">
                 <!-- 게시글 제목란(start) -->
                 <div>
-                    <input class="form-control form-control-lg title" type="text" name="title" placeholder="제목"
+                    <input class="form-control form-control-lg title" type="text" name="cmtyTitle" placeholder="제목"
                         aria-label=".form-control-lg example">
                 </div>
                 <!-- 게시글 제목란 (end) -->
@@ -77,11 +77,11 @@
                 <!-- 익명 닉네임 비밀번호 기입(start) -->
                 <div class="row account__warp">
                     <div class="col-lg-6 col-md-6 col-sm-6 account__name">
-                        <input type="text" name="name" maxlength="13" placeholder="닉네임" class="form-control"
+                        <input type="text" name="cmtyNic" maxlength="13" placeholder="닉네임" class="form-control"
                             id="nameinp">
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 account__passwd">
-                        <input type="password" name="password" id="inputPassword" class="form-control"
+                        <input type="password" name="cmtyPasswd" id="inputPassword" class="form-control"
                             placeholder="비밀번호">
                     </div>
 
@@ -90,14 +90,14 @@
 
                 <!-- 게시글 본문 작성란(start) -->
                 <div class="text">
-                    <textarea name="contents" id="textra" cols="60" rows="50"></textarea>
+                    <textarea name="cmtyContent" id="textra" cols="60" rows="50"></textarea>
                 </div>
                 <!-- 게시글 본문 작성란(end) -->
 
                 <div class="account">
                     <!-- 이미지 첨부(start) -->
                     <div class="mb-3">
-                        <input class="form-control" type="file" name="image" id="formFile">
+                        <input class="form-control" type="file" name="cmtyImg" id="formFile">
                     </div>
 
                     <!-- 이미지 첨부(end) -->
