@@ -10,10 +10,11 @@ EDIT ON
   
 .que{
   position: relative;
-  padding: 17px 0;
+  padding: 17px 10px;
   cursor: pointer;
   font-size: 18px;
   border-bottom: 1px solid #dddddd;
+  padding-right:40px;
 }
   
 .que::before{
@@ -21,7 +22,8 @@ EDIT ON
   content: 'Q';
   font-size: 18px;
   color: black;
-  margin: 0 5px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .que.on>span{
@@ -35,6 +37,7 @@ EDIT ON
   font-size: 16px;
   background-color: #f4f4f2;
   padding: 27px 0;
+  padding-right: 40px;
 }
   
 .anw::before {
@@ -43,7 +46,7 @@ EDIT ON
   font-size: 16px;
   font-weight: bold;
   color: #666;
-  margin: 0 5px;
+  margin: 0 10px;
 }
 
 .arrow-wrap {

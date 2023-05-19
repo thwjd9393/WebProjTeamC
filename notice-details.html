@@ -25,6 +25,49 @@
     <!--헤더 푸터-->
     <script src="./js/includeHTML.js"></script>
 
+    <script>
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        let no = getParameterByName('ntcNo');
+
+        loadNoticeDetail(no)
+
+        // console.log(no);
+
+
+        //리뷰 로드
+        function loadNoticeDetail(no) {
+
+            //연동할 주소
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/noticeDetailLoad.php?ntcNo=${no}`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+                .then(response => response.json())
+                .then(data =>
+
+                    //포문이 then문 안에서는 동작하지 않음
+                    // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
+                    displayNoticeDetail(data)
+
+                ).catch(error => console.log(error))
+        }
+
+        function displayNoticeDetail(data) {
+
+            document.querySelector('#ntcTitle').innerHTML = `${data[0].ntcTitle}`;
+            document.querySelector('#ntcDate').innerHTML = `${data[0].ntcDate}`;
+            document.querySelector('#ntcContent').innerHTML = `${data[0].ntcContent}`;
+
+        }
+
+    </script>
+
 </head>
 
 <body>
@@ -58,28 +101,19 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Shopping Cart Section Begin -->
-    <section class="shopping-cart spad">
+    <section class="shopping-cart spad" id="notice_details">
         <div class="container">
             <div class="col-lg-12">
-                <h4 style="font-weight: bold;">블록체인 기반 암호화폐 '겸겸코인' 전격 도입</h4>
-                2022.12.04
-                <hr style="margin-bottom: 50px;">
+                <h4 style="font-weight: bold;" id="ntcTitle"></h4>
+                <div id="ntcDate" style="margin-top: 15px;"></div>
+                <hr style="margin-bottom: 50px; margin-top: 3px; margin-bottom: 20px;">
             </div>
             <div class="col-lg-12">
-                <p>
-                    <h5 style="text-decoration: underline;"> 블록체인 기술과 만나다.. 겸겸코인(TOMTOM COIN)전격 도입</h5>
-                </p>
-                <p>
-                    <h6> 김겸, 올 상반기부터 블록체인 기술 적용 NEW 결제수단 접목<br> ‘보안성↑ 효율성↑’ 겸겸코인으로 고객지향적 서비스 예고</h6>
-                </p>
-                <img src="./img/coin.jpg" alt="award">
-                <p>
-                    <h6>겸겸 코인(GyeomGyeom COIN)은 김겸을 생태계로 사용하는 블록체인 및 유틸리티 토큰 프로젝트로서,
-                        최근 유통·산업계의 화두로 떠오른 보안 및 데이터 관리에 대한 김겸의 솔루션으로 주목 받고 있다.
-                        해당 암호화폐는 강화된 보안성으로 향후 자사 플랫폼의 결제 수단으로 활용되는 건 물론, 고객 리워드에 대한 편의성·다양성·투명성까지 제공할 수 있을 전망이다.</h6>
-                </p>
+                    <p>
+                      <h6 id="ntcContent"></h6>
+                    </p>
+                </div>
             </div>
-        </div>
     </section>
     <!-- Shopping Cart Section End -->
 
@@ -87,16 +121,6 @@
     <footer include-html="./common/footer.html"></footer>
     <!-- Footer Section End -->
 
-    <!-- Search Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
-    </div>
-    <!-- Search End -->
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>

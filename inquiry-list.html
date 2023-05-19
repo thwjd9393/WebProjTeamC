@@ -41,23 +41,22 @@
                     //포문이 then문 안에서는 동작하지 않음
                     // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
                     displayInquiryList(data)
-
+                   
                 ).catch(error => console.log(error))
         }
 
         function displayInquiryList(data) {
             const container = document.querySelector("#table_body_wrap")
-
+            console.log(data)
             data.forEach(e => {
 
 
                 container.innerHTML += `<tr>
                             <td>${e.qaNo}</td>
-                            <td class="text_left"><a href="./inquiry-details.html" class="aa">${e.qaTitle}</a></td>
+                            <td class="text_left"><a href="http://mrhisj23.dothome.co.kr/WebProjTeamC/inquiry-details.html?qaNo=${e.qaNo}" class="aa">${e.qaTitle}</a></td>
                             <td>${e.qaDate}</td>
                             <td>${e.qaType}</td>
                         </tr>`;
-
             });
         }
 
@@ -84,11 +83,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h2 style="margin-bottom: 10;">Notice</h2>
+                        <h2 style="margin-bottom: 10;">Inquiry-List</h2>
                         <div class="breadcrumb__links">
                             <a href="./index.html">Home</a>
                             <a href="./shop.html">Service</a>
-                            <span>Notice</span>
+                            <span>Inquiry-List</span>
                         </div>
                     </div>
                 </div>
