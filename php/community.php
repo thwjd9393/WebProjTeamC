@@ -8,7 +8,7 @@ $db = mysqli_connect('localhost', 'mrhisj23', 'hi23bye6!', 'mrhisj23');
 mysqli_query($db, "set names utf8"); //한글깨짐 방지
 
 // 쿼리문
-$sql = "SELECT * FROM cCommunity WHERE cmtyNo=$cmtyNo";
+$sql = "SELECT * FROM cCommunity ORDER BY cmtyNo DESC";
 
 // 받아온 값 변수(result)에 저장
 $result = mysqli_query($db, $sql);

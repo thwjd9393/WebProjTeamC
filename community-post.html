@@ -35,56 +35,104 @@
     <script src="./js/community-post.js">
 
     </script>
+    <script>
 
-<script>
-    function loadPostList() {
-
-        //글번호 찾아오기
-        const cmtyNo = document.getElementById('cmtyNo').innerHTML;
-
-        console.log('cmtyNo');
-
-        //연동할 주소
-        var url =
-            `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityComment.php?mnuNo=${cmtyNo}`;
-
-        // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
-        fetch(url)
-            .then(response => response.json())
-            .then(data =>
-                
-                //포문이 then문 안에서는 동작하지 않음
-                // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
-                displayPostList(data)
-                
-                // console.log(data)
-            ).catch(error => console.log(error))
-           
-    } 
-    
-            
-    function displayPostList(data) {
-        const container = document.querySelector("#comtemt_item_warp")
-        console(data)
-        data.forEach(e => {
-
-        container.innerHTML += `<div class="comment_item">
-                <div id="reviewNo" style="display: none;">${e.reviewNo}</div>
-                <p class="comment">${e.reviewContent}</p>
-                <div class="d-flex justify-content-between">
-                    <p id="nicname">${e.reviewNic}</p>
-                    <p id="date">${e.reviewDate}</p>
-                </div>
-            </div>`;
-
-        });
-    }
+    </script>
 
 
-    // 페이지 로드 시 loadMemberList 함수 호출
-    window.onload = loadReviewList;
-</script>
 
+    <script>
+        function loadPostList() {
+
+            //글번호 찾아오기
+            const cmtyNo = document.getElementById('cmtyNo').innerHTML;
+
+            console.log(cmtyNo);
+
+            //연동할 주소
+            var url =
+                `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/community.php?cmtyNo=${cmtyNo}`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+                .then(response => response.json())
+                .then(data =>
+
+                    //포문이 then문 안에서는 동작하지 않음
+                    // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
+                    displayPostList(data)
+
+                    // console.log(data)
+                ).catch(error => console.log(error))
+
+        }
+
+
+        function displayPostList(data) {
+            const container = document.querySelector("#comtemt_item_warp");
+            container.innerHTML = ""; // 기존 내용을 지우고 새로운 내용을 추가하기 위해 innerHTML 초기화
+
+            data.forEach(e => {
+                container.innerHTML += `
+      <div class="comment_item">
+        <div id="reviewNo" style="display: none;">${e.reviewNo}</div>
+        <p class="comment">${e.reviewContent}</p>
+        <div class="d-flex justify-content-between">
+          <p id="nicname">${e.reviewNic}</p>
+          <p id="date">${e.reviewDate}</p>
+        </div>
+      </div>`;
+            });
+        }
+
+
+        // 페이지 로드 시 loadMemberList 함수 호출
+        window.onload = loadPostList;
+    </script>
+
+    <script>
+        function commentUploade() {
+            const cmtNic = document.getElementById('cmtNic').value;
+            const cmtPasswd = document.getElementById('cmtPasswd').value;
+            const cmtContent = document.getElementById('cmtContent').value;
+            const cmtyNo = document.getElementById('cmtyNo').innerHTML;
+
+
+            // url에 집어넣을 데이터값 결합
+
+            const data = `cmtNic=${cmtNic}&cmtPasswd=${cmtPasswd}&cmtContent=${cmtContent}&cmtyNo=${cmtyNo}`
+
+            // 연동할 주소
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityCommentInsert.php`
+
+            // 네트워크 연결
+            fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    },
+                    body: data
+                }).then(response => response.text())
+                .then(data =>
+                    //리뷰 재로드
+                    CommentReload()
+                ).catch(error => console.log(error))
+
+        }
+
+        function CommentReload() {
+            //텍스트 지우기
+            document.getElementById('cmtNic').value = "";
+            document.getElementById('cmtPasswd').value = "";
+            document.getElementById('cmtContent').value = "";
+
+            const container = document.querySelector("#comtemt_item_warp");
+            container.innerHTML = "";
+
+            // 댓글 리로드
+            loadPostList();
+        }
+    </script>
     <!-- JS 영역 (end)  -->
 
 
@@ -139,6 +187,7 @@
                 <div class="col-lg-9 text-center">
                     <div class="blog__hero__text">
                         <h2>Are you one of the thousands of Iphone owners who has no idea</h2>
+                        <div id="cmtyNo" style="display: none;">25</div>
                         <ul>
                             <li>By Deercreative</li>
                             <li>February 21, 2019</li>
@@ -162,7 +211,7 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="blog__details__content">
-                        
+
                         <div id="cmtyNo" style="display: none;"></div>
 
                         <div class="blog__details__text">
@@ -246,7 +295,7 @@
 
                         </div>
 
-                        
+
 
                         <!-- 좋아요 영역(end) -->
 
@@ -312,24 +361,25 @@
                         <!-- 페이지네이션 -->
 
                         <!-- comment 영역(start) -->
-                        
-                       
 
-                        
+
+
+
                         <div class="blog__details__comment">
                             <h4>댓글</h4>
                             <form action="#">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-2">
-                                        <input type="text" placeholder="닉네임">
+                                        <input type="text" placeholder="닉네임" id="cmtNic">
                                     </div>
 
                                     <div class="col-lg-6 col-md-6 col-sm-2">
-                                        <input type="password" placeholder="비밀번호">
+                                        <input type="password" placeholder="비밀번호" id="cmtPasswd">
                                     </div>
                                     <div class="col-lg-12 text-center">
-                                        <textarea placeholder="Comment"></textarea>
-                                        <button type="submit" class="submitcomment">댓글 작성</button>
+                                        <textarea placeholder="Comment" id="cmtContent"></textarea>
+                                        <button type="submit" class="submitcomment" onclick="commentUploade()">댓글
+                                            작성</button>
                                     </div>
                                 </div>
                             </form>
@@ -365,8 +415,8 @@
     <header include-html="./common/footer.html"></header>
 </body>
 <script>
-    // 헤더 푸터
-    includeHTML();
+    // // 헤더 푸터
+    // includeHTML();
 </script>
 
 </html>
