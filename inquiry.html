@@ -27,6 +27,13 @@
     <!--헤더 푸터-->
     <script src="./js/includeHTML.js"></script>
 
+    <script>
+        function goInquiry() {
+            open('./inquiry-list.html')
+        }
+       
+    </script>
+
 </head>
 
 <body>
@@ -46,11 +53,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h2 style="margin-bottom: 10;">Notice</h2>
+                        <h2 style="margin-bottom: 10;">Inquiry</h2>
                         <div class="breadcrumb__links">
                             <a href="./index.html">Home</a>
                             <a href="./shop.html">Service</a>
-                            <span>Notice</span>
+                            <span>Inquiry</span>
                         </div>
                     </div>
                 </div>
@@ -89,7 +96,7 @@
             </div>
             <hr>
 
-            <form action="inquiry.php" method="post" enctype="multipart/form-data">
+            <form action="./php/inquiryInsert.php" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-6  col-md-6">
                         <div class="checkout__input">
@@ -152,7 +159,7 @@
                         <input type="button" value="목록보기" class="btn_list" onclick="goInquiry()">
                     </div>
                     <div>
-                        <input type="submit" value="문의하기" class="btn_inquiry">
+                        <input type="submit" value="문의하기" class="btn_inquiry" onclick="goInquiry()">
                     </div>
                 </div>
             </form>

@@ -26,6 +26,50 @@
     <!--헤더 푸터-->
     <script src="./js/includeHTML.js"></script>
 
+    <script>
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        let no = getParameterByName('qaNo');
+
+        loadQnaDetail(no)
+
+        // console.log(no);
+
+
+        //리뷰 로드
+        function loadQnaDetail(no) {
+
+            //연동할 주소
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/inquiryDetailLoad.php?qaNo=${no}`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+                .then(response => response.json())
+                .then(data =>
+
+                    //포문이 then문 안에서는 동작하지 않음
+                    // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
+                    displayQnaDetail(data)
+
+                ).catch(error => console.log(error))
+        }
+
+        function displayQnaDetail(data) {
+
+            document.querySelector('#qaTitle').innerHTML = `${data[0].qaTitle}`;
+            document.querySelector('#qaNic').innerHTML = `${data[0].qaNic}`;
+            document.querySelector('#qaType').innerHTML = `${data[0].qaType}`;
+            document.querySelector('#qaContent').innerHTML = `${data[0].qaContent}`;
+
+        }
+
+    </script>
+
 </head>
 
 <body>
@@ -77,31 +121,26 @@
             <div class="col-lg-12">
                 <table class="table-view-01 txt-mt">
                     <colgroup>
-                        <col width="80%">
-                        <col width="20%">
+                        <col width="90%">
+                        <col width="10%">
                     </colgroup>
                     <tbody>
                         <tr>
                             <td colspan="2" class="clearfix tit_box">
-                                <p class="tit"> [Smile Campaign] 2022년_1분기 "탐앤탐스를 미소짓게 만든 칭찬사연 BEST 3" </p>
+                                <p class="tit" id="qaTitle"></p>
                             </td>
                             <td>
-                                <p class="tit">2022.05.11</p>
+                                <p></p>
                             </td>
+                        </tr>
+                        <tr class="type">
+                            <td>닉네임 : <span id="qaNic"></span></td>
+                            <td>타입 : <span id="qaType"></span></td>
                         </tr>
                 </table>
             </div>
             <div class="col-lg-12">
-                <p class="context">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, labore ipsam
-                    temporibus obcaecati provident repellat consectetur architecto sed dolore voluptatum optio error sit
-                    itaque ullam culpa rem perferendis! Amet, id. Lorem ipsum, dolor sit amet consectetur adipisicing
-                    elit. Iusto praesentium maiores harum laboriosam? Molestiae sunt repellendus doloribus ad aperiam
-                    earum voluptate neque nesciunt non nobis nisi, enim perferendis architecto nam!>Lorem ipsum dolor
-                    sit amet consectetur adipisicing elit. Consequuntur, labore ipsam temporibus obcaecati provident
-                    repellat consectetur architecto sed dolore voluptatum optio error sit itaque ullam culpa rem
-                    perferendis! Amet, id. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto praesentium
-                    maiores harum laboriosam? Molestiae sunt repellendus doloribus ad aperiam earum voluptate neque
-                    nesciunt non nobis nisi, enim perferendis architecto nam!</p>
+                <p class="context" id="qaContent"></p>
             </div>
 
         </div>

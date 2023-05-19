@@ -29,7 +29,7 @@
 
     <script>
         //리뷰 로드
-        function loadFaqList(){
+        function loadFaqList() {
 
             //연동할 주소
             var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/faqSelectAll.php`;
@@ -53,30 +53,35 @@
 
 
                 container.innerHTML += `<div class="que">
-                    <span style="padding-left: 20px;">${e.faTitle}</span>
+                    <span style="padding-left: 5px;">${e.faTitle}</span>
                     <div class="arrow-wrap">
                         <span class="arrow-top">▽</span>
                         <span class="arrow-bottom">△</span>
                     </div>
                 </div>
                 <div class="anw">
-                    <span style="padding-left: 20px;">${e.faContent}</span>
+                    <span style="padding-left: 5px; margin-right: 20px;>${e.faContent}</span>
                 </div>`;
 
             });
         }
 
-        
-
         // 페이지 로드 시 loadMemberList 함수 호출
         window.onload = loadFaqList;
     </script>
 
+    <script>
+        $(".que").click(function () {
+            $(this).next(".anw").stop().slideToggle(300);
+            $(this).toggleClass('on').siblings().removeClass('on');
+            $(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
+        });
+    </script>
 </head>
 
 <body>
     <!-- Page Preloder -->
-    <div id="preloder"> 
+    <div id="preloder">
         <div class="loader"></div>
     </div>
 
@@ -121,49 +126,48 @@
     </div>
     <!-- Breadcrumb Section End -->
 
-    
-        <div class="container">
-            <p>
-                <h3 style="font-weight: bold; margin-top: 50px;">자주 묻는 질문</h3>
-            </p>
+
+    <div class="container">
+        <p>
+            <h3 style="font-weight: bold; margin-top: 50px;">자주 묻는 질문</h3>
+        </p>
+    </div>
+
+    <div class="container">
+        <div id="Accordion_wrap">
+
         </div>
+    </div>
 
-        <div class="container">
-            <div id="Accordion_wrap">
-                
-            </div>
+
+
+
+    <!-- Footer Section Begin -->
+    <footer include-html="./common/footer.html"></footer>
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
         </div>
+    </div>
+    <!-- Search End -->
 
-
-
-
-        <!-- Footer Section Begin -->
-        <footer include-html="./common/footer.html"></footer>
-        <!-- Footer Section End -->
-
-        <!-- Search Begin -->
-        <div class="search-model">
-            <div class="h-100 d-flex align-items-center justify-content-center">
-                <div class="search-close-switch">+</div>
-                <form class="search-model-form">
-                    <input type="text" id="search-input" placeholder="Search here.....">
-                </form>
-            </div>
-        </div>
-        <!-- Search End -->
-
-        <!-- Js Plugins -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.nice-select.min.js"></script>
-        <script src="js/jquery.nicescroll.min.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/jquery.countdown.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/main.js"></script>
-        <script src="js/faq.js"></script>
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 <script>
