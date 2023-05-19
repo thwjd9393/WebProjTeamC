@@ -13,17 +13,9 @@
     $tmpName = $file['tmp_name']; //임시 저장소 위치
     $filename = $file['name']; 
 
-    if($tmpName != "" || $tmpName != null){
-        $allowedExtensions = ['jpg', 'png']; // 허용할 확장자 목록
-        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION)); // 파일의 확장자 추출 후 소문자로 변환
-
-        if (!in_array($extension, $allowedExtensions)) {
-            echo "jpg 또는 png 파일만 업로드할 수 있습니다.";
-            return;
-        }
-        
+    if($file != "" || $file != null){
         //임시 저장소에 있는 이미지를 영구저장소 위치로 이동
-        $dstName = "./uploadImg/menu_review/".date('YmdHis').$filename;
+        $dstName = "../uploadImg/menu_review/".date('YmdHis').$filename;
         $result = move_uploaded_file($tmpName, $dstName);
     }
 

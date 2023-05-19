@@ -41,7 +41,9 @@
         //선택한 파일 보이기
         function fileupload(e){
             document.getElementById('file').innerHTML=e.value;   
-        } 
+        }
+
+        //
 
         //리뷰 로드
         function loadReviewList(){
@@ -102,9 +104,16 @@
                 // container.innerHTML+= `</div>`;
                 // container.innerHTML+= `</div>`;
 
+                let img = (e.reviewImg).substr(1);
+
                 container.innerHTML += `<div class="comment_item">
                         <div id="reviewNo" style="display: none;">${e.reviewNo}</div>
-                        <p class="comment">${e.reviewContent}</p>
+                        <div class="d-flex justify-content-between">
+                            <p class="comment">${e.reviewContent}</p>
+                            <div class="reViewImg">
+                                <img src="${img}" alt="${img}">
+                            </div>
+                        </div>
                         <div class="d-flex justify-content-between">
                             <p id="nicname">${e.reviewNic}</p>
                             <p id="date">${e.reviewDate}</p>
@@ -144,14 +153,33 @@
         function reViewBtn(){
 
             //보낼 데이터 준비
-            const reviewNic = document.getElementById('reviewNic').value;
-            const reviewPasswd = document.getElementById('reviewPasswd').value;
-            const reviewContent = document.getElementById('reviewContent').value;
-            const reviewImg = document.getElementById('reviewImg').value;
-            const mnuNo = document.getElementById('mnuNo').innerHTML;
+            // const reviewNic = document.getElementById('reviewNic').value;
+            // const reviewPasswd = document.getElementById('reviewPasswd').value;
+            // const reviewContent = document.getElementById('reviewContent').value;
+            // const reviewImg = document.getElementById('reviewImg').value;
+            // const mnuNo = document.getElementById('mnuNo').innerHTML;
 
-            // var data="title=HELO&msg=sdsfd";
-            const data = `reviewNic=${reviewNic}&reviewPasswd=${reviewPasswd}&reviewContent=${reviewContent}&reviewImg=${reviewImg}&mnuNo=${mnuNo}`;
+            const reviewNicInput = document.getElementById('reviewNic');
+            const reviewPasswdInput = document.getElementById('reviewPasswd');
+            const reviewContentInput = document.getElementById('reviewContent');
+            const reviewImgInput = document.getElementById('reviewImg');
+            const mnuNoInput = document.getElementById('mnuNo');
+
+            const reviewNic = reviewNicInput.value;
+            const reviewPasswd = reviewPasswdInput.value;
+            const reviewContent = reviewContentInput.value;
+            const reviewImg = reviewImgInput.files[0];
+            const mnuNo = mnuNoInput.innerHTML;
+
+            // // var data="title=HELO&msg=sdsfd";
+            // const data = `reviewNic=${reviewNic}&reviewPasswd=${reviewPasswd}&reviewContent=${reviewContent}&reviewImg=${reviewImg}&mnuNo=${mnuNo}`;
+
+            const data = new FormData();
+            data.append("reviewNic", reviewNic);
+            data.append("reviewPasswd", reviewPasswd);
+            data.append("reviewContent", reviewContent);
+            data.append("reviewImg", reviewImg);
+            data.append("mnuNo", mnuNo);
 
             //연동할 주소
             var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewInsert.php`;
@@ -159,13 +187,22 @@
             // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
             fetch(url,{
                     method : 'POST',
-                    headers : {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
                     body : data
             }).then(response =>response.text())
             .then(data => 
                 //리뷰 재로드
                 reViewReload()
             ).catch(error => console.log(error))
+
+            // fetch(url,{
+            //         method : 'POST',
+            //         headers : {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
+            //         body : data
+            // }).then(response =>response.text())
+            // .then(data => 
+            //     //리뷰 재로드
+            //     reViewReload()
+            // ).catch(error => console.log(error))
 
         }
 
@@ -177,6 +214,7 @@
             document.getElementById('reviewPasswd').value = "";
             document.getElementById('reviewContent').value = "";
             document.getElementById('reviewImg').value = "";
+            document.getElementById('file').innerHTML = "";
 
             //기존 리스트 부시기
             const container = document.querySelector("#comtemt_item_warp");

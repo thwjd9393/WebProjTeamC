@@ -53,6 +53,34 @@ div#product_img_warp > img {
     margin-top: 1em;
 }
 
+#menuTitle:hover{
+    cursor: pointer;
+}
+
+/* 버튼 */
+.btn_warp{
+    margin: 50px 0;
+}
+
+#readmorehold {
+    text-align: center;
+    
+}
+  
+#readmore {
+    background-color: black;
+    border-radius: 35px;
+    color: white;
+    font-size: 12px;
+    padding: 13px 
+}
+
+#readmore:hover{
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
 /* Wide Mobile = 480px */
 @media (max-width: 767px) {
     ul#menu_ul li{
