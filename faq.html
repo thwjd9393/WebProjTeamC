@@ -11,7 +11,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
-    rel="stylesheet">
+        rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -26,16 +26,61 @@
     <link rel="stylesheet" href="css/faq.css" type="text/css">
     <!--헤더 푸터-->
     <script src="./js/includeHTML.js"></script>
-    
+
+    <script>
+        //리뷰 로드
+        function loadFaqList(){
+
+            //연동할 주소
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/faqSelectAll.php`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+                .then(response => response.json())
+                .then(data =>
+
+                    //포문이 then문 안에서는 동작하지 않음
+                    // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
+                    displayFaqList(data)
+
+                ).catch(error => console.log(error))
+        }
+
+        function displayFaqList(data) {
+            const container = document.querySelector("#Accordion_wrap")
+
+            data.forEach(e => {
+
+
+                container.innerHTML += `<div class="que">
+                    <span style="padding-left: 20px;">${e.faTitle}</span>
+                    <div class="arrow-wrap">
+                        <span class="arrow-top">▽</span>
+                        <span class="arrow-bottom">△</span>
+                    </div>
+                </div>
+                <div class="anw">
+                    <span style="padding-left: 20px;">${e.faContent}</span>
+                </div>`;
+
+            });
+        }
+
+        
+
+        // 페이지 로드 시 loadMemberList 함수 호출
+        window.onload = loadFaqList;
+    </script>
+
 </head>
 
 <body>
     <!-- Page Preloder -->
-    <div id="preloder">
+    <div id="preloder"> 
         <div class="loader"></div>
     </div>
 
-    
+
     <!-- Header Section Begin -->
     <header include-html="./common/header.html"></header>
     <!-- Header Section End -->
@@ -59,106 +104,66 @@
     </section>
     <div>
         <nav class="bg-light">
-            <div class="container">             
+            <div class="container">
                 <ul id="menu_ul">
-                  <li>
-                    <a class="nav-link" aria-current="page" href="./notice.html">공지사항</a>
-                  </li>
-                  <li class="active">
-                    <a class="nav-link" aria-current="page" href="#">FAQ</a>
-                  </li>
-                  <li>
-                    <a class="nav-link" aria-current="page" href="./inquiry.html">1대1 문의</a>
-                  </li>
+                    <li>
+                        <a class="nav-link" aria-current="page" href="./notice.html">공지사항</a>
+                    </li>
+                    <li class="active">
+                        <a class="nav-link" aria-current="page" href="#">FAQ</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" aria-current="page" href="./inquiry.html">1대1 문의</a>
+                    </li>
                 </ul>
             </div>
         </nav>
     </div>
     <!-- Breadcrumb Section End -->
 
-    <div class="col-lg-12">
-        <div class="container">
-          <p><h3 style="font-weight: bold; margin-top: 50px;">자주 묻는 질문</h3></p>
-     </div>
-       
-    <div class="container">
-      <div id="Accordion_wrap">
-        <div class="que">
-         <span>This is first question.</span>
-          <div class="arrow-wrap">
-            <span class="arrow-top">▽</span>
-           <span class="arrow-bottom">△</span>
-          </div>
-        </div>
-        <div class="anw">
-         <span>This is first answer.</span>
-        </div>
-         <div class="que">
-         <span>This is second question.</span>
-         <div class="arrow-wrap">
-          <span class="arrow-top">▽</span>
-         <span class="arrow-bottom">△</span>
-        </div>
-        </div>
-        <div class="anw">
-         <span>This is second answer.</span>
-        </div>
-         <div class="que">
-         <span>This is third question.</span>
-         <div class="arrow-wrap">
-          <span class="arrow-top">▽</span>
-         <span class="arrow-bottom">△</span>
-        </div>
-        </div>
-        <div class="anw">
-         <span>This is third answer.</span>
-        </div>
-    </div>
-
-    <!-- 페이지네이션 -->
-    <div class="row">
-      <div class="col-lg-12">
-          <div class="product__pagination">
-              <a class="active" href="#">1</a>
-              <a href="#">2</a>
-              <a href="#">3</a>
-              <span>...</span>
-              <a href="#">21</a>
-          </div>
-      </div>
-  </div>
-</div>
     
-
-
-
-    <!-- Footer Section Begin -->
-    <footer include-html="./common/footer.html"></footer>
-    <!-- Footer Section End -->
-
-    <!-- Search Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
+        <div class="container">
+            <p>
+                <h3 style="font-weight: bold; margin-top: 50px;">자주 묻는 질문</h3>
+            </p>
         </div>
-    </div>
-    <!-- Search End -->
 
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery.nicescroll.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/jquery.countdown.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/faq.js"></script>
+        <div class="container">
+            <div id="Accordion_wrap">
+                
+            </div>
+        </div>
+
+
+
+
+        <!-- Footer Section Begin -->
+        <footer include-html="./common/footer.html"></footer>
+        <!-- Footer Section End -->
+
+        <!-- Search Begin -->
+        <div class="search-model">
+            <div class="h-100 d-flex align-items-center justify-content-center">
+                <div class="search-close-switch">+</div>
+                <form class="search-model-form">
+                    <input type="text" id="search-input" placeholder="Search here.....">
+                </form>
+            </div>
+        </div>
+        <!-- Search End -->
+
+        <!-- Js Plugins -->
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.nice-select.min.js"></script>
+        <script src="js/jquery.nicescroll.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/jquery.countdown.min.js"></script>
+        <script src="js/jquery.slicknav.js"></script>
+        <script src="js/mixitup.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/faq.js"></script>
 </body>
 
 <script>

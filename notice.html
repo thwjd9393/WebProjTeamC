@@ -11,7 +11,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
-    rel="stylesheet">
+        rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -26,7 +26,54 @@
     <link rel="stylesheet" href="css/notice.css" type="text/css">
     <!--헤더 푸터-->
     <script src="./js/includeHTML.js"></script>
-    
+
+    <script>
+        //리뷰 로드
+        function loadNoticeList(){
+
+            //연동할 주소
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/noticeSelectAll.php`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+                .then(response => response.json())
+                .then(data =>
+
+                    //포문이 then문 안에서는 동작하지 않음
+                    // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
+                    displayNoticeList(data)
+
+                ).catch(error => console.log(error))
+        }
+
+        function displayNoticeList(data) {
+            const container = document.querySelector("#notice_list_tr")
+
+            data.forEach(e => {
+
+
+                container.innerHTML += `<tr>
+                                    <td class="product__cart__item">
+                                        <div class="product__cart__item__pic">
+                                            <img src="img/notice/cart-icon.png" alt="" width="60px">
+                                        </div>
+                                    </td>
+                                    <td class="product__cart__item_b">
+                                        <div class="product__cart__item__text">
+                                            <h5><a href="./notice-details.html" class="product__cart__item_a">${e.ntcTitle}</a></h5>
+                                        </div>
+                                    </td>
+                                    <td>${e.ntcDate}</td>
+                                </tr>`;
+
+            });
+        }
+
+
+        // 페이지 로드 시 loadMemberList 함수 호출
+        window.onload = loadNoticeList;
+    </script>
+
 </head>
 
 <body>
@@ -35,7 +82,7 @@
         <div class="loader"></div>
     </div>
 
-    
+
     <!-- Header Section Begin -->
     <header include-html="./common/header.html"></header>
     <!-- Header Section End -->
@@ -59,17 +106,17 @@
     </section>
     <div>
         <nav class="bg-light">
-            <div class="container">             
+            <div class="container">
                 <ul id="menu_ul">
-                  <li class="active">
-                    <a class="nav-link" aria-current="page" href="#">공지사항</a>
-                  </li>
-                  <li>
-                    <a class="nav-link" aria-current="page" href="./faq.html">FAQ</a>
-                  </li>
-                  <li>
-                    <a class="nav-link" aria-current="page" href="./inquiry.html">1대1 문의</a>
-                  </li>
+                    <li class="active">
+                        <a class="nav-link" aria-current="page" href="#">공지사항</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" aria-current="page" href="./faq.html">FAQ</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" aria-current="page" href="./inquiry.html">1대1 문의</a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -83,66 +130,17 @@
                 <div class="col-lg-12">
                     <div class="shopping__cart__table">
                         <table>
-                            <caption style="caption-side: top; text-align: left;"><h3 style="font-weight: bold;">공지사항</h3></caption>
-                            <tbody>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/notice/cart-icon.png" alt="" width="60px">
-                                        </div>
-                                    </td>
-                                    <td class="product__cart__item_b">
-                                        <div class="product__cart__item__text" >
-                                            <h5><a href="./notice-details.html" class="product__cart__item_a">고객센터 운영시간 변경안내</a></h5>
-                                        </div>
-                                    </td>
-                                    <td>2023-01-01</td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/notice/cart-icon.png" alt="" width="60px">
-                                        </div>
-                                    </td>
-                                    <td class="product__cart__item_b">
-                                        <div class="product__cart__item__text">
-                                            <h5><a href="./notice-details.html" class="product__cart__item_a">[보도자료] 김겸, ‘대한민국 소비자만족지수1위’ 시상식 수상</a></h5>
-                                        </div>
-                                    </td>
-                                    <td>2022-12-17</td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="img/notice/cart-icon.png" alt="" width="60px">
-                                        </div>
-                                    </td>
-                                    <td class="product__cart__item_b">
-                                        <div class="product__cart__item__text">
-                                            <h5><a href="./notice-details.html" class="product__cart__item_a">블록체인 기반 암호화폐 '겸겸코인' 전격 도입</a></h5>
-                                        </div>
-                                    </td>
-                                    <td>2022-12-04</td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="./img/notice/cart-icon.png" alt="" width="60px">
-                                        </div>
-                                    </td>
-                                    <td class="product__cart__item_b">
-                                        <div class="product__cart__item__text">
-                                            <h5><a href="./notice-details.html" class="product__cart__item_a">김겸, GYEOMS NFT Market 오픈 안내</a> </h5>
-                                        </div>
-                                    </td>
-                                    <td>2022-11-30</td>
-                                </tr>
+                            <caption style="caption-side: top; text-align: left;">
+                                <h3 style="font-weight: bold;">공지사항</h3>
+                            </caption>
+                            <tbody id="notice_list_tr">
+                                
                             </tbody>
                         </table>
                     </div>
-                    
+
                 </div>
-            
+
             </div>
             <!-- 페이지네이션 -->
             <div class="row">

@@ -12,15 +12,14 @@ EDIT ON
   position: relative;
   padding: 17px 0;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   border-bottom: 1px solid #dddddd;
-  
 }
   
 .que::before{
   display: inline-block;
   content: 'Q';
-  font-size: 16px;
+  font-size: 18px;
   color: black;
   margin: 0 5px;
 }
@@ -33,7 +32,7 @@ EDIT ON
 .anw {
   display: none;
     overflow: hidden;
-  font-size: 20px;
+  font-size: 16px;
   background-color: #f4f4f2;
   padding: 27px 0;
 }
@@ -69,4 +68,8 @@ EDIT ON
 
 .product__pagination{
   margin-bottom: 25px;
+}
+
+#Accordion_wrap{
+  margin-bottom: 50px;
 }
