@@ -11,10 +11,17 @@ ul#menu_ul li{
     letter-spacing: 1px;
 }
 
-ul#menu_ul li a{
+/* ul#menu_ul li a{
     color: #0d0d0d;
     text-decoration: none;
     font-weight: 700;
+} */
+
+ul#menu_ul li{
+    color: #0d0d0d;
+    text-decoration: none;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 li.active {
@@ -53,7 +60,7 @@ div#product_img_warp > img {
     margin-top: 1em;
 }
 
-#menuTitle:hover{
+#menuName:hover{
     cursor: pointer;
 }
 
@@ -83,12 +90,12 @@ div#product_img_warp > img {
 
 /* Wide Mobile = 480px */
 @media (max-width: 767px) {
-    ul#menu_ul li{
+    /* ul#menu_ul li{
         display: inline;
         letter-spacing: 1px;
         padding: 0;
         font-size: 13px;
-    }
+    } */
 
     .shop__sidebar__search {
         margin: 0 40px 45px;

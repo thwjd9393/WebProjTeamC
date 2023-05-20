@@ -7,7 +7,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>커피커피</title>
+    <title>커피테리아</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -28,20 +28,120 @@
 
 
     <script>
-
-        //주소에서 카테고리 번호 가져오기
         
-        // let mnuCtyNoToUrl = window.location.search
-
-
-        // console.log();
-        // console.log(mnuCtyNoToUrl.split('='));
-
+        let end = 5; 
+    
+        //페이지 로드 시 발동하는 함수
+        function firstMenuLoad() {
+            let mnuCtyNo = 1;
+            loadNav(mnuCtyNo);
+        }
+    
+        //네브 클릭 시 발동하는 함수
+        function selectNav(elem) {
+            const container = document.querySelector("#menu_warp");
+            container.innerHTML = ""; //아이템 클리어
+            let selectTab = elem.innerText;
+            console.log(selectTab);
         
-
+            let mnuCtyNo = 0;
+            if (selectTab == 'COFFEE') mnuCtyNo = 1;
+            else if (selectTab == 'BEVERAGE') mnuCtyNo = 2;
+            else mnuCtyNo = 3;
         
+            loadNav(mnuCtyNo);
+        }
+    
+        function loadNav(mnuCtyNo) {
+            //타이틀 변경
+            let memuTitle = document.querySelector("#memuTitle");
+            let relatedTitle = document.querySelector(".related-title");
 
-    </script>
+            //태그 이동
+            //기존 태그 위치 지우기
+            $('#menu_ul > li').siblings('li').removeClass('active');
+            //체크하여 active 추가
+            if(mnuCtyNo == 1) {
+                $('#menu_ul > li').eq(0).addClass('active');
+                memuTitle.innerHTML = 'COFFEE';
+                relatedTitle.innerHTML = 'COFFEE';
+            } else if(mnuCtyNo == 2) {
+                $('#menu_ul > li').eq(1).addClass('active');
+                memuTitle.innerHTML = 'BEVERAGE';
+                relatedTitle.innerHTML = 'BEVERAGE';
+            } else {
+                $('#menu_ul > li').eq(2).addClass('active');
+                memuTitle.innerHTML = 'FOOD';
+                relatedTitle.innerHTML = 'FOOD';
+            }
+
+            end = 5; // Reset starting index
+            loadMenuList(mnuCtyNo,end);
+        }
+    
+        // 리스트 부르는 네트워크 연동 함수
+        function loadMenuList(mnuCtyNo,end) {
+            let container = document.querySelector("#menu_warp");
+            container.innerHTML = ""; //아이템 클리어
+
+            
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuSeleteAll.php?mnuCtyNo=${mnuCtyNo}&end=${end}`;
+        
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+
+                    displayMenuList(data);
+                })
+                .catch(error => console.log(error));
+        }
+    
+        //더보기 누르면 발동하는 함수
+        function loadMoreItems() {
+
+            //현재 선택되어 있는 카테고리 읽어오기
+            let mnuCtyNo = 0; 
+            
+            const selectTab = document.querySelector('.active').innerText;
+            if (selectTab == 'COFFEE') mnuCtyNo = 1;
+            else if (selectTab == 'BEVERAGE') mnuCtyNo = 2;
+            else mnuCtyNo = 3;
+
+            //5개 더 읽어오기
+            end += 5;
+
+            console.log(end)
+
+            loadMenuList(mnuCtyNo, end);
+        }
+    
+        //화면에 그리는 함수
+        function displayMenuList(data) {
+
+            data.forEach(e => {
+                const container = document.querySelector("#menu_warp");
+                container.innerHTML += `<div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
+                <div class="product_item" id="product_item">
+                    <div id="product_img_warp">
+                        <img src="${e.mnuImg}" alt="${e.mnuImg}">
+                    </div>
+                    <div class="product_item_text" onclick="selectItem(${e.mnuNo})">
+                        <div id="mnuNo" style="display: none;">${e.mnuNo}</div>
+                        <h5 id="menuName">${e.mnuName}</h5>
+                    </div>
+                </div>
+                </div>`;
+            });
+        }
+    
+        window.onload = firstMenuLoad;
+
+
+        //페이지 이동 함수
+        function selectItem(mnuNo){
+            location.href = `./menu-detail.html?mnuNo=${mnuNo}`;
+        }
+      </script>  
 
 
 </head>
@@ -65,7 +165,7 @@
                         <h4>Menu</h4>
                         <div class="breadcrumb__links">
                             <a href="./index.html">Home</a>
-                            <span>Coffee</span>
+                            <span id="memuTitle"></span>
                         </div>
                     </div>
                 </div>
@@ -78,14 +178,17 @@
         <nav class="bg-light">
             <div class="container">             
                 <ul id="menu_ul">
-                  <li class="active">
-                    <a class="nav-link" aria-current="page" href="#">COFFEE</a>
+                  <li class="active" onclick="selectNav(this);">
+                    COFFEE
+                    <!-- <a class="nav-link" aria-current="page" href="#">COFFEE</a> -->
                   </li>
-                  <li>
-                    <a class="nav-link" aria-current="page" href="#">BEVERAGE</a>
+                  <li onclick="selectNav(this);">
+                    BEVERAGE
+                    <!-- <a class="nav-link selectNav" aria-current="page" href="#">BEVERAGE</a> -->
                   </li>
-                  <li>
-                    <a class="nav-link" aria-current="page" href="#">FOOD</a>
+                  <li onclick="selectNav(this);">
+                    FOOD
+                    <!-- <a class="nav-link" aria-current="page" href="#">FOOD</a> -->
                   </li>
                 </ul>
             </div>
@@ -98,7 +201,7 @@
             <div class="row">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4">
-                    <h3 class="related-title">COFFEE</h3>
+                    <h3 class="related-title"></h3>
                 </div>
 
                 <!-- 검색 -->
@@ -114,24 +217,17 @@
             <div class="row" id="menu_warp">
                 <!-- 메뉴 아이템  -->
                 
-                <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
-                    <div class="product_item" id="product_item">
-                        <div id="product_img_warp">
-                            <img src="img/product/menu01.png" alt="">
-                        </div>
-                        <div class="product_item_text">
-                            <div id="menuNo" style="display: none;"></div>
-                            <h5 id="menuTitle" name="menuTitle">아메리카노</h5>
-                        </div>
-                    </div>
-                </div>
+                
 
                 
             </div>
 
             <div class="row text-center btn_warp">
-                <div class="col-lg-12">
-                    <button id="readmore">READ MORE</button>
+                <div class="col-lg-12 btnWarp">
+
+                    <!-- 버튼 -->
+                    <button id="readmore" onclick="loadMoreItems()">READ MORE</button>
+
                 </div>
             </div>
 
@@ -143,17 +239,7 @@
     <!-- Footer Section Begin -->
     <footer include-html="./common/footer.html"></footer>
     <!-- Footer Section End -->
-
-    <!-- Search Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
-    </div>
-    <!-- Search End -->
+    
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
