@@ -92,9 +92,19 @@
     margin-bottom: 10px;
 }
 
+.reviewRight{
+    display: grid;
+}
+
+.reviewBtnWarp {
+    text-align: end;
+    font-size: 13px;
+    padding-bottom: 5px;
+}
+
 .reViewImg {
     width: 100px;
-    margin: 0 0 10px 10px;
+    margin-left: 12px;
 }
 
 #nicname, #date {

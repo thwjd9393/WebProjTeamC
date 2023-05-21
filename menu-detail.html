@@ -30,27 +30,69 @@
 
     <script>
 
-        //메뉴 상세 로드
+        //주소 idx 값 얻기
+        function getIdx(){
+            //주소에서 카테고리 번호 가져오기
+            //http://mrhisj23.dothome.co.kr/WebProjTeamC/menu-detail.html?mnuNo=14
+            let mnuNoToUrl = window.location.search
+            
+            //번호 얻기
+            let getMnuNo = mnuNoToUrl.split('=');
+            let mnuNo = getMnuNo[1];
 
-
-    </script>
-
-
-    <script>
-
-        //선택한 파일 보이기
-        function fileupload(e){
-            document.getElementById('file').innerHTML=e.value;   
+            //메뉴 상세 로드
+            loadMenuDetail(mnuNo)
         }
 
-        //
+        //메뉴 상세 로드
+        function loadMenuDetail(mnuNo){
+
+            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuDetailLoad.php?mnuNo=${mnuNo}`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+            .then(response => response.json())
+            .then(data => 
+
+                displayMenu(data)
+
+            ).catch(error => console.log(error))
+
+        }
+
+        function displayMenu(data) {
+
+            const mnuNameId = document.querySelector("#mnuName");
+            const mnuContentClass = document.querySelector(".mnuContent");
+            const mnuImgClass = document.querySelector(".mnuImg");
+            const mnuMlClass = document.querySelector(".mnuMl");
+            const mnuCalClass = document.querySelector(".mnuCal");
+            const mnuSugarClass = document.querySelector(".mnuSugar");
+            const mnuPrtinClass = document.querySelector(".mnuPrtin");
+            const mnuFatClass = document.querySelector(".mnuFat");
+            const mnuSaltClass = document.querySelector(".mnuSalt");
+            
+
+            mnuNameId.innerHTML = data.mnuName;
+            mnuContentClass.innerHTML = data.mnuName;
+            mnuImgClass.innerHTML = `<img src=${data.mnuImg} alt=${data.mnuName}>`;
+            mnuMlClass.innerHTML = data.mnuMl;
+            mnuCalClass.innerHTML = data.mnuCal;
+            mnuSugarClass.innerHTML = data.mnuSugar;
+            mnuPrtinClass.innerHTML = data.mnuPrtin;
+            mnuFatClass.innerHTML = data.mnuFat;
+            mnuSaltClass.innerHTML = data.mnuSalt;
+
+            //리뷰 로드
+            loadReviewList(data.mnuNo);
+
+        }
+        
 
         //리뷰 로드
-        function loadReviewList(){
+        function loadReviewList(mnuNo){
 
-            const mnuNo = document.getElementById('mnuNo').innerHTML
-
-            console.log(mnuNo);
+            // const mnuNo = document.getElementById('mnuNo').innerHTML
 
             //연동할 주소
             var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewSeleteAll.php?mnuNo=${mnuNo}`;
@@ -110,8 +152,16 @@
                         <div id="reviewNo" style="display: none;">${e.reviewNo}</div>
                         <div class="d-flex justify-content-between">
                             <p class="comment">${e.reviewContent}</p>
-                            <div class="reViewImg">
-                                <img src="${img}" alt="${img}">
+                            
+                            <div class="reviewRight">
+                                <div class="reviewBtnWarp">
+                                    <span class="reViwUpdate">수정</span>
+                                    <span> | </span>
+                                    <span class="reViwDel">삭제</span>
+                                </div>
+                                <div class="reViewImg">
+                                    <img src="${img}" alt="${img}">
+                                </div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between">
@@ -140,9 +190,14 @@
             });
         }
 
+        //선택한 파일 보이기
+        function fileupload(e){
+            document.getElementById('file').innerHTML=e.value;   
+        }
+
 
         // 페이지 로드 시 loadMemberList 함수 호출
-        window.onload = loadReviewList;
+        window.onload = getIdx;
 
 
     </script>
@@ -243,7 +298,7 @@
     <section class="blog-hero spad">
         <div class="container">
             <div class="col-lg-12 menu__title__warp">
-                <h3>블루밍 콜드브루 티라미수 젤라또 프라페노</h3>
+                <h3 id="mnuName"></h3>
             </div>
         </div>
     </section>
@@ -256,19 +311,17 @@
             <!-- 상세 정보 -->
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="menu__detail__img text-center">
-                        <img src="img/product/menu01.png" alt="블루밍 콜드브루 티라미수 젤라또 프라페노">
+                    <div class="menu__detail__img text-center mnuImg">
+                        
                     </div>
                 </div>
-
-                <div id="mnuNo" style="display: none;">1</div>
 
                 <div class="col-lg-6">
                     <div class="menu__detail__contents">
                         
                         <!-- 메뉴 설명 -->
-                        <div class="menu__detail__text">
-                            신선한 생딸기를 듬뿍 넣어 갈아 만든 딸기 주스
+                        <div class="menu__detail__text mnuContent">
+                            
                         </div>
                         
                         <!-- 영양표시 -->
@@ -284,11 +337,27 @@
                                 <tbody>
                                   <tr>
                                     <td scope="row">1회제공량 1잔 (ml)</th>
-                                    <td class="text-center">Mark</td>
+                                    <td class="text-center mnuMl"></td>
                                   </tr>
                                   <tr>
-                                    <td scope="row">2</th>
-                                    <td class="text-center">Jacob</td>
+                                    <td scope="row">열량 (kcal)</th>
+                                    <td class="text-center mnuCal"></td>
+                                  </tr>
+                                  <tr>
+                                    <td scope="row">당류 (g)</th>
+                                    <td class="text-center mnuSugar"></td>
+                                  </tr>
+                                  <tr>
+                                    <td scope="row">단백질 (g) (%영양소기준치)</th>
+                                    <td class="text-center mnuPrtin"></td>
+                                  </tr>
+                                  <tr>
+                                    <td scope="row">포화지방 (g) (%영양소기준치)</th>
+                                    <td class="text-center mnuFat"></td>
+                                  </tr>
+                                  <tr>
+                                    <td scope="row">나트륨 (mg) (%영양소기준치)</th>
+                                    <td class="text-center mnuSalt"></td>
                                   </tr>
                                 </tbody>
                             </table>
@@ -331,11 +400,10 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="product__pagination">
+                                    <span> <i class="fa fa-caret-left"></i> </span>
                                     <a class="active" href="#">1</a>
                                     <a href="#">2</a>
-                                    <a href="#">3</a>
-                                    <span>...</span>
-                                    <a href="#">21</a>
+                                    <span> <i class="bi bi-caret-right"></i> </span>
                                 </div>
                             </div>
                         </div>
