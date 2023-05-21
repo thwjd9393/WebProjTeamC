@@ -40,69 +40,82 @@
     </script>
 
 
-
     <script>
-        //글번호 찾아오기
-        var cmtyNo = localStorage.getItem('cmtyNo');
+        // 글번호 찾아오기
+        const cmtyNo = localStorage.getItem('cmtyNo');
 
-        console.log(cmtyNo);
+
 
         function loadPostList(cmtyNo) {
 
-            console.log(cmtyNo);
 
-            //연동할 주소
-            var url =
-                `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/community.php?cmtyNo=${cmtyNo}`;
--
-            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
-            fetch(url)
+            // 연동할 주소
+            var postUrl = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/community.php?cmtyNo=${cmtyNo}`;
+
+            // 게시글 가져오기
+            fetch(postUrl)
                 .then(response => response.json())
-                .then(data =>
-
-                    //포문이 then문 안에서는 동작하지 않음
+                .then(data => {
+                    // 포문이 then문 안에서는 동작하지 않음
                     // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
-                    postContent(data)
-
-                //   console.log(data)
-                ).catch(error => console.log(error))
-
+                    postContent(data);
+                    loadComment(cmtyNo); // 댓글 불러오기 함수 호출
+                })
+                .catch(error => console.log(error));
         }
-
-
 
         function postContent(data) {
-            
-                document.querySelector("#imgcontent").innerHTML = "";
-                for(var i = 0; i < data.length; i++) {
-                    if (data[i].cmtyNo == cmtyNo) {
-                        let img = (data[i].cmtyImg).substr(1);
+            document.querySelector("#imgcontent").innerHTML = "";
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].cmtyNo == cmtyNo) {
+                    let img = data[i].cmtyImg.substr(1);
 
-                        document.querySelector('#cmtyTitle').innerHTML = `${data[i].cmtyTitle}`; 
-                        document.querySelector('#cmtyPassword').innerHTML = `${data[i].cmtyPassword}`; 
-                        document.querySelector('#cmtyDate').innerHTML = `${data[i].cmtyDate}`; 
-                        document.querySelector('#cmtyNic').innerHTML = `${data[i].cmtyNic}`; 
-                        document.querySelector('#cmtyContent').innerHTML = `${data[i].cmtyContent}`;     
-                        document.querySelector("#imgcontent").innerHTML += `<img src="${img}" alt="${img}" id="img">`;
-                        // document.querySelector('#img').innerHTML = `${data[i].cmtyImg}`; 
-                        
-                       
-
-                    }
+                    document.querySelector('#cmtyTitle').innerHTML = data[i].cmtyTitle;
+                    document.querySelector('#cmtyPassword').innerHTML = data[i].cmtyPassword;
+                    document.querySelector('#cmtyDate').innerHTML = data[i].cmtyDate;
+                    document.querySelector('#cmtyNic').innerHTML = data[i].cmtyNic;
+                    document.querySelector('#cmtyContent').innerHTML = data[i].cmtyContent;
+                    document.querySelector("#imgcontent").innerHTML += `<img src="${img}" alt="${img}" id="img">`;
                 }
-
-
-                // 값 변경
-                // document.querySelector('#cmtyTitle').innerHTML = `${data[cmtyNo].cmtyTitle}`; 
-                console.log(data)
-               
-
+            }
         }
 
-        
+        function loadComment(cmtyNo) {
+            // 댓글 가져오기
+            var commentUrl = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityComment.php?cmtyNo=${cmtyNo}`;
 
-        // 페이지 로드 시 loadMemberList 함수 호출
-        window.onload = loadPostList;
+            fetch(commentUrl)
+                .then(response => response.json())
+                .then(data => {
+                    loadCommentData(data);
+                })
+                .catch(error => console.log(error));
+        }
+
+        function loadCommentData(data) {
+            const container = document.querySelector("#comtemt_item_warp");
+            container.innerHTML = "";
+
+            const commentCtn = document.getElementById('cmtTotal');
+            commentCtn.innerHTML = data.length;
+
+            data.forEach(e => {
+                container.innerHTML += `
+          <div class="comment_item" style="border: 1px solid black; margin:10px; border-radius: 32px; ">
+            <div id="cmtNo" style="display: none;">${e.cmtNo}</div>
+            <p class="comment" style="padding: 17px;" >${e.cmtContent}</p>
+            <div class="d-flex justify-content-between">
+              <p id="nicname" style="padding: 17px; margin: 5px;">${e.cmtNic}</p>
+              <p id="date" style="padding: 17px; margin: 5px; ">${e.cmtDate}</p>
+            </div>
+          </div>
+        `;
+            });
+        }
+
+        window.onload = function () {
+            loadPostList(cmtyNo);
+        };
     </script>
 
     <script>
@@ -114,7 +127,7 @@
             // url에 집어넣을 데이터값 결합
 
             const data = `cmtNic=${cmtNic}&cmtPasswd=${cmtPasswd}&cmtContent=${cmtContent}&cmtyNo=${cmtyNo}`
-            console.log(data)
+
 
             // 연동할 주소
             var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityCommentInsert.php`
@@ -128,7 +141,7 @@
                     body: data
                 }).then(response => response.text())
                 .then(data =>
-                    //리뷰 재로드
+                    //댓글 재로드
                     CommentReload()
                 ).catch(error => console.log(error))
 
@@ -144,16 +157,13 @@
             const container = document.querySelector("#comtemt_item_warp");
             container.innerHTML = "";
 
-            // 댓글 리로드
+
             loadPostList();
         }
-
-    
-
-        
-
-
     </script>
+
+
+
     <!-- JS 영역 (end)  -->
 
 
@@ -161,7 +171,7 @@
 </head>
 
 <body>
-    
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -177,7 +187,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-9 text-center">
 
-                     <!-- 본문 재목 및 닉네임 비밀번호 날자 -->
+                    <!-- 본문 재목 및 닉네임 비밀번호 날자 -->
                     <div class="blog__hero__text">
                         <h2 id="cmtyTitle"></h2>
                         <div id="cmtyNo" style="display: none;"></div>
@@ -199,17 +209,17 @@
     <section class="blog-details spad">
         <div class="container">
             <div class="row d-flex justify-content-center">
-               <!-- 이미지 적용 -->
+                <!-- 이미지 적용 -->
                 <div class="col-lg-12">
-                    
-                    <div class="blog__details__pic" id="imgcontent" >
+
+                    <div class="blog__details__pic" id="imgcontent">
                         <img src="WebProjTeamC/uploadImg/community" alt="WebProjTeamC/uploadImg/community" id="img">
                     </div>
-                   
-                </div>
-                 <!-- 이미지 적용 -->
 
-                 <!-- 본문 내용 -->
+                </div>
+                <!-- 이미지 적용 -->
+
+                <!-- 본문 내용 -->
                 <div class="col-lg-12">
                     <div class="blog__details__content">
 
@@ -219,7 +229,7 @@
                             <p id="cmtyContent"></p>
 
                         </div>
-                         <!-- 본문 내용 -->
+                        <!-- 본문 내용 -->
 
 
 
@@ -326,7 +336,7 @@
                         <!-- 댓글 리스트 -->
                         <div id="comtemt_item_warp">
 
-                            
+
 
                         </div>
                         <!-- 댓글 리스트 -->
