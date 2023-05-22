@@ -34,7 +34,7 @@
             return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
 
-        let no = getParameterByName('qaNo');
+        no = getParameterByName('qaNo');
 
         loadQnaDetail(no)
 
@@ -67,13 +67,12 @@
             document.querySelector('#qaContent').innerHTML = `${data[0].qaContent}`;
 
         }
-
     </script>
 
 </head>
 
 <body>
-    <!-- Page Preloder -->
+    <!--   Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -121,26 +120,157 @@
             <div class="col-lg-12">
                 <table class="table-view-01 txt-mt">
                     <colgroup>
-                        <col width="90%">
-                        <col width="10%">
+                        <col width="70%">
+                        <col width="30%">
                     </colgroup>
                     <tbody>
                         <tr>
                             <td colspan="2" class="clearfix tit_box">
-                                <p class="tit" id="qaTitle"></p>
+                                <span style="padding-left: 6px;">제목 : </span><span class="tit" id="qaTitle"> </span>
                             </td>
                             <td>
                                 <p></p>
                             </td>
                         </tr>
                         <tr class="type">
-                            <td>닉네임 : <span id="qaNic"></span></td>
-                            <td>타입 : <span id="qaType"></span></td>
+                            <td style="padding-left: 10px;">닉네임 : <span id="qaNic"></span></td>
+                            <td style="padding-left: 10px;">타입 : <span id="qaType"></span></td>
                         </tr>
                 </table>
             </div>
             <div class="col-lg-12">
                 <p class="context" id="qaContent"></p>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="blog__details__tags ">
+                    <button type="button" class="btn" data-toggle="modal" data-target="#updateModal"
+                        data-whatever="@mdo" id="repost" style="background-color: black; color: white;">수정</button>
+                    <button type="button" class="btn" data-toggle="modal" data-target="#deleteModal"
+                        data-whatever="@mdo" id="delete" style="background-color: black; color: white;">삭제</button>
+                </div>
+            </div>
+
+            <!-- 수정 -->
+            <div class="modal fade" id="updateModal" tabindex="1" aria-labelledby="exampleModalLabel"
+                style="display: none;" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <p class="modal-title" id="exampleModalLabel">비밀번호를 입력해주세요</p>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="password" class="col-form-label">Password:</label>
+                                    <input type="password" class="form-control" id="password">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn " data-dismiss="modal"
+                                style="color: white; background-color: black;">취소</button>
+                            <button type="button" class="btn " id="confirmBtn"
+                                style="color: white; background-color: black;">확인</button>
+
+                            <script>
+                                document.getElementById('confirmBtn').addEventListener('click',
+                                    function () {
+                                        var qaPasswd = document.getElementById('password').value;
+                                        console.log(qaPasswd);
+
+                                        fetch('http://mrhisj23.dothome.co.kr/WebProjTeamC/php/inquiryRepost.php?qaNo=' +
+                                                no + '&qaPasswd=' + qaPasswd)
+
+                                            .then(function (response) {
+                                                if (response.ok) {
+                                                    return response.json();
+                                                } else {
+                                                    throw new Error('요청에 실패하였습니다.');
+                                                }
+                                            })
+                                            .then(function (data) {
+                                                if (data.success) {
+                                                    location.replace('./inquiry.html')
+                                                } else {
+                                                    // 삭제 실패 시의 처리
+                                                    alert(data.message);
+                                                    // 추가적인 동작 수행
+                                                }
+                                            })
+                                            .catch(function (error) {
+                                                // 오류 처리
+                                                alert(error.message);
+                                                // 추가적인 동작 수행
+                                            });
+                                    });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 삭제 -->
+            <div class="modal fade" id="deleteModal" tabindex="1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <p class="modal-title" id="exampleModalLabe2">비밀번호를 입력해주세요</p>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="password" class="col-form-label">Password:</label>
+                                    <input type="password" class="form-control" id="password">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                style="color: white; background-color: black;">취소</button>
+
+                            <button type="button" class="btn btn-primary" id="selectDelete"
+                                style="color: white; background-color: black;">확인</button>
+
+                            <script>
+                                document.getElementById('selectDelete').addEventListener('click',
+                                    function () {
+                                        var qaPasswd = document.getElementById('password').value;
+                                        console.log(qaPasswd);
+
+                                        fetch('http://mrhisj23.dothome.co.kr/WebProjTeamC/php/inquiryDelete.php?qaNo=' +
+                                                no + '&qaPasswd=' + qaPasswd)
+
+                                            .then(function (response) {
+                                                if (response.ok) {
+                                                    return response.json();
+                                                } else {
+                                                    throw new Error('요청에 실패하였습니다.');
+                                                }
+                                            })
+                                            .then(function (data) {
+                                                if (data.success) {
+                                                    // 삭제 성공 시의 처리
+                                                    alert('문의내용이 삭제되었습니다.');
+                                                    // 추가적인 동작 수행
+                                                    location.replace('./inquiry-list.htm?qaNo='+no)
+                                                } else {
+                                                    // 삭제 실패 시의 처리
+                                                    alert(data.message);
+                                                    // 추가적인 동작 수행
+                                                }
+                                            })
+                                            .catch(function (error) {
+                                                // 오류 처리
+                                                alert(error.message);
+                                                // 추가적인 동작 수행
+                                            });
+                                    });
+                            </script>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>

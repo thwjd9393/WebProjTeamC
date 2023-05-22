@@ -1,78 +1,37 @@
-HTML CSS JSResult Skip Results Iframe
-EDIT ON
-*{
-  box-sizing: border-box; 
-}
-  
-.que:first-child{
-    border-top: 1px solid black;
-  }
-  
-.que{
-  position: relative;
-  padding: 17px 10px;
-  cursor: pointer;
-  font-size: 18px;
-  border-bottom: 1px solid #dddddd;
-  padding-right:40px;
-}
-  
-.que::before{
-  display: inline-block;
-  content: 'Q';
-  font-size: 18px;
+.nav-link{
   color: black;
+}
+.nav-link:hover{
+  color: black;
+}
+
+summary {
+  display: list-item;
+  cursor: pointer;
+  list-style: none;
+  border-bottom: 1px solid silver;
+  padding: 20px 5px;
+}
+.li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+  list-style: none;
+  background-color: rgb(224, 218, 218);
+  padding: 20px 5px;
+}
+.faq{
+  border-top: 1px solid silver;
+}
+
+span{
   margin-left: 10px;
-  margin-right: 10px;
+  margin-right: 15px;
 }
-
-.que.on>span{
-  font-weight: bold;
-  color: black; 
+#faqList{
+  border-top: 2px solid #333;
+  border-bottom: 1px so;
+  margin-bottom: 60px;
 }
-  
-.anw {
-  display: none;
-    overflow: hidden;
-  font-size: 16px;
-  background-color: #f4f4f2;
-  padding: 27px 0;
-  padding-right: 40px;
-}
-  
-.anw::before {
-  display: inline-block;
-  content: 'A';
-  font-size: 16px;
-  font-weight: bold;
-  color: #666;
-  margin: 0 10px;
-}
-
-.arrow-wrap {
-  position: absolute;
-  top:50%; right: 10px;
-  transform: translate(0, -50%);
-  
-}
-
-.que .arrow-top {
-  display: none;
-}
-.que .arrow-bottom {
-  display: block;
-}
-.que.on .arrow-bottom {
-  display: none;
-}
-.que.on .arrow-top {
-  display: block; 
-}
-
-.product__pagination{
-  margin-bottom: 25px;
-}
-
-#Accordion_wrap{
-  margin-bottom: 50px;
+.icon{
+  text-align: right;
 }

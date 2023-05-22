@@ -12,10 +12,7 @@ function check_ctn() {
     }
 }
 
-document.getElementById("confirmBtn").addEventListener("click", function () {
-    // 다른 HTML 페이지로 이동하는 코드를 추가합니다.
-    window.location.href = "writePost.html";
-});
+
 
 
 

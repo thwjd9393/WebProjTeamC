@@ -47,36 +47,24 @@
         }
 
         function displayFaqList(data) {
-            const container = document.querySelector("#Accordion_wrap")
+            const container = document.querySelector("#faqList")
 
             data.forEach(e => {
-
-
-                container.innerHTML += `<div class="que">
-                    <span style="padding-left: 5px;">${e.faTitle}</span>
-                    <div class="arrow-wrap">
-                        <span class="arrow-top">▽</span>
-                        <span class="arrow-bottom">△</span>
-                    </div>
-                </div>
-                <div class="anw">
-                    <span style="padding-left: 5px; margin-right: 20px;>${e.faContent}</span>
-                </div>`;
+                container.innerHTML += ` <details class="faq">
+                <summary><span>Q</span>${e.faTitle}</summary>
+                <ul>
+                    <li class="li"><span>A</span>${e.faContent}</li>
+                </ul>
+            </details>`;
 
             });
         }
 
         // 페이지 로드 시 loadMemberList 함수 호출
-        window.onload = loadFaqList;
+         window.onload = loadFaqList;
     </script>
 
-    <script>
-        $(".que").click(function () {
-            $(this).next(".anw").stop().slideToggle(300);
-            $(this).toggleClass('on').siblings().removeClass('on');
-            $(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
-        });
-    </script>
+
 </head>
 
 <body>
@@ -134,8 +122,8 @@
     </div>
 
     <div class="container">
-        <div id="Accordion_wrap">
-
+        <div id="faqList">
+         
         </div>
     </div>
 
@@ -168,6 +156,7 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/faq.js"></script>
 </body>
 
 <script>
