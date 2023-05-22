@@ -22,8 +22,7 @@
     // 실행
     $result = mysqli_query($db, $sql);
 
-    if($result) echo "등록 성공"; 
-    else echo "등록 실패";
+    
 
     // php 닫기
     mysqli_close($db);

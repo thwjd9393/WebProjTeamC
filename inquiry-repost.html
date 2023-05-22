@@ -29,9 +29,16 @@
 
     <script>
         function goInquiry() {
-            location.replace('./inquiry-list.html');
+            open('./inquiry-list.html')
         }
-       
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        no = getParameterByName('qaNo');
     </script>
 
 </head>

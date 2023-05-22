@@ -28,7 +28,7 @@ table, td, th, tr {
 .table_board_for td {
     padding: 15px 5px;
     border-top: 1px solid #ddd;
-    text-align: left;
+    text-align: center;
     vertical-align: middle;
 	font-size: 18px;
 }
@@ -56,6 +56,16 @@ table, td, th, tr {
 	margin: 30px;
 	font-weight: bold;
 }
+.row{
+    margin-bottom: 40px;
+}
+
+.nav-link{
+    color: black;
+  }
+  .nav-link:hover{
+    color: black;
+  }
 @media screen and (max-width: 1024px){
 .table_board_for col, .table_board_for colgroup, .table_board_for table, .table_board_for tbody, .table_board_for td, .table_board_for th, .table_board_for thead, .table_board_for tr {
     display: block;
