@@ -71,7 +71,7 @@
                     let img = data[i].cmtyImg.substr(1);
 
                     document.querySelector('#cmtyTitle').innerHTML = data[i].cmtyTitle;
-                    document.querySelector('#cmtyPassword').innerHTML = data[i].cmtyPassword;
+                    document.querySelector('#cmtyPasswd').innerHTML = data[i].cmtyPassword;
                     document.querySelector('#cmtyDate').innerHTML = data[i].cmtyDate;
                     document.querySelector('#cmtyNic').innerHTML = data[i].cmtyNic;
                     document.querySelector('#cmtyContent').innerHTML = data[i].cmtyContent;
@@ -91,6 +91,7 @@
                 })
                 .catch(error => console.log(error));
         }
+
 
         function loadCommentData(data) {
             const container = document.querySelector("#comtemt_item_warp");
@@ -195,7 +196,7 @@
                             <li id="cmtyNic"></li>
                             <li id="cmtyDate"></li>
                             <li id="cmtTotal">1</li>
-                            <li id="cmtyPassword" style="display: none;">비밀번호 영역</li>
+                            <li id="cmtyPasswd" style="display: none;">비밀번호 영역</li>
                         </ul>
                     </div>
                     <!-- 본문 재목 및 닉네임 비밀번호 날자 -->
@@ -233,8 +234,8 @@
 
 
 
-                        <!-- 모달 -->
-                        <div class="modal fade" id="exampleModal" tabindex="1" aria-labelledby="exampleModalLabel"
+                        <!--수정 모달 -->
+                        <div class="modal fade" id="updateModal" tabindex="1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -247,25 +248,27 @@
                                         <form>
                                             <div class="mb-3">
                                                 <label for="password" class="col-form-label">Password:</label>
-                                                <input type="password" class="form-control" id="password">
+                                                <input type="password" class="form-control" id="cmtyPasswd">
                                             </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                                        <button type="button" class="btn btn-primary" id="confirmBtn">확인</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            style="color: white; background-color: black;">취소</button>
+                                        <button type="button" class="btn btn-primary" id="confirmBtn"
+                                            style="color: white; background-color: black;">확인</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- 모달 -->
 
-                        <div class="modal fade" id="exampleModa2" tabindex="1" aria-labelledby="exampleModalLabel"
+                        <!-- 삭제 모달 -->
+                        <div class="modal fade" id="deleteModal" tabindex="1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <p class="modal-title" id="exampleModalLabel">비밀번호를 입력해주세요</p>
+                                        <p class="modal-title" id="exampleModalLabe2">비밀번호를 입력해주세요</p>
                                         <button type="button" class="btn-close" data-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -278,8 +281,72 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                                        <button type="button" class="btn btn-primary" id="confirmBtn">확인</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            style="color: white; background-color: black;">취소</button>
+
+                                        <button type="button" class="btn btn-primary" id="selectDelete"
+                                            style="color: white; background-color: black;">확인</button>
+
+
+
+                                        <script>
+                                            // DB에  연결하여 검증요청후 게시글과 댓글 한번에 삭제하는 코드 영역
+                                            document.getElementById('selectDelete').addEventListener('click',
+                                                function () {
+                                                    var cmtyPasswd = document.getElementById('password').value;
+
+                                                    fetch('http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityDelete.php?cmtyNo=' +
+                                                            cmtyNo + '&cmtyPasswd=' + cmtyPasswd)
+                                                        .then(function (response) {
+                                                            if (response.ok) {
+                                                                return response.json();
+                                                            } else {
+                                                                throw new Error('요청에 실패하였습니다.');
+                                                            }
+                                                        })
+                                                        .then(function (data) {
+                                                            if (data.success) {
+                                                                // 게시글과 댓글 번호 대조 검증 및 삭제 기능
+                                                                var deletePostAndComments =
+                                                                    "http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityDelete.php?cmtyNo=" +
+                                                                    cmtyNo;
+                                                                return fetch(deletePostAndComments);
+                                                            } else {
+                                                                // 비밀번호가 일치하지 않아도 삭제 가능하도록 처리
+                                                                var deletePostOnly =
+                                                                    "http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityDelete.php?cmtyNo=" +
+                                                                    cmtyNo;
+                                                                return fetch(deletePostOnly);
+                                                            }
+                                                        })
+                                                        .then(function (response) {
+                                                            if (response.ok) {
+                                                                return response.json();
+                                                            } else {
+                                                                throw new Error('요청에 실패하였습니다.');
+                                                            }
+                                                        })
+                                                        .then(function (data) {
+                                                            if (data.success) {
+                                                                // 삭제 성공 시의 처리
+                                                                alert('게시글과 댓글이 삭제되었습니다.');
+                                                                location.href =
+                                                                    "http://mrhisj23.dothome.co.kr/WebProjTeamC/community.html";
+                                                                // 추가적인 동작 수행
+                                                            } else {
+                                                                // 삭제 실패 시의 처리
+                                                                alert(data.message);
+                                                                // 추가적인 동작 수행
+                                                            }
+                                                        })
+                                                        .catch(function (error) {
+                                                            // 오류 처리
+                                                            alert(error.message);
+                                                            // 추가적인 동작 수행
+                                                        });
+                                                });
+                                            // DB에  연결하여 검증요청후 게시글과 댓글 한번에 삭제하는 코드 영역
+                                        </script>
                                     </div>
                                 </div>
                             </div>
@@ -321,12 +388,11 @@
                                     <div class="blog__details__tags ">
 
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#exampleModal" data-whatever="@mdo" id="repost">수정</button>
+                                            data-target="#updateModal" data-whatever="@mdo" id="repost">수정</button>
                                         <script src="./js/blog-details.js"></script>
 
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#exampleModa2" data-whatever="@mdo" id="delete">삭제</button>
-
+                                            data-target="#deleteModal" data-whatever="@mdo" id="delete">삭제</button>
 
                                     </div>
                                 </div>
