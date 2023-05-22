@@ -127,6 +127,12 @@
     padding: 0 10px;
 }
 
+.reViwUpdate, .reViwDel {
+    cursor: pointer;
+}
+
+
+
 /* 파일 업로드 */
 .file_box {
     position: relative;

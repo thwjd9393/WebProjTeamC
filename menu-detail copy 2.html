@@ -27,6 +27,15 @@
 
     <!-- 헤더 푸터 -->
     <script src="./js/includeHTML.js"></script>
+
+    <script>
+
+        // function reviewDel() {
+        //     const reviewNo = document.querySelector('#reviewNo').innerHTML;
+        //     console.log(reviewNo)
+        // }
+
+    </script>
     
 </head>
 
@@ -106,6 +115,15 @@
     <section class="comment__warp">
         <div class="container">
 
+            <details>
+                <summary>사내 공지사항</summary>
+                <ul>
+                  <li>1. 공지사항 1번입니다.</li>
+                  <li>2. 공지사항 2번입니다.</li>
+                  <li>3. 공지사항 3번입니다.</li>
+                </ul>
+              </details>
+
             <!-- 코멘트 -->
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-lg-8">
@@ -114,15 +132,50 @@
                         <div class="blog__details__comment comment_content_warp">
                             <div class="d-flex justify-content-between">
                                 <h4>Comments</h4>
-                                <p class="moreBtn" data-toggle="modal" data-target="#comentsMore"> 더보기 <i class="fa fa-chevron-right"></i></p>
+                                <!-- <p class="moreBtn" data-toggle="modal" data-target="#comentsMore"> 더보기 <i class="fa fa-chevron-right"></i></p> -->
+                                <p class="moreBtn"> 더보기 <i class="fa fa-chevron-right"></i></p>
                             </div>
 
                             <!-- 코멘트 -->
                             <div class="comment_item">
-                                <p class="comment">
-                                   Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                   Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                </p>
+                                <div class="d-flex justify-content-between">
+                                    <p class="comment">1111111</p>
+                                    <div id="reviewNo">15</div>
+                                    
+                                    <div class="reviewRight">
+                                        <div class="reviewBtnWarp">
+                                            <span class="reViwUpdate" data-toggle="modal" data-target="#updateModal">수정</span>
+                                            <span> | </span>
+                                            <span class="reViwDel" data-toggle="modal" data-target="#delModal">삭제</span>
+                                        </div>
+                                        <div class="reViewImg">
+                                        </div>
+                                    </div>
+                                </div>  
+                                <div class="d-flex justify-content-between">
+                                      <p id="nicname">우리집으로가자</p>
+                                      <p id="date">2023-05-17 12:23:05 </p>
+                                   <!-- <div class="reply-btn">
+                                      <a href="#" class="btn-reply text-uppercase">reply</a>
+                                   </div> -->
+                                </div>
+                             </div>
+
+                             <div class="comment_item">
+                                <div class="d-flex justify-content-between">
+                                    <p class="comment">22222222</p>
+                                    <div id="reviewNo">13</div>
+                                    
+                                    <div class="reviewRight">
+                                        <div class="reviewBtnWarp">
+                                            <span class="reViwUpdate" data-toggle="modal" data-target="#updateModal">수정</span>
+                                            <span> | </span>
+                                            <span class="reViwDel" data-toggle="modal" data-target="#delModal">삭제</span>
+                                        </div>
+                                        <div class="reViewImg">
+                                        </div>
+                                    </div>
+                                </div>  
                                 <div class="d-flex justify-content-between">
                                       <p id="nicname">우리집으로가자</p>
                                       <p id="date">2023-05-17 12:23:05 </p>
@@ -137,20 +190,7 @@
                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
                                 </p>
-                                <div class="d-flex justify-content-between">
-                                      <p id="nicname">우리집으로가자</p>
-                                      <p id="date">2023-05-17 12:23:05 </p>
-                                   <!-- <div class="reply-btn">
-                                      <a href="#" class="btn-reply text-uppercase">reply</a>
-                                   </div> -->
-                                </div>
-                             </div>
-
-                             <div class="comment_item">
-                                <p class="comment">
-                                   Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                   Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                </p>
+                                <div id="reviewNo">13</div>
                                 <div class="d-flex justify-content-between">
                                       <p id="nicname">우리집으로가자</p>
                                       <p id="date">2023-05-17 12:23:05 </p>
@@ -188,22 +228,59 @@
     </section>
     <!-- Comments Details Section End -->
 
-    <!-- 댓글 모달 -->
-    <!-- Scrollable modal -->
-    <div class="modal fade" id="comentsMore" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header justify-content-end">
-                <div data-dismiss="modal" style="cursor: pointer;">x</div>
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+    </button> -->
+  
+    <!-- Modal -->
+    <div class="modal fade" id="delModal" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title" id="exampleModalLabel">댓글 삭제</p>
+                    <div class="reviewNo" style="display: none;"></div>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="password" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control reviewPasswd" placeholder="댓글을 등록했을 때 사용하신 비밀번호를 입력하세요">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary" id="deleteRv" >확인</button>
+                </div>
             </div>
-            <div class="modal-body">
-                
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="deleteCheckModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">정말로 삭제하시겠습니까?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    '삭제'버튼을 누르면 해당 게시글이 삭제됩니다.
+                    정말로 삭제하시겠습니까?
+                    <!--해당 글 삭제하는 주소값받는 input 태그-->
+                    <img id="deleteUrl" src="">
+                </div>
+                <div class="modal-footer">
+                    <!--
+                    replace한 이유는 삭제한 페이지의 기록을 남기고 싶지 않아서이다. (뒤로가기불가)
+                    replace 참고 url : http://heeestorys.tistory.com/747-->
+                    <button type="button" class="btn btn-primary" id="delete" onclick="del">삭제</button>
+    
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Understood</button>
-            </div>
-          </div>
         </div>
     </div>
 
@@ -226,7 +303,23 @@
     <script>
         // 헤더 푸터
         includeHTML();
+
+        $(document).ready(function() {
+            $('#deleteCheckModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var del = button.data('title');
+                var modal = $(this);
+
+                const reviewNo = document.querySelector('#reviewNo').innerHTML;
+                console.log(reviewNo)
+            
+            })
+        });
+        
     </script>
+
+
+    
 
 
 </body>

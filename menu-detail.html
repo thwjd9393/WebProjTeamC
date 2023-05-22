@@ -61,7 +61,8 @@
         }
 
         function displayMenu(data) {
-
+            
+            const mnuNoClass = document.querySelector('.mnuNo');
             const mnuNameId = document.querySelector("#mnuName");
             const mnuContentClass = document.querySelector(".mnuContent");
             const mnuImgClass = document.querySelector(".mnuImg");
@@ -72,7 +73,7 @@
             const mnuFatClass = document.querySelector(".mnuFat");
             const mnuSaltClass = document.querySelector(".mnuSalt");
             
-
+            mnuNoClass.innerHTML = data.mnuNo;
             mnuNameId.innerHTML = data.mnuName;
             mnuContentClass.innerHTML = data.mnuName;
             mnuImgClass.innerHTML = `<img src=${data.mnuImg} alt=${data.mnuName}>`;
@@ -149,15 +150,15 @@
                 let img = (e.reviewImg).substr(1);
 
                 container.innerHTML += `<div class="comment_item">
-                        <div id="reviewNo" style="display: none;">${e.reviewNo}</div>
+                        <div id="reviewNo" style="display: block;">${e.reviewNo}</div>
                         <div class="d-flex justify-content-between">
                             <p class="comment">${e.reviewContent}</p>
                             
                             <div class="reviewRight">
                                 <div class="reviewBtnWarp">
-                                    <span class="reViwUpdate">수정</span>
+                                    <span class="reViwUpdate" data-toggle="modal" data-target="#updateModal">수정</span>
                                     <span> | </span>
-                                    <span class="reViwDel">삭제</span>
+                                    <span class="reViwDel" data-toggle="modal" data-target="#delModal">삭제</span>
                                 </div>
                                 <div class="reViewImg">
                                     <img src="${img}" alt="${img}">
@@ -170,25 +171,28 @@
                         </div>
                     </div>`;
 
-                
-        // <div id="comtemt_item">
-
-        // <div class="comment_item">
-        //     <p class="comment">
-                                            
-        //     </p>
-        //     <div class="d-flex justify-content-between">
-        //         <p id="nicname">우리집으로가자</p>
-        //         <p id="date">2023-05-17 12:23:05 </p>
-        //     </div>
-        // </div>
-
-        // </div> -->
-
-                    
 
             });
         }
+
+        //리뷰 삭제
+        // function reviewDel(){
+        //     //글번호 가져오기
+        //     const reviewNo = document.querySelector('#reviewNo').innerHTML;
+        //     console.log(reviewNo)
+
+        //     //비밀번호 체크 후 삭제
+
+
+        // }
+
+        //리뷰 수정
+        // function reviewUpdate(){
+        //     const reviewNo = document.querySelector('#reviewNo').innerHTML;
+        //     console.log(reviewNo)
+
+        // }
+
 
         //선택한 파일 보이기
         function fileupload(e){
@@ -218,7 +222,7 @@
             const reviewPasswdInput = document.getElementById('reviewPasswd');
             const reviewContentInput = document.getElementById('reviewContent');
             const reviewImgInput = document.getElementById('reviewImg');
-            const mnuNoInput = document.getElementById('mnuNo');
+            const mnuNoInput = document.querySelector('.mnuNo');
 
             const reviewNic = reviewNicInput.value;
             const reviewPasswd = reviewPasswdInput.value;
@@ -318,6 +322,8 @@
 
                 <div class="col-lg-6">
                     <div class="menu__detail__contents">
+
+                        <div class="mnuNo" style="display: none;"></div>
                         
                         <!-- 메뉴 설명 -->
                         <div class="menu__detail__text mnuContent">
@@ -445,21 +451,46 @@
     <!-- Comments Details Section End -->
 
     <!-- 댓글 모달 -->
-    <!-- Scrollable modal -->
-    <div class="modal fade" id="comentsMore" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header justify-content-end">
-                <div data-dismiss="modal" style="cursor: pointer;">x</div>
+    <!-- 수정 -->
+    <div class="modal fade updateModal" id="updateModal" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title" id="exampleModalLabel">댓글 수정</p>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="password" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control reviewPasswd" placeholder="댓글을 등록했을 때 사용하신 비밀번호를 입력하세요">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary" id="updateReview" onclick="reviewUpdate()">확인</button>
+                    <!-- <button type="button" class="btn btn-primary" id="updateReview" onclick="reviewUpdate()">확인</button> -->
+                </div>
             </div>
-            <div class="modal-body">
-                
+        </div>
+    </div>
+
+    <!-- 삭제 -->
+    <div class="modal fade" id="delModal" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title" id="exampleModalLabel">댓글 삭제</p>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="password" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control reviewPasswd" placeholder="댓글을 등록했을 때 사용하신 비밀번호를 입력하세요">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary" id="deleteReview" onclick="reviewDel()">확인</button>
+                </div>
             </div>
-            <div class="modal-footer">
-              <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Understood</button>
-            </div>
-          </div>
         </div>
     </div>
 
