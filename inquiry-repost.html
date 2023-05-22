@@ -29,8 +29,9 @@
 
     <script>
         function goInquiry() {
-            open('./inquiry-list.html')
+            location.replace('http://mrhisj23.dothome.co.kr/WebProjTeamC/inquiry-list.html')
         }
+
         function getParameterByName(name) {
             name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
             var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -39,6 +40,41 @@
         }
 
         no = getParameterByName('qaNo');
+
+        loadQnaDetail(no)
+
+        // console.log(no);
+
+
+        //리뷰 로드
+        function loadQnaDetail(no) {
+
+            //연동할 주소
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/inquiryDetailLoad.php?qaNo=${no}`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+                .then(response => response.json())
+                .then(data =>
+
+                    //포문이 then문 안에서는 동작하지 않음
+                    // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
+                    displayQnaDetail(data)
+
+                ).catch(error => console.log(error))
+        }
+
+        function displayQnaDetail(data) {
+
+            document.getElementById("input_name").value=`${data[0].qaNic}`
+            document.getElementById("input_pw").value=`${data[0].qaPasswd}`
+            document.getElementById("input_type").value=`${data[0].qaType}`
+            document.getElementById("input_title").value=`${data[0].qaTitle}`
+            document.getElementById("input_context").value=`${data[0].qaContent}`
+            document.getElementById("input_no").value=no
+            
+
+        }
     </script>
 
 </head>
@@ -103,23 +139,23 @@
             </div>
             <hr>
 
-            <form action="./php/inquiryInsert.php" method="post" enctype="multipart/form-data">
+            <form action="./php/inquiryResave.php" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-6  col-md-6">
                         <div class="checkout__input">
-                            <input type="text" name="name" placeholder="Name">
-
+                            <input type="text" name="name" placeholder="Name" id="input_name">
+                            <input type="text" style="visibility: hidden;" name="no" id="input_no">
                         </div>
                     </div>
                     <div class="col-lg-6  col-md-6">
                         <div class="checkout__input">
-                            <input type="password" name="password" placeholder="Password">
+                            <input type="password" name="password" placeholder="Password" id="input_pw">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6  col-md-6">
-                        <select class="select" name="type">
+                        <select class="select" name="type" id="input_type">
                             <option selected="">문의 유형</option>
                             <option value="문의">문의</option>
                             <option value="칭찬">칭찬</option>
@@ -134,7 +170,7 @@
                             <div class="tit">
                                 제목<span class="star">*</span>
                             </div>
-                            <input type="text" name="title" placeholder="제목을 입력하세요">
+                            <input type="text" name="title" placeholder="제목을 입력하세요" id="input_title">
                         </div>
                     </div>
                 </div>
@@ -144,7 +180,7 @@
                             <div class="tit">
                                 내용<span class="star">*</span>
                             </div>
-                            <textarea name="context" placeholder="내용을 입력하세요"></textarea>
+                            <textarea name="context" placeholder="내용을 입력하세요" id="input_context"></textarea>
                         </div>
                     </div>
                 </div>
