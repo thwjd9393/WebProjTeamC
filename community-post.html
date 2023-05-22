@@ -248,19 +248,50 @@
                                         <form>
                                             <div class="mb-3">
                                                 <label for="password" class="col-form-label">Password:</label>
-                                                <input type="password" class="form-control" id="cmtyPasswd">
+                                                <input type="password" class="form-control" id="updatepasswrd">
                                             </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                             style="color: white; background-color: black;">취소</button>
-                                        <button type="button" class="btn btn-primary" id="confirmBtn"
+                                        <button type="button" class="btn btn-primary" id="updategobtn"
                                             style="color: white; background-color: black;">확인</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <script>
+                            document.getElementById('updategobtn').addEventListener('click', function () {
+                                var cmtyPasswd = document.getElementById('updatepasswrd').value;
+                        
+                                fetch('http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityUpdate.php?cmtyNo=' + cmtyNo + '&cmtyPasswd=' + cmtyPasswd)
+                                    .then(function (response) {
+                                        if (response.ok) {
+                                            return response.json();
+                                        } else {
+                                            throw new Error('요청에 실패하였습니다.');
+                                        }
+                                    })
+                                    .then(function (data) {
+                                        console.log(data);
+                                        if (data.success) {
+                                            localStorage.setItem("cmtyNo","cmtyNo")
+                                           
+                                            window.location.href = `http://mrhisj23.dothome.co.kr/WebProjTeamC/community-write.html?cmtyNo=${cmtyNo}`;
+                                        } else {
+                                            // 비밀번호가 일치하지 않는 경우
+                                            alert(data.message);
+                                        }
+                                    })
+                                    .catch(function (error) {
+                                        // 오류 처리
+                                        alert(error.message);
+                                    });
+                            });
+                        </script>
+
 
                         <!-- 삭제 모달 -->
                         <div class="modal fade" id="deleteModal" tabindex="1" aria-labelledby="exampleModalLabel"
