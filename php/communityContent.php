@@ -3,13 +3,12 @@
 //데이터 받기
 $cmtyNo = (int)$_GET['cmtyNo'];
 
-
 // 데이터 연결
 $db = mysqli_connect('localhost', 'mrhisj23', 'hi23bye6!', 'mrhisj23');
 mysqli_query($db, "set names utf8"); //한글깨짐 방지
 
 // 쿼리문
-$sql = "SELECT * FROM cComment WHERE cmtyNo= $cmtyNo ORDER BY cmtyNo DESC";
+$sql = "SELECT * FROM cCommunity WHERE cmtyNo = $cmtyNo";
 
 // 받아온 값 변수(result)에 저장
 $result = mysqli_query($db, $sql);

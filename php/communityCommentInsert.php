@@ -14,7 +14,7 @@ $cmtContent = addslashes($cmtContent);
 
 $db = mysqli_connect('localhost', 'mrhisj23', 'hi23bye6!', 'mrhisj23');
 mysqli_query($db, "set names utf8"); // 한글깨짐 방지
-$sql = "INSERT INTO cComment (cmtNo, cmtNic, cmtPasswd, cmtContent, cmtDate, cmtyNo) VALUES ('', '$cmtNic', '$cmtPasswd', '$cmtContent', '0', '$cmtyNo')";
+$sql = "INSERT INTO cComment (cmtNic, cmtPasswd, cmtContent, cmtDate, cmtyNo) VALUES ('$cmtNic', '$cmtPasswd', '$cmtContent', NOW(), '$cmtyNo')";
 
 $result = mysqli_query($db, $sql);
 echo $result;

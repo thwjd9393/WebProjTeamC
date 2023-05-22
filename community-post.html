@@ -40,54 +40,82 @@
     </script>
 
 
-
     <script>
-        function loadPostList() {
+        // 글번호 찾아오기
+        const cmtyNo = localStorage.getItem('cmtyNo');
 
-            //글번호 찾아오기
-            const cmtyNo = document.getElementById('cmtyNo').innerHTML;
 
-            console.log(cmtyNo);
 
-            //연동할 주소
-            var url =
-                `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/community.php?cmtyNo=${cmtyNo}`;
+        function loadPostList(cmtyNo) {
 
-            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
-            fetch(url)
+
+            // 연동할 주소
+            var postUrl = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/community.php?cmtyNo=${cmtyNo}`;
+
+            // 게시글 가져오기
+            fetch(postUrl)
                 .then(response => response.json())
-                .then(data =>
-
-                    //포문이 then문 안에서는 동작하지 않음
+                .then(data => {
+                    // 포문이 then문 안에서는 동작하지 않음
                     // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
-                    displayPostList(data)
-
-                    // console.log(data)
-                ).catch(error => console.log(error))
-
+                    postContent(data);
+                    loadComment(cmtyNo); // 댓글 불러오기 함수 호출
+                })
+                .catch(error => console.log(error));
         }
 
+        function postContent(data) {
+            document.querySelector("#imgcontent").innerHTML = "";
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].cmtyNo == cmtyNo) {
+                    let img = data[i].cmtyImg.substr(1);
 
-        function displayPostList(data) {
+                    document.querySelector('#cmtyTitle').innerHTML = data[i].cmtyTitle;
+                    document.querySelector('#cmtyPassword').innerHTML = data[i].cmtyPassword;
+                    document.querySelector('#cmtyDate').innerHTML = data[i].cmtyDate;
+                    document.querySelector('#cmtyNic').innerHTML = data[i].cmtyNic;
+                    document.querySelector('#cmtyContent').innerHTML = data[i].cmtyContent;
+                    document.querySelector("#imgcontent").innerHTML += `<img src="${img}" alt="${img}" id="img">`;
+                }
+            }
+        }
+
+        function loadComment(cmtyNo) {
+            // 댓글 가져오기
+            var commentUrl = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityComment.php?cmtyNo=${cmtyNo}`;
+
+            fetch(commentUrl)
+                .then(response => response.json())
+                .then(data => {
+                    loadCommentData(data);
+                })
+                .catch(error => console.log(error));
+        }
+
+        function loadCommentData(data) {
             const container = document.querySelector("#comtemt_item_warp");
-            container.innerHTML = ""; // 기존 내용을 지우고 새로운 내용을 추가하기 위해 innerHTML 초기화
+            container.innerHTML = "";
+
+            const commentCtn = document.getElementById('cmtTotal');
+            commentCtn.innerHTML = "뎃글:" + data.length;
 
             data.forEach(e => {
                 container.innerHTML += `
-      <div class="comment_item">
-        <div id="reviewNo" style="display: none;">${e.reviewNo}</div>
-        <p class="comment">${e.reviewContent}</p>
-        <div class="d-flex justify-content-between">
-          <p id="nicname">${e.reviewNic}</p>
-          <p id="date">${e.reviewDate}</p>
-        </div>
-      </div>`;
+          <div class="comment_item" style="border: 1px solid black; margin:10px; border-radius: 32px; ">
+            <div id="cmtNo" style="display: none;">${e.cmtNo}</div>
+            <p class="comment" style="padding: 17px;" >${e.cmtContent}</p>
+            <div class="d-flex justify-content-between">
+              <p id="nicname" style="padding: 17px; margin: 5px;">${e.cmtNic}</p>
+              <p id="date" style="padding: 17px; margin: 5px; ">${e.cmtDate}</p>
+            </div>
+          </div>
+        `;
             });
         }
 
-
-        // 페이지 로드 시 loadMemberList 함수 호출
-        window.onload = loadPostList;
+        window.onload = function () {
+            loadPostList(cmtyNo);
+        };
     </script>
 
     <script>
@@ -95,12 +123,11 @@
             const cmtNic = document.getElementById('cmtNic').value;
             const cmtPasswd = document.getElementById('cmtPasswd').value;
             const cmtContent = document.getElementById('cmtContent').value;
-            const cmtyNo = document.getElementById('cmtyNo').innerHTML;
-
 
             // url에 집어넣을 데이터값 결합
 
             const data = `cmtNic=${cmtNic}&cmtPasswd=${cmtPasswd}&cmtContent=${cmtContent}&cmtyNo=${cmtyNo}`
+
 
             // 연동할 주소
             var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityCommentInsert.php`
@@ -114,11 +141,12 @@
                     body: data
                 }).then(response => response.text())
                 .then(data =>
-                    //리뷰 재로드
+                    //댓글 재로드
                     CommentReload()
                 ).catch(error => console.log(error))
 
         }
+
 
         function CommentReload() {
             //텍스트 지우기
@@ -129,10 +157,13 @@
             const container = document.querySelector("#comtemt_item_warp");
             container.innerHTML = "";
 
-            // 댓글 리로드
+
             loadPostList();
         }
     </script>
+
+
+
     <!-- JS 영역 (end)  -->
 
 
@@ -140,44 +171,14 @@
 </head>
 
 <body>
-    <header include-html="./common/header.html"></header>
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
 
-    <!-- Offcanvas Menu Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__option">
-            <div class="offcanvas__links">
-                <a href="#">Sign in</a>
-                <a href="#">FAQs</a>
-            </div>
-            <div class="offcanvas__top__hover">
-                <span>Usd <i class="arrow_carrot-down"></i></span>
-                <ul>
-                    <li>USD</li>
-                    <li>EUR</li>
-                    <li>USD</li>
-                </ul>
-            </div>
-        </div>
-        <div class="offcanvas__nav__option">
-            <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-            <a href="#"><img src="img/icon/heart.png" alt=""></a>
-            <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-            <div class="price">$0.00</div>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__text">
-            <p>Free shipping, 30-day return or refund guarantee.</p>
-        </div>
-    </div>
-    <!-- Offcanvas Menu End -->
-
     <!-- Header Section Begin -->
-    <header id="header"></header>
+    <header include-html="./common/header.html"></header>
     <!-- Header Section End -->
 
     <!-- Blog Details Hero Begin -->
@@ -185,15 +186,19 @@
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-9 text-center">
+
+                    <!-- 본문 재목 및 닉네임 비밀번호 날자 -->
                     <div class="blog__hero__text">
-                        <h2>Are you one of the thousands of Iphone owners who has no idea</h2>
-                        <div id="cmtyNo" style="display: none;">25</div>
+                        <h2 id="cmtyTitle"></h2>
+                        <div id="cmtyNo" style="display: none;"></div>
                         <ul>
-                            <li>By Deercreative</li>
-                            <li>February 21, 2019</li>
-                            <li>8 Comments</li>
+                            <li id="cmtyNic"></li>
+                            <li id="cmtyDate"></li>
+                            <li id="cmtTotal">1</li>
+                            <li id="cmtyPassword" style="display: none;">비밀번호 영역</li>
                         </ul>
                     </div>
+                    <!-- 본문 재목 및 닉네임 비밀번호 날자 -->
                 </div>
             </div>
         </div>
@@ -204,27 +209,27 @@
     <section class="blog-details spad">
         <div class="container">
             <div class="row d-flex justify-content-center">
+                <!-- 이미지 적용 -->
                 <div class="col-lg-12">
-                    <div class="blog__details__pic">
-                        <img src="img/blog/details/blog-details.jpg" alt="">
+
+                    <div class="blog__details__pic" id="imgcontent">
+                        <img src="WebProjTeamC/uploadImg/community" alt="WebProjTeamC/uploadImg/community" id="img">
                     </div>
+
                 </div>
+                <!-- 이미지 적용 -->
+
+                <!-- 본문 내용 -->
                 <div class="col-lg-12">
                     <div class="blog__details__content">
 
                         <div id="cmtyNo" style="display: none;"></div>
 
-                        <div class="blog__details__text">
-                            <p>Hydroderm is the highly desired anti-aging cream on the block. This serum restricts the
-                                occurrence of early aging sings on the skin and keeps the skin younger, tighter and
-                                healthier. It reduces the wrinkles and loosening of skin. This cream nourishes the skin
-                                and brings back the glow that had lost in the run of hectic years.</p>
-                            <p>The most essential ingredient that makes hydroderm so effective is Vyo-Serum, which is a
-                                product of natural selected proteins. This concentrate works actively in bringing about
-                                the natural youthful glow of the skin. It tightens the skin along with its moisturizing
-                                effect on the skin. The other important ingredient, making hydroderm so effective is
-                                “marine collagen” which along with Vyo-Serum helps revitalize the skin.</p>
+                        <div class="blog__details__text content">
+                            <p id="cmtyContent"></p>
+
                         </div>
+                        <!-- 본문 내용 -->
 
 
 
@@ -331,17 +336,7 @@
                         <!-- 댓글 리스트 -->
                         <div id="comtemt_item_warp">
 
-                            <div class="comment_item_warp">
-                                <p class="comment">
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which
-                                    them
-                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                </p>
-                                <div class="d-flex justify-content-between">
-                                    <p id="nicname">우리집으로가자</p>
-                                    <p id="date">2023-05-17 12:23:05 </p>
-                                </div>
-                            </div>
+
 
                         </div>
                         <!-- 댓글 리스트 -->
