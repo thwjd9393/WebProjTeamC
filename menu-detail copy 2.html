@@ -186,19 +186,25 @@
                              </div>
 
                              <div class="comment_item">
-                                <p class="comment">
-                                   Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                   Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                </p>
-                                <div id="reviewNo">13</div>
-                                <div class="d-flex justify-content-between">
-                                      <p id="nicname">우리집으로가자</p>
-                                      <p id="date">2023-05-17 12:23:05 </p>
-                                   <!-- <div class="reply-btn">
-                                      <a href="#" class="btn-reply text-uppercase">reply</a>
-                                   </div> -->
+                                <div class="d-flex justify-content-between reViewWarp">
+                                    <p class="comment">1111111</p>
+                                    <div id="reviewNo">22</div>
+                            
+                                    <div class="reviewRight">
+                                        <div class="reviewBtnWarp">
+                                            <span class="reViwUpdate" data-toggle="modal" data-target="#updateModal" onclick="passReviewNo(this)">수정</span>
+                                            <span> | </span>
+                                            <span class="reViwDel" data-toggle="modal" data-target="#delModal">삭제</span>
+                                        </div>
+                                        <div class="reViewImg">
+                                        </div>
+                                    </div>
                                 </div>
-                             </div>
+                                <div class="d-flex justify-content-between">
+                                    <p id="nicname">우리집으로가자</p>
+                                    <p id="date">2023-05-17 12:23:05 </p>
+                                </div>
+                            </div>
 
                         </div>
     
@@ -257,28 +263,21 @@
 
 
 
-    <div class="modal fade" id="deleteCheckModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">정말로 삭제하시겠습니까?</h5>
+                    <h5 class="modal-title" id="updateModalLabel">Update Review</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    '삭제'버튼을 누르면 해당 게시글이 삭제됩니다.
-                    정말로 삭제하시겠습니까?
-                    <!--해당 글 삭제하는 주소값받는 input 태그-->
-                    <img id="deleteUrl" src="">
+                    <input type="text" id="reviewNoModal" value="">
                 </div>
                 <div class="modal-footer">
-                    <!--
-                    replace한 이유는 삭제한 페이지의 기록을 남기고 싶지 않아서이다. (뒤로가기불가)
-                    replace 참고 url : http://heeestorys.tistory.com/747-->
-                    <button type="button" class="btn btn-primary" id="delete" onclick="del">삭제</button>
-    
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Update</button>
                 </div>
             </div>
         </div>
@@ -303,23 +302,37 @@
     <script>
         // 헤더 푸터
         includeHTML();
-
-        $(document).ready(function() {
-            $('#deleteCheckModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget);
-                var del = button.data('title');
-                var modal = $(this);
-
-                const reviewNo = document.querySelector('#reviewNo').innerHTML;
-                console.log(reviewNo)
-            
-            })
-        });
         
     </script>
 
+    <script>
+        
+    </script>
 
     
+
+
+<!-- Modal for Update -->
+<!-- <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Update Review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="reviewNoModal" value="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
 
 
 </body>
