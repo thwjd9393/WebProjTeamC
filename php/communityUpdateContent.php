@@ -30,7 +30,6 @@
         }
     }
 
-    // 데이터베이스 연결 설정
     $db = mysqli_connect('localhost', 'mrhisj23', 'hi23bye6!', 'mrhisj23');
     mysqli_query($db, "set names utf8"); //한글깨짐 방지
     // 연결 확인

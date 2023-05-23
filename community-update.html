@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- head meta영역 -->
 
-    <title>게시글 작성</title>
+    <title>카페그라운드</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -70,15 +70,27 @@
             const cmtyImg = document.querySelector('#cmtyImg');
             const cmtyPasswd = document.querySelector('#cmtyPasswd');
 
+            // if(cmtyNic==""|| cmtyNic== null){
+            //     alert('작성자 이름을 입력하세요')
+            // } else if(cmtyTitle==""|| cmtyTitle== null){
+            //     alert('재목을 입력하세요')
+            // }else if(cmtyContent==""|| cmtyContent== null){
+            //     alert('본문 내용을 입력하세요')
+            // }else if(cmtyPasswd==""|| cmtyPasswd== null){
+            //     alert('비밀 번호를 입력하세요')
+            // }
+
+
             cmtyNo.value = data.cmtyNo;
             cmtyNic.value = data.cmtyNic;
             cmtyTitle.value = data.cmtyTitle;
             cmtyContent.value = data.cmtyContent;
             cmtyImg.src.value = data.cmtyImg; // 이미지 URL을 설정하는 부분 수정
             cmtyPasswd.value = data.cmtyPasswd;
-           
-            
+
+
         }
+
 
         // 페이지 로드 시 loadMemberList 함수 호출
         window.onload = getIdx;
@@ -122,7 +134,7 @@
             <form action="./php/communityUpdateContent.php" method="POST" enctype="multipart/form-data">
 
                 <!-- 번호 -->
-                <input type="hidden" id="cmtyNo" name="cmtyNo" >
+                <input type="hidden" id="cmtyNo" name="cmtyNo">
 
                 <!-- 게시글 제목란(start) -->
                 <div>
@@ -162,7 +174,8 @@
 
                     <div class="row btn_sum">
                         <div class="col-auto">
-                            <button type="submit" class="btn" name="submit"><span>게시글 수정</span></button>
+                            <button type="submit" class="btn" name="submit" onclick=""><span>게시글
+                                    수정</span></button>
 
                         </div>
                     </div>
@@ -170,7 +183,7 @@
 
                 </div>
             </form>
-
+           
 
         </div>
         <div>
