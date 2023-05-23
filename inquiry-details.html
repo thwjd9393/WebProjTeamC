@@ -191,7 +191,7 @@
                                             })
                                             .then(function (data) {
                                                 if (data.success) {
-                                                    location.replace('./inquiry.html')
+                                                    location.replace('http://mrhisj23.dothome.co.kr/WebProjTeamC/inquiry-repost.html?qaNo='+no)
                                                 } else {
                                                     // 삭제 실패 시의 처리
                                                     alert(data.message);
@@ -222,7 +222,7 @@
                             <form>
                                 <div class="mb-3">
                                     <label for="password" class="col-form-label">Password:</label>
-                                    <input type="password" class="form-control" id="password">
+                                    <input type="password" class="form-control" id="password_delete">
                                 </div>
                             </form>
                         </div>
@@ -236,7 +236,7 @@
                             <script>
                                 document.getElementById('selectDelete').addEventListener('click',
                                     function () {
-                                        var qaPasswd = document.getElementById('password').value;
+                                        var qaPasswd = document.getElementById('password_delete').value;
                                         console.log(qaPasswd);
 
                                         fetch('http://mrhisj23.dothome.co.kr/WebProjTeamC/php/inquiryDelete.php?qaNo=' +
@@ -254,7 +254,7 @@
                                                     // 삭제 성공 시의 처리
                                                     alert('문의내용이 삭제되었습니다.');
                                                     // 추가적인 동작 수행
-                                                    location.replace('./inquiry-list.htm?qaNo='+no)
+                                                    location.replace("http://mrhisj23.dothome.co.kr/WebProjTeamC/inquiry-list.html")
                                                 } else {
                                                     // 삭제 실패 시의 처리
                                                     alert(data.message);
