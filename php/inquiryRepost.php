@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json');
 
 // 데이터 받기
 $qaNo = (int)$_GET['qaNo'];
@@ -22,7 +23,6 @@ if ($storedPassword == $qaPasswd) {
 }
 
 // 응답 전송
-header('Content-Type: application/json');
 echo json_encode($response);
 
 // 데이터베이스 연결 종료

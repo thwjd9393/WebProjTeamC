@@ -7,7 +7,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Male-Fashion | Template</title>
+    <title>카페그라운드</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -28,9 +28,12 @@
     <script src="./js/includeHTML.js"></script>
 
     <script>
-        function goInquiry() {
-            location.replace('http://mrhisj23.dothome.co.kr/WebProjTeamC/inquiry-list.html')
+        function pageChange(){
+            window.location.replace("./inquiry-list.html")
         }
+    </script>
+    <script>
+       
 
         function getParameterByName(name) {
             name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -71,8 +74,7 @@
             document.getElementById("input_type").value=`${data[0].qaType}`
             document.getElementById("input_title").value=`${data[0].qaTitle}`
             document.getElementById("input_context").value=`${data[0].qaContent}`
-            document.getElementById("input_no").value=no
-            
+            document.getElementById("input_no").value=`${data[0].qaNo}`
 
         }
     </script>
@@ -139,12 +141,11 @@
             </div>
             <hr>
 
-            <form action="./php/inquiryResave.php" method="post" enctype="multipart/form-data">
+            <form action="./php/inquiryResave.php" method="post" enctype="multipart/form-data" target="_self">
                 <div class="row">
                     <div class="col-lg-6  col-md-6">
                         <div class="checkout__input">
                             <input type="text" name="name" placeholder="Name" id="input_name">
-                            <input type="text" style="visibility: hidden;" name="no" id="input_no">
                         </div>
                     </div>
                     <div class="col-lg-6  col-md-6">
@@ -194,15 +195,17 @@
                     * 용량제한 : 2MB로 확장자 명은 doc, ppt ,xls , hwp, pdf, jpg, png, gif만 첨부 가능합니다.
                 </div>
 
-
+                
+                <input type="number" style="visibility: hidden;" name="no" id="input_no">
+                
                 <hr>
 
                 <div class="row btn__warp ">
                     <div>
-                        <input type="button" value="목록보기" class="btn_list" onclick="goInquiry()">
+                        <input type="button" value="목록보기" class="btn_list" onclick="pageChange()">
                     </div>
                     <div>
-                        <input type="submit" value="문의하기" class="btn_inquiry" onclick="goInquiry()">
+                        <input type="submit" value="문의하기" class="btn_inquiry" onclick="pageChange()">
                     </div>
                 </div>
             </form>

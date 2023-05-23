@@ -1,5 +1,5 @@
 <?php
-    header('Content-Type:application/json; charset=utf-8'); 
+     header('Location: http://mrhisj23.dothome.co.kr/WebProjTeamC/inquiry-list.html');
 
     // 데이터 받기
  
@@ -9,22 +9,21 @@
     $qaTitle=$_POST['title'];
     $qaContent=$_POST['context'];
     $qaImg=$_POST['image'];
-
     $qaDate= date('Y-m-d', time());
 
+
+    
     // 데이터베이스 연결 설정
     $db = mysqli_connect('localhost','mrhisj23','hi23bye6!','mrhisj23');
     mysqli_query($db, "set names utf8"); //한글깨짐 방지
  
-    $
+    
     // 쿼리문
     $sql = "INSERT INTO cQa(qaType, qaNic, qaPasswd, qaTitle, qaContent, qaDate, qaImg)
     VALUES ('${qaType}','${qaNic}','${qaPasswd}','${qaTitle}','${qaContent}','${qaDate}','${qaImg}');";
  
     // 실행
     $result = mysqli_query($db, $sql);
-
-    
 
     // php 닫기
     mysqli_close($db);
