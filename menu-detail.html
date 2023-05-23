@@ -7,7 +7,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Male-Fashion | Template</title>
+    <title>카페그라운드</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -179,7 +179,8 @@
 
                                 <div class="col-lg-12 text-center">
                                     <textarea id="reviewContent" placeholder="Comment"></textarea>
-                                    <button type="button" class="site-btn" onclick="reViewBtn()">Post Comment</button>
+                                    <button type="button" class="site-btn rvInsertBtn" onclick="reViewBtn()">Post Comment</button>
+                                    <button type="button" class="site-btn rvUpdateBtn" onclick="reViewUpdateBtn()">Update Comment</button>
                                 </div>
                                 
 
@@ -211,7 +212,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                     <button type="button" class="btn btn-primary reViwUpdate" data-dismiss="modal" onclick="reviewUpdate()">확인</button>
-                    <!-- <button type="button" class="btn btn-primary" id="updateReview" onclick="reviewUpdate()">확인</button> -->
                 </div>
             </div>
         </div>
@@ -317,6 +317,8 @@
             mnuFatClass.innerHTML = data.mnuFat;
             mnuSaltClass.innerHTML = data.mnuSalt;
 
+            
+
             //리뷰 로드
             loadReviewList(data.mnuNo);
 
@@ -408,25 +410,6 @@
             });
         }
 
-        //리뷰 삭제
-        // function reviewDel(){
-        //     //글번호 가져오기
-        //     const reviewNo = document.querySelector('#reviewNo').innerHTML;
-        //     console.log(reviewNo)
-
-        //     //비밀번호 체크 후 삭제
-
-
-        // }
-
-        //리뷰 수정
-        // function reviewUpdate(){
-        //     const reviewNo = document.querySelector('#reviewNo').innerHTML;
-        //     console.log(reviewNo)
-
-        // }
-
-
         //선택한 파일 보이기
         function fileupload(e){
             document.getElementById('file').innerHTML=e.value;   
@@ -441,23 +424,28 @@
         function reViewBtn(){
 
             //보낼 데이터 준비
-            // const reviewNic = document.getElementById('reviewNic').value;
-            // const reviewPasswd = document.getElementById('reviewPasswd').value;
-            // const reviewContent = document.getElementById('reviewContent').value;
-            // const reviewImg = document.getElementById('reviewImg').value;
-            // const mnuNo = document.getElementById('mnuNo').innerHTML;
+            // const reviewNicInput = document.getElementById('reviewNic');
+            // const reviewPasswdInput = document.getElementById('reviewPasswd');
+            // const reviewContentInput = document.getElementById('reviewContent');
+            // const reviewImgInput = document.getElementById('reviewImg');
+            // const mnuNoInput = document.querySelector('.mnuNo');
 
-            const reviewNicInput = document.getElementById('reviewNic');
-            const reviewPasswdInput = document.getElementById('reviewPasswd');
-            const reviewContentInput = document.getElementById('reviewContent');
-            const reviewImgInput = document.getElementById('reviewImg');
-            const mnuNoInput = document.querySelector('.mnuNo');
+            const reviewNic = document.getElementById('reviewNic').value;
+            const reviewPasswd = document.getElementById('reviewPasswd').value;
+            const reviewContent = document.getElementById('reviewContent').value;
+            const reviewImg = document.getElementById('reviewImg').files[0];
+            const mnuNo = document.querySelector('.mnuNo').innerHTML;
 
-            const reviewNic = reviewNicInput.value;
-            const reviewPasswd = reviewPasswdInput.value;
-            const reviewContent = reviewContentInput.value;
-            const reviewImg = reviewImgInput.files[0];
-            const mnuNo = mnuNoInput.innerHTML;
+            if(reviewNic == "" || reviewNic == null){
+                alert('작성자 이름 입력하세요');
+                return;
+            } else if(reviewPasswd == "" || reviewPasswd == null){
+                alert('비밀번호 입력하세요');
+                return;
+            } else if(reviewContent == "" || reviewContent == null){
+                alert('내용을 입력하세요');
+                return;
+            } 
 
             // // var data="title=HELO&msg=sdsfd";
             // const data = `reviewNic=${reviewNic}&reviewPasswd=${reviewPasswd}&reviewContent=${reviewContent}&reviewImg=${reviewImg}&mnuNo=${mnuNo}`;
@@ -479,7 +467,7 @@
             }).then(response =>response.text())
             .then(data => 
                 //리뷰 재로드
-                reViewReload()
+                reViewReload(mnuNo)
             ).catch(error => console.log(error))
 
             // fetch(url,{
@@ -508,8 +496,9 @@
             const container = document.querySelector("#comtemt_item_warp");
             container.innerHTML = "";
 
-            //리뷰 재로드`
-            loadReviewList()
+            //리뷰 재로드
+            const mnuNo = document.querySelector('.mnuNo').innerHTML;
+            loadReviewList(mnuNo)
         }
 
         //모달에 값 가져오기
@@ -543,7 +532,7 @@
         // });
 
 
-        //수정 모달
+        //수정 모달 - 데이터 불러오기
         function reviewUpdate(){
 
             const reviewNo = document.getElementById('selectNo').innerHTML;
@@ -574,18 +563,68 @@
              
             if(data.result == 'false'){
                 alert('비밀번호가 틀립니다.');
+                document.getElementById('reviewPwUd').value = ""; //비밀번호 칸 지우기
             } else {
+
+                //버튼 변경
+                document.querySelector('.rvUpdateBtn').style.display = "initial";
+                document.querySelector('.rvInsertBtn').style.display = "none";
+
+                //데이터 불러오기
                 document.getElementById('reviewNo').value = data.reviewNo;
                 document.getElementById('reviewNic').value = data.reviewNic;
                 document.getElementById('reviewContent').value = data.reviewContent;
                 document.getElementById('file').innerHTML = data.reviewImg;
 
-
-                //리뷰 리로드
-                // reViewReload();
+                
             }
 
         }
+
+
+        //수정 버튼 클릭
+        function reViewUpdateBtn() {
+
+            const reviewNic = document.getElementById('reviewNic').value;
+            const reviewPasswd = document.getElementById('reviewPasswd').value;
+            const reviewContent = document.getElementById('reviewContent').value;
+            const reviewImg = document.getElementById('reviewImg').files[0];
+            const reviewNo = document.getElementById('selectNo').innerHTML;
+            const mnuNo = document.querySelector('.mnuNo').innerHTML;
+
+            if(reviewNic == "" || reviewNic == null){
+                alert('작성자 이름 입력하세요');
+                return;
+            } else if(reviewPasswd == "" || reviewPasswd == null){
+                alert('비밀번호 입력하세요');
+                return;
+            } else if(reviewContent == "" || reviewContent == null){
+                alert('내용을 입력하세요');
+                return;
+            } 
+
+            const data = new FormData();
+            data.append("reviewNic", reviewNic);
+            data.append("reviewPasswd", reviewPasswd);
+            data.append("reviewContent", reviewContent);
+            data.append("reviewImg", reviewImg);
+            data.append("reviewNo", reviewNo);
+
+            //연동할 주소
+            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewUpdate.php`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url,{
+                    method : 'POST',
+                    body : data
+            }).then(response =>response.text())
+            .then(data => 
+                //리뷰 재로드
+                reViewReload()
+            ).catch(error => console.log(error))
+
+        }
+
 
 
         //모달 삭제 버튼
