@@ -7,7 +7,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Male-Fashion | Template</title>
+    <title>카페그라운드</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -88,11 +88,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h2 style="margin-bottom: 10;">Notice</h2>
+                        <h2 style="margin-bottom: 10;">Inquiry Detail</h2>
                         <div class="breadcrumb__links">
                             <a href="./index.html">Home</a>
                             <a href="./shop.html">Service</a>
-                            <span>Notice</span>
+                            <span>Inquiry Detail</span>
                         </div>
                     </div>
                 </div>
@@ -191,7 +191,7 @@
                                             })
                                             .then(function (data) {
                                                 if (data.success) {
-                                                    location.replace('http://mrhisj23.dothome.co.kr/WebProjTeamC/inquiry-repost.html?qaNo='+no)
+                                                    location.replace('http://mrhisj23.dothome.co.kr/WebProjTeamC/inquiry-repost.html?qaNo='+no);
                                                 } else {
                                                     // 삭제 실패 시의 처리
                                                     alert(data.message);
@@ -254,7 +254,7 @@
                                                     // 삭제 성공 시의 처리
                                                     alert('문의내용이 삭제되었습니다.');
                                                     // 추가적인 동작 수행
-                                                    location.replace("http://mrhisj23.dothome.co.kr/WebProjTeamC/inquiry-list.html")
+                                                    location.replace("http://mrhisj23.dothome.co.kr/WebProjTeamC/inquiry-list.html");
                                                 } else {
                                                     // 삭제 실패 시의 처리
                                                     alert(data.message);
