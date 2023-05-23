@@ -7,7 +7,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>커피테리아</title>
+    <title>카페그라운드</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -32,10 +32,22 @@
         let end = 5; 
     
         //페이지 로드 시 발동하는 함수
-        function firstMenuLoad() {
-            let mnuCtyNo = 1;
-            loadNav(mnuCtyNo);
+        function firstMenuLoad(){
+            //주소에서 카테고리 번호 가져오기
+            //http://mrhisj23.dothome.co.kr/WebProjTeamC/menu-detail.html?mnuNo=14
+            let mnuNoToUrl = window.location.search
+
+            //번호 얻기
+            let getMnuNo = mnuNoToUrl.split('=');
+            let mnuCtyNo = getMnuNo[1];
+
+            //메뉴 상세 로드
+            loadNav(mnuCtyNo)
         }
+        // function firstMenuLoad() {
+        //     let mnuCtyNo = 1;
+        //     loadNav(mnuCtyNo);
+        // }
     
         //네브 클릭 시 발동하는 함수
         function selectNav(elem) {
@@ -199,18 +211,18 @@
     <section class="related spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4">
+                <!-- <div class="col-lg-4"></div> -->
+                <div class="col-lg-12 text-center">
                     <h3 class="related-title"></h3>
                 </div>
 
                 <!-- 검색 -->
-                <div class="shop__sidebar__search col-lg-4">
+                <!-- <div class="shop__sidebar__search col-lg-4">
                     <form action="#">
                         <input type="text" placeholder="Search...">
                         <button type="submit"><span class="icon_search"></span></button>
                     </form>
-                </div>
+                </div> -->
             </div>
 
             <!-- 메뉴 warp -->

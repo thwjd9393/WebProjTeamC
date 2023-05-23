@@ -3473,6 +3473,11 @@ ol {
 /* Wide Mobile = 480px */
 
 @media only screen and (max-width: 767px) {
+	.sliderBtn {
+		padding: 10px 15px;
+    	margin-left: 15%;
+	}
+
 	.canvas__open {
 		display: block;
 		font-size: 22px;
