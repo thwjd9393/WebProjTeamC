@@ -27,7 +27,28 @@
     <!--헤더 푸터-->
     <script src="./js/includeHTML.js"></script>
 
-    
+    <script>
+        function nullCheck(){
+            const name=document.getElementById('input_name').value;
+            const pw=document.getElementById('input_pw').value;
+            const title=document.getElementById('input_title').value;
+            const context=document.getElementById('input_context').value;
+
+            if(name=="" || name==null){
+                alert('이름을 입력하세요')
+                return false;
+            }else if(pw=="" || pw==null){
+                alert('비밀번호를 입력하세요')
+                return false;
+            }else if(title=="" || title==null){
+                alert('제목을 입력하세요')
+                return false;
+            }else if(context=="" || context==null){
+                alert('내용을 입력하세요')
+                return false;
+            }
+        }
+    </script>
 
 </head>
 
@@ -91,17 +112,17 @@
             </div>
             <hr>
 
-            <form action="./php/inquiryInsert.php" method="post" enctype="multipart/form-data" target="_self">
+            <form action="./php/inquiryInsert.php" method="post" enctype="multipart/form-data" target="_self" onsubmit="return nullCheck()">
                 <div class="row">
                     <div class="col-lg-6  col-md-6">
                         <div class="checkout__input">
-                            <input type="text" name="name" placeholder="Name">
+                            <input type="text" name="name" placeholder="Name" id="input_name">
 
                         </div>
                     </div>
                     <div class="col-lg-6  col-md-6">
                         <div class="checkout__input">
-                            <input type="password" name="password" placeholder="Password">
+                            <input type="password" name="password" placeholder="Password" id="input_pw">
                         </div>
                     </div>
                 </div>
@@ -122,7 +143,7 @@
                             <div class="tit">
                                 제목<span class="star">*</span>
                             </div>
-                            <input type="text" name="title" placeholder="제목을 입력하세요">
+                            <input type="text" name="title" placeholder="제목을 입력하세요" id="input_title">
                         </div>
                     </div>
                 </div>
@@ -132,7 +153,7 @@
                             <div class="tit">
                                 내용<span class="star">*</span>
                             </div>
-                            <textarea name="context" placeholder="내용을 입력하세요"></textarea>
+                            <textarea name="context" placeholder="내용을 입력하세요" id="input_context"></textarea>
                         </div>
                     </div>
                 </div>
@@ -151,10 +172,10 @@
 
                 <div class="row btn__warp ">
                     <div>
-                        <input type="button" value="목록보기" class="btn_list" onclick="location.href='http://mrhisj23.dothome.co.kr/WebProjTeamC/inquiry-list.html'" >
+                        <input type="button" value="목록보기" class="btn_list" >
                     </div>
                     <div>
-                        <input type="submit" value="문의하기" class="btn_inquiry" onclick="location.href='http://mrhisj23.dothome.co.kr/WebProjTeamC/inquiry-list.html'">
+                        <input type="submit" value="문의하기" class="btn_inquiry">
                     </div>
                 </div>
             </form>
