@@ -35,12 +35,12 @@ body {
 
 #place {
     border-radius: 35px;
-    height: 70px;
+    height: 60px;
     width: 500px;
     z-index: 100;
     margin-top: 25px;
     border: 1px solid #949494;
-    padding-left: 10px;
+    padding-left: 20px;
 
     
 }
@@ -59,7 +59,7 @@ body {
 /* 미디어 쿼리 맵과 검색창영역 */
 @media (max-width: 780px) {
     #map {
-        height: 650px;
+        height: 550px;
     }
 
     #title {
@@ -68,15 +68,13 @@ body {
         height: 60px;
     }
 
-   
-
     .locationSearch {
         height: 70px;
 
     }
 
     #place {
-        width: 380px;
+        width: 300px;
     }
 
 }
