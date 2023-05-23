@@ -31,7 +31,71 @@
     <!-- 스타일 시트 연결  영역-->
     <!--헤더 푸터-->
     <script src="./js/includeHTML.js"></script>
-    
+
+    <script>
+        function getIdx() {
+            //주소에서 카테고리 번호 가져오기
+            //http://mrhisj23.dothome.co.kr/WebProjTeamC/menu-detail.html?mnuNo=14
+            let cmtyNoToUrl = window.location.search;
+            let getCmtyNo1 = cmtyNoToUrl.split("&");
+            let cmtyNo = getCmtyNo1[0].split("=")[1];
+            let cmtyPasswd = getCmtyNo1[1].split("=")[1];
+            let splitCmtyNo = cmtyNo.split('=');
+            let splitCmtyPasswd = cmtyPasswd.split('=');
+
+            loadPostUpdate(splitCmtyNo);
+        }
+
+        // 게시글 수정 로드
+        function loadPostUpdate(splitCmtyNo) {
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityRepost.php?cmtyNo=${splitCmtyNo}`;
+            console.log(url)
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    rePostItem(data);
+                })
+                .catch(error => console.log(error));
+        }
+
+        //게시글에 보여주기
+        function rePostItem(data) {
+
+            const cmtyNo = document.querySelector('#cmtyNo');
+            const cmtyNic = document.querySelector('#cmtyNic');
+            const cmtyTitle = document.querySelector('#cmtyTitle');
+            const cmtyContent = document.querySelector('#cmtyContent');
+            const cmtyImg = document.querySelector('#cmtyImg');
+            const cmtyPasswd = document.querySelector('#cmtyPasswd');
+
+            // if(cmtyNic==""|| cmtyNic== null){
+            //     alert('작성자 이름을 입력하세요')
+            // } else if(cmtyTitle==""|| cmtyTitle== null){
+            //     alert('재목을 입력하세요')
+            // }else if(cmtyContent==""|| cmtyContent== null){
+            //     alert('본문 내용을 입력하세요')
+            // }else if(cmtyPasswd==""|| cmtyPasswd== null){
+            //     alert('비밀 번호를 입력하세요')
+            // }
+
+
+            cmtyNo.value = data.cmtyNo;
+            cmtyNic.value = data.cmtyNic;
+            cmtyTitle.value = data.cmtyTitle;
+            cmtyContent.value = data.cmtyContent;
+            cmtyImg.src.value = data.cmtyImg; // 이미지 URL을 설정하는 부분 수정
+            cmtyPasswd.value = data.cmtyPasswd;
+
+
+        }
+
+
+        // 페이지 로드 시 loadMemberList 함수 호출
+        window.onload = getIdx;
+    </script>
+
 </head>
 
 <body>
@@ -67,11 +131,15 @@
 
 
 
-            <form action="./php/communityWrite.php" method="POST" enctype="multipart/form-data">
+            <form action="./php/communityUpdateContent.php" method="POST" enctype="multipart/form-data">
+
+                <!-- 번호 -->
+                <input type="hidden" id="cmtyNo" name="cmtyNo">
+
                 <!-- 게시글 제목란(start) -->
                 <div>
                     <input class="form-control form-control-lg title" type="text" name="cmtyTitle" placeholder="제목"
-                        aria-label=".form-control-lg example">
+                        aria-label=".form-control-lg example" id="cmtyTitle">
                 </div>
                 <!-- 게시글 제목란 (end) -->
 
@@ -79,10 +147,10 @@
                 <div class="row account__warp">
                     <div class="col-lg-6 col-md-6 col-sm-6 account__name">
                         <input type="text" name="cmtyNic" maxlength="13" placeholder="닉네임" class="form-control"
-                            id="nameinp">
+                            id="cmtyNic">
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 account__passwd">
-                        <input type="password" name="cmtyPasswd" id="inputPassword" class="form-control"
+                        <input type="password" name="cmtyPasswd" id="cmtyPasswd" class="form-control"
                             placeholder="비밀번호">
                     </div>
 
@@ -91,32 +159,31 @@
 
                 <!-- 게시글 본문 작성란(start) -->
                 <div class="text">
-                    <textarea name="cmtyContent" id="textra" cols="60" rows="50"></textarea>
+                    <textarea name="cmtyContent" id="cmtyContent" cols="60" rows="50"></textarea>
                 </div>
                 <!-- 게시글 본문 작성란(end) -->
 
                 <div class="account">
                     <!-- 이미지 첨부(start) -->
                     <div class="mb-3">
-                        <input class="form-control" type="file" name="cmtyImg" id="formFile">
+                        <input class="form-control" type="file" name="cmtyImg" id="cmtyImg">
                     </div>
 
                     <!-- 이미지 첨부(end) -->
                     <!-- 게시글 등록 버튼(start) -->
-                    
+
                     <div class="row btn_sum">
                         <div class="col-auto">
-                            <button type="submit" class="btn" name="submit" onclick="changePage()"><span>게시글 등록</span></button>
-                            
+                            <button type="submit" class="btn" name="submit" onclick=""><span>게시글
+                                    수정</span></button>
+
                         </div>
                     </div>
                     <!-- 게시글 등록 버튼(end) -->
-                    
+
                 </div>
             </form>
-
-            
-            
+           
 
         </div>
         <div>
@@ -128,16 +195,6 @@
     <footer include-html="./common/footer.html"></footer>
     <!-- Footer Section End -->
 
-    <!-- Search Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
-    </div>
-    <!-- Search End -->
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>

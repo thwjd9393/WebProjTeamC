@@ -7,7 +7,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Male-Fashion | Template</title>
+    <title>카페그라운드</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -65,17 +65,19 @@
 
                 let img = (e.cmtyImg).substr(1);
 
-                poi.innerHTML += `<div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="blog__item " id="imgcontainer>
-                    <div id="cmtyNo" style="display:none">${e.cmtyNo}</div>
-                </div calss="blog_item_img_cmty"><img src="${img}" alt="${img}"></div>
-                    <div class="blog_item_text">
-                        <span><img src="img/icon/calendar.png" alt="">${e.cmtyDate}</span>
-                        <h5>${e.cmtyTitle}</h5>
-                        <a href="./community-post.html" onclick="ptest(${e.cmtyNo})" >Read More</a>
-                    </div>
-                </div>
-            </div>`
+                poi.innerHTML += `
+    <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="blog__item">
+            <div class="blog__item__pic set-bg" data-setbg="${img}">
+                <img src="${img}" alt="${img}" style="width: 384px; height: 270px;">
+            </div>
+            <div class="blog__item__text">
+                <span><img src="img/icon/calendar.png" alt=""> ${e.cmtyDate}</span>
+                <h5>${e.cmtyTitle}</h5>
+                <a href="./community-post.html" onclick="ptest(${e.cmtyNo})">Read More</a>
+            </div>
+        </div>
+    </div>`;
             })
 
         }
@@ -147,7 +149,7 @@
 
             <div class="row text-center">
                 <div class="col-lg-12">
-                    <button id="readmore">READ MORE</button>
+                    <button id="readmore" style="display: none;">READ MORE</button>
                 </div>
             </div>
 

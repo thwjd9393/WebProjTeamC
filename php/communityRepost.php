@@ -1,4 +1,5 @@
 <?php
+
 $cmtyNo = $_GET['cmtyNo'];
 
 // 데이터베이스 연결 설정
@@ -9,41 +10,26 @@ if ($db->connect_error) {
     die("Connection failed: " . $db->connect_error);
 }
 
-// POST 데이터 받아오기
-$title = $_POST['cmtyTitle'];
-$contents = $_POST['cmtyContent'];
-$name = $_POST['cmtyNic'];
-$password = $_POST['cmtyPasswd'];
+// 데이터 조회 쿼리 작성
+$sql = "SELECT * FROM cCommunity WHERE cmtyNo = $cmtyNo";
 
-// 사진 파일 업로드
-$file = $_FILES['cmtyImg'];
-$filename = $file['name'];
-$tmpName = $file['tmp_name']; //임시 저장소 위치
+// 데이터 조회 실행
+$result = mysqli_query($db, $sql);
 
-$dstName = "";
-if (!empty($filename)) {
-    $dstName = "../uploadImg/community/" . date('YmdHis') . $filename; // 영구 저장소 위치
-    $allowedExtensions = ['jpg', 'png']; // 허용할 확장자 목록
+if ($result) {
+    // 데이터가 존재하는 경우
+    if (mysqli_num_rows($result) > 0) {
+        $data = mysqli_fetch_assoc($result);
 
-    $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION)); // 파일의 확장자 추출 후 소문자로 변환
-
-    if (!in_array($extension, $allowedExtensions)) {
-        echo "jpg 또는 png 파일만 업로드할 수 있습니다.";
-        exit; // 업로드 오류 발생 시 코드 실행 중단
-    } elseif (!move_uploaded_file($tmpName, $dstName)) {
-        echo "파일 업로드 중 오류가 발생하였습니다.";
-        exit; // 업로드 오류 발생 시 코드 실행 중단
+        // JSON 응답 생성
+        echo json_encode($data);
+    } else {
+        // 데이터가 없는 경우
+        echo "데이터가 존재하지 않습니다.";
     }
-}
-
-// 데이터 업데이트 쿼리 작성
-$sql = "UPDATE cCommunity SET cmtyTitle = '$title', cmtyContent = '$contents', cmtyNic = '$name', cmtyPasswd = '$password', cmtyImg = '$dstName', cmtyLikeCnt = 0 WHERE cmtyNo = $cmtyNo";
-
-// 데이터 업데이트 실행
-if (mysqli_query($db, $sql)) {
-    echo "<script>window.location.href = 'http://mrhisj23.dothome.co.kr/WebProjTeamC/community.html';</script>";
 } else {
-    echo "데이터 업데이트 중 오류가 발생하였습니다: " . mysqli_error($db);
+    // 데이터 조회 오류 발생
+    echo "데이터 조회 중 오류가 발생하였습니다: " . mysqli_error($db);
 }
 
 // 데이터베이스 연결 종료
