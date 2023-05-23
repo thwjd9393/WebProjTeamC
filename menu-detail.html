@@ -28,264 +28,6 @@
     <!-- 헤더 푸터 -->
     <script src="./js/includeHTML.js"></script>
 
-    <script>
-
-        //주소 idx 값 얻기
-        function getIdx(){
-            //주소에서 카테고리 번호 가져오기
-            //http://mrhisj23.dothome.co.kr/WebProjTeamC/menu-detail.html?mnuNo=14
-            let mnuNoToUrl = window.location.search
-            
-            //번호 얻기
-            let getMnuNo = mnuNoToUrl.split('=');
-            let mnuNo = getMnuNo[1];
-
-            //메뉴 상세 로드
-            loadMenuDetail(mnuNo)
-        }
-
-        //메뉴 상세 로드
-        function loadMenuDetail(mnuNo){
-
-            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuDetailLoad.php?mnuNo=${mnuNo}`;
-
-            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
-            fetch(url)
-            .then(response => response.json())
-            .then(data => 
-
-                displayMenu(data)
-
-            ).catch(error => console.log(error))
-
-        }
-
-        function displayMenu(data) {
-            
-            const mnuNoClass = document.querySelector('.mnuNo');
-            const mnuNameId = document.querySelector("#mnuName");
-            const mnuContentClass = document.querySelector(".mnuContent");
-            const mnuImgClass = document.querySelector(".mnuImg");
-            const mnuMlClass = document.querySelector(".mnuMl");
-            const mnuCalClass = document.querySelector(".mnuCal");
-            const mnuSugarClass = document.querySelector(".mnuSugar");
-            const mnuPrtinClass = document.querySelector(".mnuPrtin");
-            const mnuFatClass = document.querySelector(".mnuFat");
-            const mnuSaltClass = document.querySelector(".mnuSalt");
-            
-            mnuNoClass.innerHTML = data.mnuNo;
-            mnuNameId.innerHTML = data.mnuName;
-            mnuContentClass.innerHTML = data.mnuName;
-            mnuImgClass.innerHTML = `<img src=${data.mnuImg} alt=${data.mnuName}>`;
-            mnuMlClass.innerHTML = data.mnuMl;
-            mnuCalClass.innerHTML = data.mnuCal;
-            mnuSugarClass.innerHTML = data.mnuSugar;
-            mnuPrtinClass.innerHTML = data.mnuPrtin;
-            mnuFatClass.innerHTML = data.mnuFat;
-            mnuSaltClass.innerHTML = data.mnuSalt;
-
-            //리뷰 로드
-            loadReviewList(data.mnuNo);
-
-        }
-        
-
-        //리뷰 로드
-        function loadReviewList(mnuNo){
-
-            // const mnuNo = document.getElementById('mnuNo').innerHTML
-
-            //연동할 주소
-            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewSeleteAll.php?mnuNo=${mnuNo}`;
-
-            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
-            fetch(url)
-            .then(response => response.json())
-            .then(data => 
-
-                //포문이 then문 안에서는 동작하지 않음
-                // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
-                displayReviewList(data)
-                // console.log(data)
-            ).catch(error => console.log(error))
-        }
-
-        function displayReviewList(data) {
-            const container = document.querySelector("#comtemt_item_warp")
-            const reviewCnt = document.getElementById('reviewCnt')
-
-            //코멘트 갯수
-            reviewCnt.innerHTML = `<i class="bi bi-chat"></i> ${data.length}`;
-            // console.log(data.length);
-
-            data.forEach(e=> {
-                
-                // 1. appendChild 사용
-                // const nameDiv = document.createElement('div');
-                // nameDiv.className = 'reviewNic';
-                // nameDiv.textContent = e.reviewNic;
-
-                // const aa = document.createElement('a');
-                // aa.className = '4444';
-                // aa.textContent = e.mnuNo;
-
-                // nameDiv.appendChild(aa);
-
-                // const noDiv = document.createElement('div');
-                // noDiv.classList.add('reviewPasswd');
-                // noDiv.textContent = e.reviewPasswd;
-
-                // container.appendChild(nameDiv);
-                // container.appendChild(noDiv);
-
-                // 2. innerHtml 사용
-                // container.innerHTML = `<div class="comment_item">`;
-                // container.innerHTML+= `<p class="comment">${e.reviewContent}</p>`;
-                // container.innerHTML+= `<div class="d-flex justify-content-between">`;
-                // container.innerHTML+= `<p id="nicname">${e.reviewNic}</p>`;
-                // container.innerHTML+= `<p id="date">${e.reviewPasswd}</p>`;
-                // container.innerHTML+= `</div>`;
-                // container.innerHTML+= `</div>`;
-
-                let img = (e.reviewImg).substr(1);
-
-                container.innerHTML += `<div class="comment_item">
-                        <div id="reviewNo" style="display: block;">${e.reviewNo}</div>
-                        <div class="d-flex justify-content-between">
-                            <p class="comment">${e.reviewContent}</p>
-                            
-                            <div class="reviewRight">
-                                <div class="reviewBtnWarp">
-                                    <span class="reViwUpdate" data-toggle="modal" data-target="#updateModal">수정</span>
-                                    <span> | </span>
-                                    <span class="reViwDel" data-toggle="modal" data-target="#delModal">삭제</span>
-                                </div>
-                                <div class="reViewImg">
-                                    <img src="${img}" alt="${img}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p id="nicname">${e.reviewNic}</p>
-                            <p id="date">${e.reviewDate}</p>
-                        </div>
-                    </div>`;
-
-
-            });
-        }
-
-        //리뷰 삭제
-        // function reviewDel(){
-        //     //글번호 가져오기
-        //     const reviewNo = document.querySelector('#reviewNo').innerHTML;
-        //     console.log(reviewNo)
-
-        //     //비밀번호 체크 후 삭제
-
-
-        // }
-
-        //리뷰 수정
-        // function reviewUpdate(){
-        //     const reviewNo = document.querySelector('#reviewNo').innerHTML;
-        //     console.log(reviewNo)
-
-        // }
-
-
-        //선택한 파일 보이기
-        function fileupload(e){
-            document.getElementById('file').innerHTML=e.value;   
-        }
-
-
-        // 페이지 로드 시 loadMemberList 함수 호출
-        window.onload = getIdx;
-
-
-    </script>
-
-    <script>
-
-        //리뷰 쓰기
-        function reViewBtn(){
-
-            //보낼 데이터 준비
-            // const reviewNic = document.getElementById('reviewNic').value;
-            // const reviewPasswd = document.getElementById('reviewPasswd').value;
-            // const reviewContent = document.getElementById('reviewContent').value;
-            // const reviewImg = document.getElementById('reviewImg').value;
-            // const mnuNo = document.getElementById('mnuNo').innerHTML;
-
-            const reviewNicInput = document.getElementById('reviewNic');
-            const reviewPasswdInput = document.getElementById('reviewPasswd');
-            const reviewContentInput = document.getElementById('reviewContent');
-            const reviewImgInput = document.getElementById('reviewImg');
-            const mnuNoInput = document.querySelector('.mnuNo');
-
-            const reviewNic = reviewNicInput.value;
-            const reviewPasswd = reviewPasswdInput.value;
-            const reviewContent = reviewContentInput.value;
-            const reviewImg = reviewImgInput.files[0];
-            const mnuNo = mnuNoInput.innerHTML;
-
-            // // var data="title=HELO&msg=sdsfd";
-            // const data = `reviewNic=${reviewNic}&reviewPasswd=${reviewPasswd}&reviewContent=${reviewContent}&reviewImg=${reviewImg}&mnuNo=${mnuNo}`;
-
-            const data = new FormData();
-            data.append("reviewNic", reviewNic);
-            data.append("reviewPasswd", reviewPasswd);
-            data.append("reviewContent", reviewContent);
-            data.append("reviewImg", reviewImg);
-            data.append("mnuNo", mnuNo);
-
-            //연동할 주소
-            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewInsert.php`;
-
-            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
-            fetch(url,{
-                    method : 'POST',
-                    body : data
-            }).then(response =>response.text())
-            .then(data => 
-                //리뷰 재로드
-                reViewReload()
-            ).catch(error => console.log(error))
-
-            // fetch(url,{
-            //         method : 'POST',
-            //         headers : {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
-            //         body : data
-            // }).then(response =>response.text())
-            // .then(data => 
-            //     //리뷰 재로드
-            //     reViewReload()
-            // ).catch(error => console.log(error))
-
-        }
-
-        //리뷰 등록 후...
-        function reViewReload(){
-
-            //텍스트 지우기
-            document.getElementById('reviewNic').value = "";
-            document.getElementById('reviewPasswd').value = "";
-            document.getElementById('reviewContent').value = "";
-            document.getElementById('reviewImg').value = "";
-            document.getElementById('file').innerHTML = "";
-
-            //기존 리스트 부시기
-            const container = document.querySelector("#comtemt_item_warp");
-            container.innerHTML = "";
-
-            //리뷰 재로드
-            loadReviewList()
-        }
-
-    </script>
-
-    
 </head>
 
 <body>
@@ -386,6 +128,8 @@
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-lg-8">
                     <div class="blog__details__content">
+
+                        <div id="selectNo" style="display: none;"></div>
                         
                         <div class="blog__details__comment comment_content_warp">
                             <div class="d-flex">
@@ -408,7 +152,6 @@
                                 <div class="product__pagination">
                                     <span> <i class="fa fa-caret-left"></i> </span>
                                     <a class="active" href="#">1</a>
-                                    <a href="#">2</a>
                                     <span> <i class="bi bi-caret-right"></i> </span>
                                 </div>
                             </div>
@@ -423,6 +166,7 @@
                                    
                                 <div class="col-lg-6 col-md-6">
                                     <input id="reviewPasswd" type="password" placeholder="Password">
+                                    <div id="reviewNo"></div>
                                 </div>
 
                                 <div class="col-lg-12 col-md-12">
@@ -461,12 +205,12 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="password" class="col-form-label">Password:</label>
-                        <input type="password" class="form-control reviewPasswd" placeholder="댓글을 등록했을 때 사용하신 비밀번호를 입력하세요">
+                        <input type="password" class="form-control" id="reviewPwUd" placeholder="댓글을 등록했을 때 사용하신 비밀번호를 입력하세요">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary" id="updateReview" onclick="reviewUpdate()">확인</button>
+                    <button type="button" class="btn btn-primary reViwUpdate" data-dismiss="modal" onclick="reviewUpdate()">확인</button>
                     <!-- <button type="button" class="btn btn-primary" id="updateReview" onclick="reviewUpdate()">확인</button> -->
                 </div>
             </div>
@@ -483,12 +227,13 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="password" class="col-form-label">Password:</label>
-                        <input type="password" class="form-control reviewPasswd" placeholder="댓글을 등록했을 때 사용하신 비밀번호를 입력하세요">
+                        <input type="password" class="form-control" id="reviewPwDel" placeholder="댓글을 등록했을 때 사용하신 비밀번호를 입력하세요">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary" id="deleteReview" onclick="reviewDel()">확인</button>
+                    <button type="button" class="btn btn-primary reViwDelBtn" onclick="reviewDelete()">확인</button>
+                    <!-- <button type="button" class="btn btn-primary reViwDel" onclick="reviewDel()">확인</button> -->
                 </div>
             </div>
         </div>
@@ -514,6 +259,372 @@
     <script>
         // 헤더 푸터
         includeHTML();
+
+
+        //주소 idx 값 얻기
+        function getIdx(){
+            //주소에서 카테고리 번호 가져오기
+            //http://mrhisj23.dothome.co.kr/WebProjTeamC/menu-detail.html?mnuNo=14
+            let mnuNoToUrl = window.location.search
+            
+            //번호 얻기
+            let getMnuNo = mnuNoToUrl.split('=');
+            let mnuNo = getMnuNo[1];
+
+            //메뉴 상세 로드
+            loadMenuDetail(mnuNo)
+        }
+
+        //메뉴 상세 로드
+        function loadMenuDetail(mnuNo){
+
+            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuDetailLoad.php?mnuNo=${mnuNo}`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+            .then(response => response.json())
+            .then(data => 
+
+                displayMenu(data)
+
+            ).catch(error => console.log(error))
+
+        }
+
+        function displayMenu(data) {
+
+            console.log(data)
+            
+            const mnuNoClass = document.querySelector('.mnuNo');
+            const mnuNameId = document.querySelector("#mnuName");
+            const mnuContentClass = document.querySelector(".mnuContent");
+            const mnuImgClass = document.querySelector(".mnuImg");
+            const mnuMlClass = document.querySelector(".mnuMl");
+            const mnuCalClass = document.querySelector(".mnuCal");
+            const mnuSugarClass = document.querySelector(".mnuSugar");
+            const mnuPrtinClass = document.querySelector(".mnuPrtin");
+            const mnuFatClass = document.querySelector(".mnuFat");
+            const mnuSaltClass = document.querySelector(".mnuSalt");
+            
+            mnuNoClass.innerHTML = data.mnuNo;
+            mnuNameId.innerHTML = data.mnuName;
+            mnuContentClass.innerHTML = data.mnuName;
+            mnuImgClass.innerHTML = `<img src=${data.mnuImg} alt=${data.mnuName}>`;
+            mnuMlClass.innerHTML = data.mnuMl;
+            mnuCalClass.innerHTML = data.mnuCal;
+            mnuSugarClass.innerHTML = data.mnuSugar;
+            mnuPrtinClass.innerHTML = data.mnuPrtin;
+            mnuFatClass.innerHTML = data.mnuFat;
+            mnuSaltClass.innerHTML = data.mnuSalt;
+
+            //리뷰 로드
+            loadReviewList(data.mnuNo);
+
+        }
+        
+
+        //리뷰 로드
+        function loadReviewList(mnuNo){
+
+            // const mnuNo = document.getElementById('mnuNo').innerHTML
+
+            //연동할 주소
+            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewSeleteAll.php?mnuNo=${mnuNo}`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+            .then(response => response.json())
+            .then(data => 
+
+                //포문이 then문 안에서는 동작하지 않음
+                // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
+                displayReviewList(data)
+                // console.log(data)
+            ).catch(error => console.log(error))
+        }
+
+        function displayReviewList(data) {
+            const container = document.querySelector("#comtemt_item_warp")
+            const reviewCnt = document.getElementById('reviewCnt')
+
+            //코멘트 갯수
+            reviewCnt.innerHTML = `<i class="bi bi-chat"></i> ${data.length}`;
+            // console.log(data.length);
+
+            data.forEach(e=> {
+                
+                // 1. appendChild 사용
+                // const nameDiv = document.createElement('div');
+                // nameDiv.className = 'reviewNic';
+                // nameDiv.textContent = e.reviewNic;
+
+                // const aa = document.createElement('a');
+                // aa.className = '4444';
+                // aa.textContent = e.mnuNo;
+
+                // nameDiv.appendChild(aa);
+
+                // const noDiv = document.createElement('div');
+                // noDiv.classList.add('reviewPasswd');
+                // noDiv.textContent = e.reviewPasswd;
+
+                // container.appendChild(nameDiv);
+                // container.appendChild(noDiv);
+
+                // 2. innerHtml 사용
+                // container.innerHTML = `<div class="comment_item">`;
+                // container.innerHTML+= `<p class="comment">${e.reviewContent}</p>`;
+                // container.innerHTML+= `<div class="d-flex justify-content-between">`;
+                // container.innerHTML+= `<p id="nicname">${e.reviewNic}</p>`;
+                // container.innerHTML+= `<p id="date">${e.reviewPasswd}</p>`;
+                // container.innerHTML+= `</div>`;
+                // container.innerHTML+= `</div>`;
+
+                let img = (e.reviewImg).substr(1);
+
+                container.innerHTML += `<div class="comment_item">
+                        <div id="reviewNo" style="display: none;">${e.reviewNo}</div>
+                        <div class="d-flex justify-content-between">
+                            <p class="comment">${e.reviewContent}</p>
+                            
+                            <div class="reviewRight">
+                                <div class="reviewBtnWarp">
+                                    <span class="reViwUpdateModal" data-toggle="modal" data-target="#updateModal">수정</span>
+                                    <span> | </span>
+                                    <span class="reViwDelModal" data-toggle="modal" data-target="#delModal">삭제</span>
+                                </div>
+                                <div class="reViewImg">
+                                    <img src="${img}" alt="${img}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p id="nicname">${e.reviewNic}</p>
+                            <p id="date">${e.reviewDate}</p>
+                        </div>
+                    </div>`;
+
+
+            });
+        }
+
+        //리뷰 삭제
+        // function reviewDel(){
+        //     //글번호 가져오기
+        //     const reviewNo = document.querySelector('#reviewNo').innerHTML;
+        //     console.log(reviewNo)
+
+        //     //비밀번호 체크 후 삭제
+
+
+        // }
+
+        //리뷰 수정
+        // function reviewUpdate(){
+        //     const reviewNo = document.querySelector('#reviewNo').innerHTML;
+        //     console.log(reviewNo)
+
+        // }
+
+
+        //선택한 파일 보이기
+        function fileupload(e){
+            document.getElementById('file').innerHTML=e.value;   
+        }
+
+
+        // 페이지 로드 시 loadMemberList 함수 호출
+        window.onload = getIdx;
+
+
+        //리뷰 쓰기
+        function reViewBtn(){
+
+            //보낼 데이터 준비
+            // const reviewNic = document.getElementById('reviewNic').value;
+            // const reviewPasswd = document.getElementById('reviewPasswd').value;
+            // const reviewContent = document.getElementById('reviewContent').value;
+            // const reviewImg = document.getElementById('reviewImg').value;
+            // const mnuNo = document.getElementById('mnuNo').innerHTML;
+
+            const reviewNicInput = document.getElementById('reviewNic');
+            const reviewPasswdInput = document.getElementById('reviewPasswd');
+            const reviewContentInput = document.getElementById('reviewContent');
+            const reviewImgInput = document.getElementById('reviewImg');
+            const mnuNoInput = document.querySelector('.mnuNo');
+
+            const reviewNic = reviewNicInput.value;
+            const reviewPasswd = reviewPasswdInput.value;
+            const reviewContent = reviewContentInput.value;
+            const reviewImg = reviewImgInput.files[0];
+            const mnuNo = mnuNoInput.innerHTML;
+
+            // // var data="title=HELO&msg=sdsfd";
+            // const data = `reviewNic=${reviewNic}&reviewPasswd=${reviewPasswd}&reviewContent=${reviewContent}&reviewImg=${reviewImg}&mnuNo=${mnuNo}`;
+
+            const data = new FormData();
+            data.append("reviewNic", reviewNic);
+            data.append("reviewPasswd", reviewPasswd);
+            data.append("reviewContent", reviewContent);
+            data.append("reviewImg", reviewImg);
+            data.append("mnuNo", mnuNo);
+
+            //연동할 주소
+            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewInsert.php`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url,{
+                    method : 'POST',
+                    body : data
+            }).then(response =>response.text())
+            .then(data => 
+                //리뷰 재로드
+                reViewReload()
+            ).catch(error => console.log(error))
+
+            // fetch(url,{
+            //         method : 'POST',
+            //         headers : {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
+            //         body : data
+            // }).then(response =>response.text())
+            // .then(data => 
+            //     //리뷰 재로드
+            //     reViewReload()
+            // ).catch(error => console.log(error))
+
+        }
+
+        //리뷰 등록 후...
+        function reViewReload(){
+
+            //텍스트 지우기
+            document.getElementById('reviewNic').value = "";
+            document.getElementById('reviewPasswd').value = "";
+            document.getElementById('reviewContent').value = "";
+            document.getElementById('reviewImg').value = "";
+            document.getElementById('file').innerHTML = "";
+
+            //기존 리스트 부시기
+            const container = document.querySelector("#comtemt_item_warp");
+            container.innerHTML = "";
+
+            //리뷰 재로드`
+            loadReviewList()
+        }
+
+        //모달에 값 가져오기
+        // $(document).ready(function() {
+            // 수정버튼
+            $(document).on('click', '.reViwUpdateModal', function() {
+                var reviewNo = $(this).closest('.comment_item').find('#reviewNo').text();
+                // var comment = $(this).closest('.comment_item').find('.comment').text();
+                // var nickname = $(this).closest('.comment_item').find('#nicname').text();
+                // var date = $(this).closest('.comment_item').find('#date').text();
+
+                document.getElementById('selectNo').innerHTML = reviewNo
+
+            });
+
+
+            // 삭제 버튼
+            $(document).on('click', '.reViwDelModal', function() {
+                let reviewNo = $(this).closest('.comment_item').find('#reviewNo').text();
+                
+                //데이터 확인
+                // console.log('Review number:', reviewNo);
+
+                //클릭하면 div에 선택한 값 넣기 - 모달에서 읽기 위해
+                document.getElementById('selectNo').innerHTML = reviewNo
+
+                // const reviewPwDel = document.getElementById('reviewPwDel').value;
+                // console.log('passwd:', reviewPwDel);
+
+            });
+        // });
+
+
+        //수정 모달
+        function reviewUpdate(){
+
+            const reviewNo = document.getElementById('selectNo').innerHTML;
+            const reviewPwUd = document.getElementById('reviewPwUd').value;
+
+            // console.log(reviewPwUd);
+
+            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewSelete.php`;
+
+            var data=`reviewNo=${reviewNo}&reviewPasswd=${reviewPwUd}`;
+
+            fetch(url,{
+                    method : 'POST',
+                    headers : {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
+                    body : data
+            }).then(response =>response.json())
+            .then(data => 
+
+                selectReview(data)
+                
+            ).catch(error => console.log(error))
+
+        }
+
+        function selectReview(data){
+
+            console.log(data);
+             
+            if(data.result == 'false'){
+                alert('비밀번호가 틀립니다.');
+            } else {
+                document.getElementById('reviewNo').value = data.reviewNo;
+                document.getElementById('reviewNic').value = data.reviewNic;
+                document.getElementById('reviewContent').value = data.reviewContent;
+                document.getElementById('file').innerHTML = data.reviewImg;
+
+
+                //리뷰 리로드
+                // reViewReload();
+            }
+
+        }
+
+
+        //모달 삭제 버튼
+        function reviewDelete() {
+
+            const reviewNo = document.getElementById('selectNo').innerHTML;
+
+            const reviewPwDel = document.getElementById('reviewPwDel').value;
+
+            var url=`http://mrhisj23.dothome.co.kr/WebProjTeamC/php/menuReviewDelete.php`;
+
+            var data=`reviewNo=${reviewNo}&reviewPasswd=${reviewPwDel}`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url,{
+                    method : 'POST',
+                    headers : {'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
+                    body : data
+            }).then(response =>response.text())
+            .then(response => 
+
+                // console.log(response)
+
+                deleteResult(response)
+                
+            ).catch(error => console.log(error))
+        }
+
+        function deleteResult(response){
+
+            // console.log(response)
+            if(response == "성공"){
+                alert('리뷰 삭제 완료.');
+                //리뷰 재로드
+                reViewReload()
+                return
+            } else { alert('비밀번호가 틀립니다.'); }
+        }
+
 
     </script>
 
