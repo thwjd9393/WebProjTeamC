@@ -32,6 +32,28 @@
             window.location.replace("./inquiry-list.html")
         }
     </script>
+     <script>
+        function nullCheck(){
+            const name=document.getElementById('input_name').value;
+            const pw=document.getElementById('input_pw').value;
+            const title=document.getElementById('input_title').value;
+            const context=document.getElementById('input_context').value;
+
+            if(name=="" || name==null){
+                alert('이름을 입력하세요')
+                return false;
+            }else if(pw=="" || pw==null){
+                alert('비밀번호를 입력하세요')
+                return false;
+            }else if(title=="" || title==null){
+                alert('제목을 입력하세요')
+                return false;
+            }else if(context=="" || context==null){
+                alert('내용을 입력하세요')
+                return false;
+            }
+        }
+    </script>
     <script>
        
 
@@ -141,7 +163,7 @@
             </div>
             <hr>
 
-            <form action="./php/inquiryResave.php" method="post" enctype="multipart/form-data" target="_self">
+            <form action="./php/inquiryResave.php" method="post" enctype="multipart/form-data" target="_self" onsubmit="nullCheck()">
                 <div class="row">
                     <div class="col-lg-6  col-md-6">
                         <div class="checkout__input">
