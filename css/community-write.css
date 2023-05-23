@@ -50,7 +50,7 @@
 }
 
 
-#textra {
+#cmtyContent {
     resize: none;
     height: 400px;
     border: 1px solid #d4d9de;
@@ -70,11 +70,11 @@
 }
 
 
-#nameinp {
+#cmtyNic {
     display: inline-block;
 }
 
-#inputPassword {
+#cmtyPasswd {
     display: inline-block;
 }
 

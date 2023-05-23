@@ -265,6 +265,8 @@
                         <script>
                             document.getElementById('updategobtn').addEventListener('click', function () {
                                 var cmtyPasswd = document.getElementById('updatepasswrd').value;
+                               
+                                
                         
                                 fetch('http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityUpdate.php?cmtyNo=' + cmtyNo + '&cmtyPasswd=' + cmtyPasswd)
                                     .then(function (response) {
@@ -277,9 +279,8 @@
                                     .then(function (data) {
                                         console.log(data);
                                         if (data.success) {
-                                            localStorage.setItem("cmtyNo","cmtyNo")
                                            
-                                            window.location.href = `http://mrhisj23.dothome.co.kr/WebProjTeamC/community-write.html?cmtyNo=${cmtyNo}`;
+                                            window.location.href = `http://mrhisj23.dothome.co.kr/WebProjTeamC/community-update.html?cmtyNo=${cmtyNo}&cmtyPasswd=${cmtyPasswd}`;
                                         } else {
                                             // 비밀번호가 일치하지 않는 경우
                                             alert(data.message);
