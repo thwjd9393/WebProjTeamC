@@ -64,14 +64,15 @@
             data.forEach(e => {
 
                 let img = (e.cmtyImg).substr(1);
+                var emptyImg="ftp://mrhisj23@mrhisj23.dothome.co.kr/html/WebProjTeamC/uploadImg/community/010.png"
 
                 poi.innerHTML += `
     <div class="col-lg-4 col-md-6 col-sm-6">
-        <div class="blog__item">
+        <div class="blog__item" style="text-align: center;">
             <div class="blog__item__pic set-bg" data-setbg="${img}">
                 <img src="${img}" alt="${img}" style="width: 384px; height: 270px;">
             </div>
-            <div class="blog__item__text">
+            <div class="blog__item__text" style="margin-top: 5px;">
                 <span><img src="img/icon/calendar.png" alt=""> ${e.cmtyDate}</span>
                 <h5>${e.cmtyTitle}</h5>
                 <a href="./community-post.html" onclick="ptest(${e.cmtyNo})">Read More</a>
