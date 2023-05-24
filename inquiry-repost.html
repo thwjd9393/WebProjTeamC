@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>카페그라운드</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/menu.css" type="text/css">
+    <link rel="stylesheet" href="css/inquiry.css" type="text/css">
+    <!--헤더 푸터-->
+    <script src="./js/includeHTML.js"></script>
+
+    <script>
+        function pageChange(){
+            window.location.replace("./inquiry-list.html")
+        }
+    </script>
+     <script>
+        function nullCheck(){
+            const name=document.getElementById('input_name').value;
+            const pw=document.getElementById('input_pw').value;
+            const title=document.getElementById('input_title').value;
+            const context=document.getElementById('input_context').value;
+
+            if(name=="" || name==null){
+                alert('이름을 입력하세요')
+                return false;
+            }else if(pw=="" || pw==null){
+                alert('비밀번호를 입력하세요')
+                return false;
+            }else if(title=="" || title==null){
+                alert('제목을 입력하세요')
+                return false;
+            }else if(context=="" || context==null){
+                alert('내용을 입력하세요')
+                return false;
+            }
+        }
+    </script>
+    <script>
+       
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        no = getParameterByName('qaNo');
+
+        loadQnaDetail(no)
+
+        // console.log(no);
+
+
+        //리뷰 로드
+        function loadQnaDetail(no) {
+
+            //연동할 주소
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/inquiryDetailLoad.php?qaNo=${no}`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+                .then(response => response.json())
+                .then(data =>
+
+                    //포문이 then문 안에서는 동작하지 않음
+                    // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
+                    displayQnaDetail(data)
+
+                ).catch(error => console.log(error))
+        }
+
+        function displayQnaDetail(data) {
+
+            document.getElementById("input_name").value=`${data[0].qaNic}`
+            document.getElementById("input_pw").value=`${data[0].qaPasswd}`
+            document.getElementById("input_type").value=`${data[0].qaType}`
+            document.getElementById("input_title").value=`${data[0].qaTitle}`
+            document.getElementById("input_context").value=`${data[0].qaContent}`
+            document.getElementById("input_no").value=`${data[0].qaNo}`
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div id="mobile-menu-wrap"></div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li><a href="./menu.html?mnuCtyNo=1">Menu</a></li>
+                            <li><a href="#">Service</a>
+                                <ul class="dropdown">
+                                    <li><a href="./notice.html">Notice</a></li>
+                                    <li><a href="./faq.html">FAQ</a></li>
+                                    <li><a href="./inquiry.html">Q&A</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./community.html">Blog</a></li>
+                            <li><a href="./location.html">Store</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h2 style="margin-bottom: 10;">Inquiry</h2>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <a href="./shop.html">Service</a>
+                            <span>Inquiry</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div>
+        <nav class="bg-light">
+            <div class="container">
+                <ul id="menu_ul">
+                    <li>
+                        <a class="nav-link" aria-current="page" href="./notice.html">공지사항</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" aria-current="page" href="./faq.html">FAQ</a>
+                    </li>
+                    <li class="active">
+                        <a class="nav-link" aria-current="page" href="#">1대1 문의</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shopping Cart Section Begin -->
+    <section class="shopping-cart spad">
+        <div class="container">
+            <div class="line-txt-area">
+                <h4 style="visibility: inherit; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">귀한 말씀 들려주십시오. 작은 소리도
+                    듣겠습니다.</h4><br>
+                <p style="visibility: inherit; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">고객 여러분의 즐겁고 행복한 시간을 위해
+                    정성을 다하고 있습니다.<br>만족스러운 서비스 였는지, 불만스러운 점은 없으셨는지 귀한 의견을 들려주시기 바랍니다. 보다 나은 서비스로 보답하겠습니다.</p>
+                <p style="visibility: inherit; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">고객의 소리 운영시간 : 월요일 ~ 금요일
+                    09:00 AM ~ 06:00 PM / 휴일 및 공휴일 제외</p>
+            </div>
+            <hr>
+
+            <form action="./php/inquiryResave.php" method="post" enctype="multipart/form-data" target="_self" onsubmit="nullCheck()">
+                <div class="row">
+                    <div class="col-lg-6  col-md-6">
+                        <div class="checkout__input">
+                            <input type="text" name="name" placeholder="Name" id="input_name">
+                        </div>
+                    </div>
+                    <div class="col-lg-6  col-md-6">
+                        <div class="checkout__input">
+                            <input type="password" name="password" placeholder="Password" id="input_pw">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6  col-md-6">
+                        <select class="select" name="type" id="input_type">
+                            <option selected="">문의 유형</option>
+                            <option value="문의">문의</option>
+                            <option value="칭찬">칭찬</option>
+                            <option value="불만">불만</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12  col-md-12">
+                        <div class="checkout__input">
+                            <div class="tit">
+                                제목<span class="star">*</span>
+                            </div>
+                            <input type="text" name="title" placeholder="제목을 입력하세요" id="input_title">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12  col-md-12">
+                        <div class="checkout__input2">
+                            <div class="tit">
+                                내용<span class="star">*</span>
+                            </div>
+                            <textarea name="context" placeholder="내용을 입력하세요" id="input_context"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-form">
+                    <div class="input_wrap file_box">
+                        <p id="file"></p>
+                        <span class="btn_type_file">파일첨부</span>
+                        <input type="file" name="image" onchange="fileupload(this)">
+                    </div>
+                    * 용량제한 : 2MB로 확장자 명은 doc, ppt ,xls , hwp, pdf, jpg, png, gif만 첨부 가능합니다.
+                </div>
+
+                
+                <input type="number" style="visibility: hidden;" name="no" id="input_no">
+                
+                <hr>
+
+                <div class="row btn__warp ">
+                    <div>
+                        <input type="button" value="목록보기" class="btn_list" onclick="pageChange()">
+                    </div>
+                    <div>
+                        <input type="submit" value="문의하기" class="btn_inquiry" onclick="pageChange()">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </section>
+    <!-- Shopping Cart Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer include-html="./common/footer.html"></footer>
+    <!-- Footer Section End -->
+
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/inquiry.js"></script>
+</body>
+
+<script>
+    // 헤더 푸터
+    includeHTML();
+</script>
+
+
+</html>

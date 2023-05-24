@@ -138,7 +138,7 @@ ol {
 }
 
 .spad {
-	padding-top: 100px;
+	padding-top: 40px;
 	padding-bottom: 100px;
 }
 
@@ -316,7 +316,10 @@ ol {
 -----------------------*/
 
 .header {
-	background: #ffffff;
+    background: #ffffff;
+    /* position: fixed;
+    z-index: 100;
+    width: -webkit-fill-available; */
 }
 
 .header__top {
@@ -873,10 +876,6 @@ ol {
   Instagram
 -----------------------*/
 
-.instagram {
-	padding-bottom: 0;
-}
-
 .instagram__pic__item {
 	width: 33.33%;
 	float: left;
@@ -936,6 +935,7 @@ ol {
 }
 
 .product__item {
+	text-align: center;
 	overflow: hidden;
 	margin-bottom: 40px;
 }
@@ -2284,6 +2284,7 @@ ol {
   Clients
 -----------------------*/
 
+
 .clients {
 	padding-top: 0;
 	padding-bottom: 25px;
@@ -2328,10 +2329,13 @@ ol {
 	padding-top: 30px;
 }
 
-.shopping__cart__table table tbody tr td.product__cart__item {
-	width: 400px;
-}
 
+.shopping__cart__table table tbody tr td.product__cart__item {
+	width: 80px;
+}
+.shopping__cart__table table tbody tr td.product__cart__item_b{
+	color: #000;
+}
 .shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__pic {
 	float: left;
 	margin-right: 30px;
@@ -2340,6 +2344,14 @@ ol {
 .shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__text {
 	overflow: hidden;
 	padding-top: 21px;
+}
+.shopping__cart__table table tbody tr td.product__cart__item_b .product__cart__item_a{
+	text-decoration: none;
+	color: #000;
+	margin-right: 10px;
+}
+.shopping__cart__table table tbody tr td.product__cart__item_b .product__cart__item_a:hover{
+	text-decoration: underline;
 }
 
 .shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__text h6 {
@@ -3162,7 +3174,7 @@ ol {
 	text-align: center;
 }
 
-.blog__details__comment form input {
+.blog__details__comment input {
 	height: 50px;
 	width: 100%;
 	border: 1px solid #e1e1e1;
@@ -3175,31 +3187,31 @@ ol {
 	transition: all, 0.3s;
 }
 
-.blog__details__comment form input::-webkit-input-placeholder {
+.blog__details__comment input::-webkit-input-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form input::-moz-placeholder {
+.blog__details__comment input::-moz-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form input:-ms-input-placeholder {
+.blog__details__comment input:-ms-input-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form input::-ms-input-placeholder {
+.blog__details__comment input::-ms-input-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form input::placeholder {
+.blog__details__comment input::placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form input:focus {
+.blog__details__comment input:focus {
 	border-color: #000000;
 }
 
-.blog__details__comment form textarea {
+.blog__details__comment textarea {
 	height: 120px;
 	width: 100%;
 	border: 1px solid #e1e1e1;
@@ -3214,31 +3226,31 @@ ol {
 	transition: all, 0.3s;
 }
 
-.blog__details__comment form textarea::-webkit-input-placeholder {
+.blog__details__comment textarea::-webkit-input-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form textarea::-moz-placeholder {
+.blog__details__comment textarea::-moz-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form textarea:-ms-input-placeholder {
+.blog__details__comment textarea:-ms-input-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form textarea::-ms-input-placeholder {
+.blog__details__comment textarea::-ms-input-placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form textarea::placeholder {
+.blog__details__comment textarea::placeholder {
 	color: #b7b7b7;
 }
 
-.blog__details__comment form textarea:focus {
+.blog__details__comment textarea:focus {
 	border-color: #000000;
 }
 
-.blog__details__comment form button {
+.blog__details__comment button {
 	letter-spacing: 4px;
 	padding: 14px 35px;
 }
@@ -3461,6 +3473,11 @@ ol {
 /* Wide Mobile = 480px */
 
 @media only screen and (max-width: 767px) {
+	.sliderBtn {
+		padding: 10px 15px;
+    	margin-left: 15%;
+	}
+
 	.canvas__open {
 		display: block;
 		font-size: 22px;

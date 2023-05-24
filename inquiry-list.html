@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>카페그라운드</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/inquiry-list.css" type="text/css">
+    <!--헤더 푸터-->
+    <script src="./js/includeHTML.js"></script>
+
+    <script>
+        //리뷰 로드
+        function loadInquiryList(){
+
+            //연동할 주소
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/inquirySelectAll.php`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+                .then(response => response.json())
+                .then(data =>
+
+                    //포문이 then문 안에서는 동작하지 않음
+                    // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
+                    displayInquiryList(data)
+                   
+                ).catch(error => console.log(error))
+        }
+
+        function displayInquiryList(data) {
+            const container = document.querySelector("#table_body_wrap")
+            console.log(data)
+            data.forEach(e => {
+
+
+                container.innerHTML += `<tr>
+                            <td>${e.qaNo}</td>
+                            <td class="text_left"><a href="http://mrhisj23.dothome.co.kr/WebProjTeamC/inquiry-details.html?qaNo=${e.qaNo}" class="aa">${e.qaTitle}</a></td>
+                            <td>${e.qaDate}</td>
+                            <td>${e.qaType}</td>
+                        </tr>`;
+            });
+        }
+
+
+        // 페이지 로드 시 loadMemberList 함수 호출
+        window.onload = loadInquiryList;
+    </script>
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div id="mobile-menu-wrap"></div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li><a href="./menu.html?mnuCtyNo=1">Menu</a></li>
+                            <li><a href="#">Service</a>
+                                <ul class="dropdown">
+                                    <li><a href="./notice.html">Notice</a></li>
+                                    <li><a href="./faq.html">FAQ</a></li>
+                                    <li><a href="./inquiry.html">Q&A</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./community.html">Blog</a></li>
+                            <li><a href="./location.html">Store</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h2 style="margin-bottom: 10;">Inquiry-List</h2>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <a href="./shop.html">Service</a>
+                            <span>Inquiry-List</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shopping Cart Section Begin -->
+    <section class="shopping-cart spad">
+        <div class="container">
+            <div class="col-lg-12">
+                <h4 class="sub-title motion_item"
+                    style="visibility: inherit; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">문의 내역</h4>
+            </div>
+            <div class="col-lg-12">
+                <div class="line-txt-area">
+                    <h6 class="tit motion_item"
+                        style="visibility: inherit; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0); ">
+                        고객 여러분의 칭찬과 격려에 감사드립니다.<br>
+                        항상 발전하기 위해 노력하겠습니다.
+                    </h6>
+                </div>
+            </div>
+            <section class="community-section mt_30" style="margin-left: 15px; margin-right: 15px;">
+                <table class="table_board_for type_a">
+                    <colgroup>
+                        <col width="8%">
+                        <col width="*%;">
+                        <col width="15%;">
+                        <col width="8%;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성일</th>
+                            <th scope="col">유형</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_body_wrap">
+                        
+                    </tbody>
+                </table>
+            </section>
+
+        </div>
+    </section>
+
+    
+    <!-- Shopping Cart Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer include-html="./common/footer.html"></footer>
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+<script>
+    // 헤더 푸터
+    includeHTML();
+</script>
+
+
+</html>

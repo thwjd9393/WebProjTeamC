@@ -1,0 +1,37 @@
+.nav-link{
+  color: black;
+}
+.nav-link:hover{
+  color: black;
+}
+
+summary {
+  display: list-item;
+  cursor: pointer;
+  list-style: none;
+  border-bottom: 1px solid silver;
+  padding: 20px 5px;
+}
+.li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+  list-style: none;
+  background-color: rgb(224, 218, 218);
+  padding: 20px 5px;
+}
+.faq{
+  border-top: 1px solid silver;
+}
+
+span{
+  margin-left: 10px;
+  margin-right: 15px;
+}
+#faqList{
+  border-top: 2px solid #333;
+  border-bottom: 1px so;
+  margin-bottom: 60px;
+}
+.icon{
+  text-align: right;
+}

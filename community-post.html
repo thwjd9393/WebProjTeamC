@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>카페그라운드</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/community-post.css" type="text/css">
+
+    <!-- 헤더 푸터 -->
+
+    <!-- 부트스트립 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JS 영역 (start) -->
+
+    <script src="./js/community-post.js">
+
+    </script>
+    <script>
+
+    </script>
+
+
+    <script>
+        // 글번호 찾아오기
+        const cmtyNo = localStorage.getItem('cmtyNo');
+
+
+
+        function loadPostList(cmtyNo) {
+
+
+            // 연동할 주소
+            var postUrl = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/community.php?cmtyNo=${cmtyNo}`;
+
+            // 게시글 가져오기
+            fetch(postUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // 포문이 then문 안에서는 동작하지 않음
+                    // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
+                    postContent(data);
+                    loadComment(cmtyNo); // 댓글 불러오기 함수 호출
+                })
+                .catch(error => console.log(error));
+        }
+
+        function postContent(data) {
+            document.querySelector("#imgcontent").innerHTML = "";
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].cmtyNo == cmtyNo) {
+                    let img = data[i].cmtyImg.substr(1);
+
+                    document.querySelector('#cmtyTitle').innerHTML = data[i].cmtyTitle;
+                    document.querySelector('#cmtyPasswd').innerHTML = data[i].cmtyPassword;
+                    document.querySelector('#cmtyDate').innerHTML = data[i].cmtyDate;
+                    document.querySelector('#cmtyNic').innerHTML = data[i].cmtyNic;
+                    document.querySelector('#cmtyContent').innerHTML = data[i].cmtyContent;
+                    document.querySelector("#imgcontent").innerHTML += `<img src="${img}" alt="${img}" id="img">`;
+                }
+            }
+        }
+
+        function loadComment(cmtyNo) {
+            // 댓글 가져오기
+            var commentUrl = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityComment.php?cmtyNo=${cmtyNo}`;
+
+            fetch(commentUrl)
+                .then(response => response.json())
+                .then(data => {
+                    loadCommentData(data);
+                })
+                .catch(error => console.log(error));
+        }
+
+
+        function loadCommentData(data) {
+            const container = document.querySelector("#comtemt_item_warp");
+            container.innerHTML = "";
+
+            const commentCtn = document.getElementById('cmtTotal');
+            commentCtn.innerHTML = "뎃글:" + data.length;
+
+            data.forEach(e => {
+                container.innerHTML += `
+          <div class="comment_item" style="border: 1px solid black; margin:10px; border-radius: 32px; ">
+            <div id="cmtNo" style="display: none;">${e.cmtNo}</div>
+            <p class="comment" style="padding: 17px;" >${e.cmtContent}</p>
+            <div class="d-flex justify-content-between">
+              <p id="nicname" style="padding: 17px; margin: 5px;">${e.cmtNic}</p>
+              <p id="date" style="padding: 17px; margin: 5px; ">${e.cmtDate}</p>
+            </div>
+          </div>
+        `;
+            });
+        }
+
+        window.onload = function () {
+            loadPostList(cmtyNo);
+        };
+    </script>
+
+    <script>
+        function commentUploade() {
+            const cmtNic = document.getElementById('cmtNic').value;
+            const cmtPasswd = document.getElementById('cmtPasswd').value;
+            const cmtContent = document.getElementById('cmtContent').value;
+
+            // url에 집어넣을 데이터값 결합
+
+            const data = `cmtNic=${cmtNic}&cmtPasswd=${cmtPasswd}&cmtContent=${cmtContent}&cmtyNo=${cmtyNo}`
+
+
+            // 연동할 주소
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityCommentInsert.php`
+
+            // 네트워크 연결
+            fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+                    },
+                    body: data
+                }).then(response => response.text())
+                .then(data =>
+                    //댓글 재로드
+                    CommentReload()
+                ).catch(error => console.log(error))
+
+        }
+
+
+        function CommentReload() {
+            //텍스트 지우기
+            document.getElementById('cmtNic').value = "";
+            document.getElementById('cmtPasswd').value = "";
+            document.getElementById('cmtContent').value = "";
+
+            const container = document.querySelector("#comtemt_item_warp");
+            container.innerHTML = "";
+
+
+            loadPostList();
+        }
+    </script>
+
+
+
+    <!-- JS 영역 (end)  -->
+
+
+
+</head>
+
+<body>
+
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div id="mobile-menu-wrap"></div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li><a href="./menu.html?mnuCtyNo=1">Menu</a></li>
+                            <li><a href="#">Service</a>
+                                <ul class="dropdown">
+                                    <li><a href="./notice.html">Notice</a></li>
+                                    <li><a href="./faq.html">FAQ</a></li>
+                                    <li><a href="./inquiry.html">Q&A</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./community.html">Blog</a></li>
+                            <li><a href="./location.html">Store</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Blog Details Hero Begin -->
+    <section class="blog-hero spad">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-9 text-center">
+
+                    <!-- 본문 재목 및 닉네임 비밀번호 날자 -->
+                    <div class="blog__hero__text">
+                        <h2 id="cmtyTitle"></h2>
+                        <div id="cmtyNo" style="display: none;"></div>
+                        <ul>
+                            <li id="cmtyNic"></li>
+                            <li id="cmtyDate"></li>
+                            <li id="cmtTotal">1</li>
+                            <li id="cmtyPasswd" style="display: none;">비밀번호 영역</li>
+                        </ul>
+                    </div>
+                    <!-- 본문 재목 및 닉네임 비밀번호 날자 -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Hero End -->
+
+    <!-- Blog Details Section Begin -->
+    <section class="blog-details spad">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <!-- 이미지 적용 -->
+                <div class="col-lg-12">
+
+                    <div class="blog__details__pic" id="imgcontent">
+                        <img src="WebProjTeamC/uploadImg/community" alt="WebProjTeamC/uploadImg/community" id="img">
+                    </div>
+
+                </div>
+                <!-- 이미지 적용 -->
+
+                <!-- 본문 내용 -->
+                <div class="col-lg-12">
+                    <div class="blog__details__content">
+
+                        <div id="cmtyNo" style="display: none;"></div>
+
+                        <div class="blog__details__text content">
+                            <p id="cmtyContent"></p>
+
+                        </div>
+                        <!-- 본문 내용 -->
+
+
+
+                        <!--수정 모달 -->
+                        <div class="modal fade" id="updateModal" tabindex="1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <p class="modal-title" id="exampleModalLabel">비밀번호를 입력해주세요</p>
+                                        <button type="button" class="btn-close" data-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="password" class="col-form-label">Password:</label>
+                                                <input type="password" class="form-control" id="updatepasswrd">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            style="color: white; background-color: black;">취소</button>
+                                        <button type="button" class="btn btn-primary" id="updategobtn"
+                                            style="color: white; background-color: black;">확인</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            document.getElementById('updategobtn').addEventListener('click', function () {
+                                var cmtyPasswd = document.getElementById('updatepasswrd').value;
+                               
+                                
+                        
+                                fetch('http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityUpdate.php?cmtyNo=' + cmtyNo + '&cmtyPasswd=' + cmtyPasswd)
+                                    .then(function (response) {
+                                        if (response.ok) {
+                                            return response.json();
+                                        } else {
+                                            throw new Error('요청에 실패하였습니다.');
+                                        }
+                                    })
+                                    .then(function (data) {
+                                        console.log(data);
+                                        if (data.success) {
+                                           
+                                            window.location.href = `http://mrhisj23.dothome.co.kr/WebProjTeamC/community-update.html?cmtyNo=${cmtyNo}&cmtyPasswd=${cmtyPasswd}`;
+                                        } else {
+                                            // 비밀번호가 일치하지 않는 경우
+                                            alert(data.message);
+                                        }
+                                    })
+                                    .catch(function (error) {
+                                        // 오류 처리
+                                        alert(error.message);
+                                    });
+                            });
+                        </script>
+
+
+                        <!-- 삭제 모달 -->
+                        <div class="modal fade" id="deleteModal" tabindex="1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <p class="modal-title" id="exampleModalLabe2">비밀번호를 입력해주세요</p>
+                                        <button type="button" class="btn-close" data-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="password" class="col-form-label">Password:</label>
+                                                <input type="password" class="form-control" id="password">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            style="color: white; background-color: black;">취소</button>
+
+                                        <button type="button" class="btn btn-primary" id="selectDelete"
+                                            style="color: white; background-color: black;">확인</button>
+
+
+
+                                        <script>
+                                            // DB에  연결하여 검증요청후 게시글과 댓글 한번에 삭제하는 코드 영역
+                                            document.getElementById('selectDelete').addEventListener('click',
+                                                function () {
+                                                    var cmtyPasswd = document.getElementById('password').value;
+
+                                                    fetch('http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityDelete.php?cmtyNo=' +
+                                                            cmtyNo + '&cmtyPasswd=' + cmtyPasswd)
+                                                        .then(function (response) {
+                                                            if (response.ok) {
+                                                                return response.json();
+                                                            } else {
+                                                                throw new Error('요청에 실패하였습니다.');
+                                                            }
+                                                        })
+                                                        .then(function (data) {
+                                                            if (data.success) {
+                                                                // 게시글과 댓글 번호 대조 검증 및 삭제 기능
+                                                                var deletePostAndComments =
+                                                                    "http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityDelete.php?cmtyNo=" +
+                                                                    cmtyNo;
+                                                                return fetch(deletePostAndComments);
+                                                            } else {
+                                                                // 비밀번호가 일치하지 않아도 삭제 가능하도록 처리
+                                                                var deletePostOnly =
+                                                                    "http://mrhisj23.dothome.co.kr/WebProjTeamC/php/communityDelete.php?cmtyNo=" +
+                                                                    cmtyNo;
+                                                                return fetch(deletePostOnly);
+                                                            }
+                                                        })
+                                                        .then(function (response) {
+                                                            if (response.ok) {
+                                                                return response.json();
+                                                            } else {
+                                                                throw new Error('요청에 실패하였습니다.');
+                                                            }
+                                                        })
+                                                        .then(function (data) {
+                                                            if (data.success) {
+                                                                // 삭제 성공 시의 처리
+                                                                alert('게시글과 댓글이 삭제되었습니다.');
+                                                                location.href =
+                                                                    "http://mrhisj23.dothome.co.kr/WebProjTeamC/community.html";
+                                                                // 추가적인 동작 수행
+                                                            } else {
+                                                                // 삭제 실패 시의 처리
+                                                                alert(data.message);
+                                                                // 추가적인 동작 수행
+                                                            }
+                                                        })
+                                                        .catch(function (error) {
+                                                            // 오류 처리
+                                                            alert(error.message);
+                                                            // 추가적인 동작 수행
+                                                        });
+                                                });
+                                            // DB에  연결하여 검증요청후 게시글과 댓글 한번에 삭제하는 코드 영역
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- 좋아요 영역(start) -->
+
+                        <div>
+
+
+                            <div class="like_holder" style="display: none;">
+
+                                <img src="./img/like.png" alt="like" onclick="check_ctn()">
+                                <h4 id="likeCount">0</h4>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- 좋아요 영역(end) -->
+
+                        <div class="blog__details__option">
+                            <div class="row btn_holder">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="blog__details__author">
+                                        <div class="blog__details__author__pic">
+
+                                        </div>
+                                        <div class="blog__details__author__text">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="blog__details__tags ">
+
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#updateModal" data-whatever="@mdo" id="repost">수정</button>
+                                        <script src="./js/blog-details.js"></script>
+
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#deleteModal" data-whatever="@mdo" id="delete">삭제</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 댓글 리스트 -->
+                        <div id="comtemt_item_warp">
+
+
+
+                        </div>
+                        <!-- 댓글 리스트 -->
+
+                        <!-- 페이지네이션 -->
+                        <!-- <div class="row pdiv">
+                            <div class="col-lg-12">
+                                <div class="product__pagination">
+                                    <a class="active" href="#">1</a>
+                                    <a href="#">2</a>
+                                    <a href="#">3</a>
+                                    <span>...</span>
+                                    <a href="#">21</a>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- 페이지네이션 -->
+
+                        <!-- comment 영역(start) -->
+
+
+
+
+                        <div class="blog__details__comment">
+                            <h4>댓글</h4>
+                            <form action="#">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-2">
+                                        <input type="text" placeholder="닉네임" id="cmtNic">
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-2">
+                                        <input type="password" placeholder="비밀번호" id="cmtPasswd">
+                                    </div>
+                                    <div class="col-lg-12 text-center">
+                                        <textarea placeholder="Comment" id="cmtContent"></textarea>
+                                        <button type="submit" class="submitcomment" onclick="commentUploade()">댓글
+                                            작성</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- comment 영역(end) -->
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Section End -->
+
+
+
+    <!-- Footer Section Begin -->
+    <footer include-html="./common/footer.html"></footer>
+    <!-- Footer Section End -->
+
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+    <header include-html="./common/footer.html"></header>
+</body>
+<script>
+    // // 헤더 푸터
+    // includeHTML();
+</script>
+
+</html>

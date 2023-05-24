@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>카페그라운드</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/community-btn.css" type="text/css">
+
+
+    <!--헤더 푸터-->
+    <script src="./js/includeHTML.js"></script>
+    <!-- <script src="./js/community.js"></script> -->
+
+
+    <script>
+        function loadPostList() {
+
+            //글번호 찾아오기
+            // const cmtNo = document.getElementById('cmtyNo').innerHTML;
+
+            // console.log('cmtyNo');
+
+            //연동할 주소
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/community.php`;
+
+            // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
+            fetch(url)
+                .then(response => response.json())
+                .then(data =>
+
+                    //포문이 then문 안에서는 동작하지 않음
+                    // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
+                    // displayPostList(data)
+                    displayPostList(data)
+
+                   // console.log(data)
+                ).catch(error => console.log(error))
+            // console.log(data)
+        }
+
+
+        function displayPostList(data) {
+
+            const poi = document.getElementById('postitem');
+
+            data.forEach(e => {
+
+                let img = (e.cmtyImg).substr(1);
+                var emptyImg="ftp://mrhisj23@mrhisj23.dothome.co.kr/html/WebProjTeamC/uploadImg/community/010.png"
+
+                poi.innerHTML += `
+    <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="blog__item" style="text-align: center;">
+            <div class="blog__item__pic set-bg" data-setbg="${img}">
+                <img src="${img}" alt="${img}" style="width: 384px; height: 270px;">
+            </div>
+            <div class="blog__item__text" style="margin-top: 5px;">
+                <span><img src="img/icon/calendar.png" alt=""> ${e.cmtyDate}</span>
+                <h5>${e.cmtyTitle}</h5>
+                <a href="./community-post.html" onclick="ptest(${e.cmtyNo})">Read More</a>
+            </div>
+        </div>
+    </div>`;
+            })
+
+        }
+
+
+        function ptest(idx){
+            localStorage.setItem('cmtyNo',idx)
+        }
+
+        // 페이지 로드 시 loadMemberList 함수 호출
+        window.onload = loadPostList();
+    </script>
+
+
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div id="mobile-menu-wrap"></div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li><a href="./menu.html?mnuCtyNo=1">Menu</a></li>
+                            <li><a href="#">Service</a>
+                                <ul class="dropdown">
+                                    <li><a href="./notice.html">Notice</a></li>
+                                    <li><a href="./faq.html">FAQ</a></li>
+                                    <li><a href="./inquiry.html">Q&A</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./community.html">Blog</a></li>
+                            <li><a href="./location.html">Store</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+
+
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-blog set-bg" data-setbg="img/breadcrumb-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>community</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+    <!-- Blog Section Begin -->
+    <section class="blog spad">
+        <div class="container">
+
+            <!--write a post  -->
+            <div class="row writetop">
+                <div class="col-lg-12 text-right">
+                    <a href="community-write.html" id="linkPost">
+                        <button id="writePost">게시글 작성</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row postitem" id="postitem">
+
+                <!-- item 들어갈 부분 -->
+
+
+
+            </div>
+            <!-- readmore btn (start)-->
+            <!-- <div class="row readmoretop">
+                <div id="readmorehold">
+                    <button id="readmore">READ MORE</button>
+                </div>
+            </div> -->
+
+            <div class="row text-center">
+                <div class="col-lg-12">
+                    <button id="readmore" style="display: none;">READ MORE</button>
+                </div>
+            </div>
+
+            <!-- readmore btn(end) -->
+        </div>
+        <div>
+
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+    <footer include-html="./common/footer.html"></footer>
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+
+
+</body>
+
+<script>
+    // 헤더 푸터
+    includeHTML();
+</script>
+
+</html>

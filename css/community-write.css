@@ -1,0 +1,108 @@
+.title {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 35px;
+    border-radius: 38px;
+    width: 90%;
+    max-width: 420px;
+    height: 50px;
+    padding-left: 10px;
+}
+
+/* 글쓴이 정보 */
+.account__warp{
+    margin-top: 30px;
+}
+
+.text {
+    display: flex;
+    margin-top: 25px;
+}
+
+.content_warp {
+    width: 90%;
+    max-width: 550px;
+    margin: 0 auto;
+    padding-left: 5px;
+    padding-top: 3px;
+}
+
+.account {
+    text-align: center;
+    margin-top: 30px;
+}
+
+
+
+
+.btn {
+    background-color: black;
+    color: white; 
+    width: 170px;
+    margin-right: 10%;
+    border-radius: 15px;
+}
+
+.btn:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+
+#cmtyContent {
+    resize: none;
+    height: 400px;
+    border: 1px solid #d4d9de;
+    border-radius: 3px;
+}
+
+
+.col-auto {
+    
+    font-size: 11px;
+    padding-left: 5px;
+    margin-top: 5px;
+    display: flex; /* 수정: flex 요소로 변경 */
+    margin-left: 200px;
+    position: absolute;
+
+}
+
+
+#cmtyNic {
+    display: inline-block;
+}
+
+#cmtyPasswd {
+    display: inline-block;
+}
+
+
+@media (max-width: 768px) {
+    .title {
+        width: 90%;
+        max-width: 100%;
+    }
+
+    .content_warp {
+        width: 90%;
+        max-width: 100%;
+    }
+
+    .account__warp > .account__name,
+    .account__warp > .account__passwd {
+        width: 50%;
+    }
+    .btn_sum{
+        position: relative;
+        display: block;
+        margin-right: 170px;
+    }
+    .btn{
+        width: 160px;
+        font-size: small;
+        border-radius: 15px;
+    }
+    
+}

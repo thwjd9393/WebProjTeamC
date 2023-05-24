@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=200,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>카페그라운드</title>
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/locationkao.css" type="text/css">
+
+
+    <!--헤더 푸터-->
+    <script src="./js/includeHTML.js"></script>
+
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div id="mobile-menu-wrap"></div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li><a href="./menu.html?mnuCtyNo=1">Menu</a></li>
+                            <li><a href="#">Service</a>
+                                <ul class="dropdown">
+                                    <li><a href="./notice.html">Notice</a></li>
+                                    <li><a href="./faq.html">FAQ</a></li>
+                                    <li><a href="./inquiry.html">Q&A</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./community.html">Blog</a></li>
+                            <li><a href="./location.html">Store</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Map Begin -->
+
+    <div class="container">
+
+        <div id="map">
+            <div class="locationSearch">
+                <input type="text" name="" id="place" onkeydown="handleSearch(event)" placeholder="지역 & 카페브랜드명 검색">
+                <img src="./img/search.png" alt="돋보기" id="searchImg" onclick="submit()">
+            </div>
+        </div>
+        
+        <!-- 카카오지도 라이브러리 적용 -->
+        <!-- <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c87bba090a945773d9d69e7a4539f69b&libraries=services"></script> -->
+        <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=83d46b0ce6d16a7ea9d8b366551c8af9&libraries=services"></script>
+        
+        <!-- 실제 지도관련 작업 스크립트 -->
+        <!-- <script src="https://mrhisj23.dothome.co.kr/WebProjTeamC/js/location.js"></script> -->
+        <!-- Map End -->
+
+        <script>
+            var mapContainer = document.getElementById('map');
+            var mapOption = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667),
+                level: 3
+            };
+
+            var map = new kakao.maps.Map(mapContainer, mapOption);
+
+            var ps = new kakao.maps.services.Places();
+            var infowindow = new kakao.maps.InfoWindow({
+                zIndex: 1
+            });
+
+            var markers=[]
+            function placesSearchCB(data, status, pagination) {
+                if (status === kakao.maps.services.Status.OK) {
+                
+                    removeMarkers()
+
+                    var bounds = new kakao.maps.LatLngBounds();
+
+                    for (var i = 0; i < data.length; i++) {
+                        displayMarker(data[i]);
+                        bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+                    }
+
+                    map.setBounds(bounds); //마커 배열에 추가
+                }
+            }
+
+
+
+            function displayMarker(place) {
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: new kakao.maps.LatLng(place.y, place.x)
+                });
+
+                markers.push(marker)
+
+                kakao.maps.event.addListener(marker, 'click', function() {
+                    infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+                    infowindow.open(map, marker);
+                });
+            }
+
+            function removeMarkers(){
+                for(var i=0; i<markers.length; i++){
+                    markers[i].setMap(null);
+                }
+                marker=[];
+            }
+
+            function submit() {
+                var keyword = document.getElementById('place').value;
+                ps.keywordSearch(keyword, placesSearchCB);
+            }
+            function handleSearch(event){
+                if(event.keyCode==13){
+                    submit();
+                }
+            }
+        </script>
+
+    </div>
+    
+
+
+
+
+    <!-- Footer Section Begin -->
+    <footer include-html="./common/footer.html"></footer>
+    <!-- Footer Section End -->
+
+    
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+<script>
+    // 헤더 푸터
+    includeHTML();
+</script>
+
+</html>

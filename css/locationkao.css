@@ -1,0 +1,81 @@
+body {
+    overflow-x: hidden;
+}
+/* 맵 영역 */
+#map {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    z-index: 0;
+    position: relative;
+    border: 1px solid #b5b5b5;
+    width: auto;
+    height: 700px;
+    max-width: 1200px;
+    margin-bottom: 60px;
+    border-radius: 3px;
+
+}
+/* 맵 영역 */
+
+/* 검색창 영역 */
+.locationSearch {
+    display: flex;
+    height: 70px;
+    align-items: center;
+    margin: 5px;
+
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+
+}
+
+
+#place {
+    border-radius: 35px;
+    height: 60px;
+    width: 500px;
+    z-index: 100;
+    margin-top: 25px;
+    border: 1px solid #949494;
+    padding-left: 20px;
+
+    
+}
+
+#searchImg {
+    height: 70px;
+    position: absolute;
+    right: 13px;
+    bottom: 3px;
+    cursor: pointer;
+    z-index: 100;
+    padding-top: 25px;
+}
+/* 검색창 영역 */
+
+/* 미디어 쿼리 맵과 검색창영역 */
+@media (max-width: 780px) {
+    #map {
+        height: 550px;
+    }
+
+    #title {
+        top: 10px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .locationSearch {
+        height: 70px;
+
+    }
+
+    #place {
+        width: 300px;
+    }
+
+}
+/* 미디어 쿼리 맵과 검색창영역 */
