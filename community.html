@@ -63,6 +63,7 @@
         function loadMorePost() {
             end +=5
             // 다음에 가져올 게시물 범위를 5개씩 증가시킵니다.
+            const poi=document.querySelector("#postitem").innerHTML="";
             loadPostList(); // 변경된 범위로 게시물을 다시 불러옵니다.
         }
 
@@ -70,8 +71,8 @@
         function displayPostList(data) {
 
             const poi = document.getElementById('postitem');
-
-            poi.innerHTML=""
+            
+           
 
             data.forEach(e => {
 
@@ -92,7 +93,7 @@
             </div>
         </div>
     </div>`;
-
+   
             })
 
         }

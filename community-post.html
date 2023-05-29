@@ -43,6 +43,7 @@
     <script>
         // 글번호 찾아오기
         const cmtyNo = localStorage.getItem('cmtyNo');
+        let end=cmtyNo
 
 
 
@@ -50,7 +51,7 @@
 
 
             // 연동할 주소
-            var postUrl = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/community.php?cmtyNo=${cmtyNo}`;
+            var postUrl = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/community.php?cmtyNo=${cmtyNo}&end=${end}`;
 
             // 게시글 가져오기
             fetch(postUrl)
