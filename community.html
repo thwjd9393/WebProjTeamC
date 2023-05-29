@@ -31,6 +31,8 @@
 
 
     <script>
+        let end =5
+       
         function loadPostList() {
 
             //글번호 찾아오기
@@ -39,7 +41,7 @@
             // console.log('cmtyNo');
 
             //연동할 주소
-            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/community.php`;
+            var url = `http://mrhisj23.dothome.co.kr/WebProjTeamC/php/community.php?end=${end}`;
 
             // 안드로이드의 레트로핏이랑 같은 아이 - 네트워크 연결
             fetch(url)
@@ -48,23 +50,34 @@
 
                     //포문이 then문 안에서는 동작하지 않음
                     // 그래서 외부함수에 응답받은 data 값 매개변수로 전달
-                    // displayPostList(data)
-                    displayPostList(data)
 
-                   // console.log(data)
+                    displayPostList(data)
+                    
+
                 ).catch(error => console.log(error))
-            // console.log(data)
+
         }
 
+        
 
+        function loadMorePost() {
+            end +=5
+            // 다음에 가져올 게시물 범위를 5개씩 증가시킵니다.
+            loadPostList(); // 변경된 범위로 게시물을 다시 불러옵니다.
+        }
+
+        //화면에 그리는 함수
         function displayPostList(data) {
 
             const poi = document.getElementById('postitem');
 
+            poi.innerHTML=""
+
             data.forEach(e => {
 
                 let img = (e.cmtyImg).substr(1);
-                var emptyImg="ftp://mrhisj23@mrhisj23.dothome.co.kr/html/WebProjTeamC/uploadImg/community/010.png"
+                var emptyImg =
+                    "ftp://mrhisj23@mrhisj23.dothome.co.kr/html/WebProjTeamC/uploadImg/community/010.png?"
 
                 poi.innerHTML += `
     <div class="col-lg-4 col-md-6 col-sm-6">
@@ -74,18 +87,19 @@
             </div>
             <div class="blog__item__text" style="margin-top: 5px;">
                 <span><img src="img/icon/calendar.png" alt=""> ${e.cmtyDate}</span>
-                <h5>${e.cmtyTitle}</h5>
+                <h5>${e.cmtyTitle} <span style="display: none;">${e.cmtyNo}<span></h5>
                 <a href="./community-post.html" onclick="ptest(${e.cmtyNo})">Read More</a>
             </div>
         </div>
     </div>`;
+
             })
 
         }
 
 
-        function ptest(idx){
-            localStorage.setItem('cmtyNo',idx)
+        function ptest(idx) {
+            localStorage.setItem('cmtyNo', idx)
         }
 
         // 페이지 로드 시 loadMemberList 함수 호출
@@ -150,7 +164,7 @@
 
             <div class="row text-center">
                 <div class="col-lg-12">
-                    <button id="readmore" style="display: none;">READ MORE</button>
+                    <button id="readmore" onclick="loadMorePost()">READ MORE</button>
                 </div>
             </div>
 
